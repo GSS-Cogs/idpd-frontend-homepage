@@ -1,5 +1,6 @@
 // pages/api/health.ts
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 interface HealthCheck {
   name: string;
@@ -18,10 +19,7 @@ export async function GET() {
   const languageVersion = process.env.npm_package_dependencies_typescript;
   const uptime = Math.floor(process.uptime());
   const startTime = new Date(Date.now() - uptime * 1000).toISOString();
-  console.log(
-    "process.env.NEXT_PUBLIC_BUILD_TIME",
-    process.env.NEXT_PUBLIC_BUILD_TIME
-  );
+
   const buildTime =
     process.env.NEXT_PUBLIC_BUILD_TIME !== undefined
       ? new Date(
@@ -73,8 +71,18 @@ export async function GET() {
   return NextResponse.json(response, { status: statusCode });
 }
 
-async function getStatusCode(res: NextResponse): Promise<number> {
-  return res.status;
+async function getStatusCode(): Promise<number> {
+  const headersList = headers();
+  const domain = headersList.get("x-forwarded-host");
+  const proto = headersList.get("x-forwarded-proto");
+  const fullUrl = proto + "://" + domain;
+
+  try {
+    const response = await fetch(fullUrl);
+    return response.status;
+  } catch (error) {
+    return 500;
+  }
 }
 
 async function checkDataExplorer(): Promise<HealthCheck> {
@@ -87,7 +95,7 @@ async function checkDataExplorer(): Promise<HealthCheck> {
     last_success: null as Date | null,
     last_failure: null as Date | null,
   };
-  const statusCode = await getStatusCode(NextResponse.next());
+  const statusCode = await getStatusCode();
 
   if (statusCode === 200) {
     check.status = "OK";
