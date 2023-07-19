@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Search from "@/components/Search";
 
 export default async function Home() {
   return (
@@ -12,6 +13,18 @@ export default async function Home() {
           tag: { children: "prototype" },
         }}
       />
+      <div
+        className=""
+        style={{
+          background: "#f3f2f1",
+          paddingTop: 30,
+          paddingBottom: 50,
+        }}
+      >
+        <div className="govuk-width-container">
+          <Search />
+        </div>
+      </div>
       <div className="govuk-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
           <h1 className="govuk-heading-xl">Hello world!</h1>
