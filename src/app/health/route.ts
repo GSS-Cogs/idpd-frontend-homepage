@@ -71,7 +71,7 @@ export async function GET() {
   return NextResponse.json(response, { status: statusCode });
 }
 
-async function getStatusCode(): Promise<number> {
+async function getStatusCode(): Promise<[number, string]> {
   const headersList = headers();
   const domain = headersList.get("x-forwarded-host");
   const proto = headersList.get("x-forwarded-proto");
@@ -79,9 +79,9 @@ async function getStatusCode(): Promise<number> {
 
   try {
     const response = await fetch(fullUrl);
-    return response.status;
+    return [response.status, fullUrl];
   } catch (error) {
-    return 500;
+    return [500, fullUrl];
   }
 }
 
@@ -95,17 +95,17 @@ async function checkDataExplorer(): Promise<HealthCheck> {
     last_success: null as Date | null,
     last_failure: null as Date | null,
   };
-  const statusCode = await getStatusCode();
+  const [statusCode, fullUrl] = await getStatusCode();
 
   if (statusCode === 200) {
     check.status = "OK";
     check.status_code = 200;
-    check.message = "data explorer is ok";
+    check.message = fullUrl; // "data explorer is ok";
     check.last_success = new Date();
   } else if (statusCode >= 400 && statusCode !== 429) {
     check.status = "CRITICAL";
     check.status_code = 500;
-    check.message = "data explorer is unavailable or non-functioning";
+    check.message = fullUrl; // "data explorer is unavailable or non-functioning";
     check.last_failure = new Date();
   }
 
