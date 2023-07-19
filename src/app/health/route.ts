@@ -73,9 +73,8 @@ export async function GET() {
 
 async function getStatusCode(): Promise<[number, string]> {
   const headersList = headers();
-  const domain = headersList.get("x-forwarded-host");
-  const proto = headersList.get("x-forwarded-proto");
-  const fullUrl = proto + "://" + domain;
+  const domain = headersList.get("x-forwarded-host") || "";
+  const fullUrl = (headersList.get("referer") || "").split(domain)[0] + domain;
 
   try {
     const response = await fetch(fullUrl);
