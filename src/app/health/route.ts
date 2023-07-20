@@ -73,16 +73,15 @@ export async function GET() {
 
 async function getStatusCode(): Promise<[number, string]> {
   const headersList = headers();
-  const domain = headersList.get("host") || "";
-  const domain2 = headersList.get("x-forwarded-host") || "";
-  const proto = headersList.get("x-forwarded-proto") || "";
-  const fullUrl = (headersList.get("referer") || "").split(domain)[0] + domain;
+  const domain = headersList.get("x-forwarded-host") || "";
+  const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
+  const fullUrl = proto + "://" + domain;
 
   try {
     const response = await fetch(fullUrl);
-    return [response.status, fullUrl + " : " + proto + " : " + domain2];
+    return [response.status, fullUrl];
   } catch (error) {
-    return [500, fullUrl + " : " + proto + " : " + domain2];
+    return [500, fullUrl];
   }
 }
 
