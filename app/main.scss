@@ -4,3 +4,7 @@
 .govuk-body--inverse {
   color: #ffffff;
 }
+
+.app-width-container {
+  @include govuk-width-container(1280px);
+}

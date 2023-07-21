@@ -51,10 +51,14 @@ export default function Hero({
 }) {
   return (
     <div className={"app-hero" + (phaseBanner ? " govuk-!-padding-top-0" : "")}>
-      <div className="govuk-width-container">
+      <div className="app-width-container">
         {phaseBanner ? <HeroPhaseBanner {...phaseBanner} /> : null}
-        <h1 className="govuk-heading-xl app-hero__title">{title}</h1>
-        <p className="app-hero__description">{description}</p>
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">
+            <h1 className="govuk-heading-xl app-hero__title">{title}</h1>
+            <p className="app-hero__description">{description}</p>
+          </div>
+        </div>
         {startButton ? (
           <a
             href={startButton.href}
