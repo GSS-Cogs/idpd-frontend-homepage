@@ -1,6 +1,6 @@
 export default function Http404() {
   return (
-    <div className="govuk-width-container">
+    <div className="app-width-container">
       <main
         className="govuk-main-wrapper govuk-main-wrapper--l"
         id="main-content"
