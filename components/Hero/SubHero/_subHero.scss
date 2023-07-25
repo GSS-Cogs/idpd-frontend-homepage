@@ -1,0 +1,5 @@
+.app-sub-hero {
+  @include govuk-responsive-padding(6, "top");
+  @include govuk-responsive-padding(7, "bottom");
+  background-color: govuk-colour("light-grey");
+}
