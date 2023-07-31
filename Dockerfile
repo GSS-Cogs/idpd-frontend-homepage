@@ -4,4 +4,5 @@ COPY . /app
 WORKDIR /app
 
 RUN yarn
+RUN make build
 
