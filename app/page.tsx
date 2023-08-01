@@ -1,6 +1,8 @@
 import BigNumber from "@/components/BigNumber";
 import CardList from "@/components/CardList";
 import Hero from "@/components/Hero";
+import SubHero from "@/components/Hero/SubHero";
+import Search from "@/components/Search";
 
 const CardListItems = [
   {
@@ -71,6 +73,9 @@ export default async function Home() {
           tag: { children: "prototype" },
         }}
       />
+      <SubHero>
+        <Search />
+      </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
           <div className="govuk-grid-row">
