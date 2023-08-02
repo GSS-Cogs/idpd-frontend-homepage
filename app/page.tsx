@@ -70,7 +70,7 @@ export default async function Home() {
         startButton={{ href: "/catalogue", text: "View data catalogue" }}
         phaseBanner={{
           href: "#",
-          tag: { children: "prototype" },
+          tag: { children: "alpha" },
         }}
       />
       <SubHero>
