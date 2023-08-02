@@ -8,3 +8,7 @@
 .app-width-container {
   @include govuk-width-container(1280px);
 }
+
+.app-section-row {
+  display: flex;
+}

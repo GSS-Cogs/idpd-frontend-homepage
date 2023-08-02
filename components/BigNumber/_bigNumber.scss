@@ -4,6 +4,11 @@
 .app-big-number {
   margin-bottom: govuk-spacing(3);
   @include govuk-text-colour;
+
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
 }
 
 .app-big-number__value {

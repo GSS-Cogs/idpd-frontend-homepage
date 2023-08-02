@@ -78,7 +78,7 @@ export default async function Home() {
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
-          <div className="govuk-grid-row">
+          <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
                 number={9}
@@ -91,7 +91,7 @@ export default async function Home() {
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
-          <div className="govuk-grid-row">
+          <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber number={13} label="publishers" />
             </div>
