@@ -161,7 +161,11 @@ export default async function Home() {
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-one-quarter">
-              <BigNumber number={13} label="publishers" />
+              <BigNumber
+                number={13}
+                label="publishers"
+                subtext="View and download datasets by publishers"
+              />
             </div>
             <div className="govuk-grid-column-three-quarters">
               <CardList items={CardListPublisherItems} isAlternative={true} />
