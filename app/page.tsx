@@ -3,8 +3,9 @@ import CardList from "@/components/CardList";
 import Hero from "@/components/Hero";
 import SubHero from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
+import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
 
-const CardListItems = [
+const CardListTopicItems = [
   {
     heading: "Agriculture, energy and environment",
     href: "",
@@ -65,67 +66,54 @@ const CardListPublisherItems = [
   {
     heading: "Department for Business, Energy & Industrial Strategy",
     href: "",
-    description: "",
   },
   {
     heading: "Department for Education",
     href: "",
-    description: "",
   },
   {
     heading: "Department for Environment, Food & Rural Affairs",
     href: "",
-    description: "",
   },
   {
     heading: "Department for Levelling Up, Housing & Communities",
     href: "",
-    description: "",
   },
   {
     heading: "Department for Transport",
     href: "",
-    description: "",
   },
   {
     heading: "Forest Research",
     href: "",
-    description: "",
   },
   {
     heading: "HM Revenue & Customs",
     href: "",
-    description: "",
   },
   {
     heading: "Met Office",
     href: "",
-    description: "",
   },
   {
     heading: "Ministry of Housing, Communities & Local Government",
     href: "",
-    description: "",
   },
   {
     heading: "Ofcom",
     href: "",
-    description: "",
   },
   {
     heading: "Office for Health Improvement and Disparities",
     href: "",
-    description: "",
   },
   {
     heading: "Office for National Statistics",
     href: "",
-    description: "",
   },
   {
     heading: "Welsh Government",
     href: "",
-    description: "",
   },
 ];
 
@@ -155,7 +143,7 @@ export default async function Home() {
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={CardListItems} />
+              <CardList items={CardListTopicItems} CardComponent={TopicCard} />
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
@@ -168,7 +156,10 @@ export default async function Home() {
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={CardListPublisherItems} isAlternative={true} />
+              <CardList
+                items={CardListPublisherItems}
+                CardComponent={PublisherCard}
+              />
             </div>
           </div>
         </main>
