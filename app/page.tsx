@@ -61,6 +61,74 @@ const CardListItems = [
   },
 ];
 
+const CardListPublisherItems = [
+  {
+    heading: "Department for Business, Energy & Industrial Strategy",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Department for Education",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Department for Environment, Food & Rural Affairs",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Department for Levelling Up, Housing & Communities",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Department for Transport",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Forest Research",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "HM Revenue & Customs",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Met Office",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Ministry of Housing, Communities & Local Government",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Ofcom",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Office for Health Improvement and Disparities",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Office for National Statistics",
+    href: "",
+    description: "",
+  },
+  {
+    heading: "Welsh Government",
+    href: "",
+    description: "",
+  },
+];
+
 export default async function Home() {
   return (
     <>
@@ -96,12 +164,7 @@ export default async function Home() {
               <BigNumber number={13} label="publishers" />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <p className="govuk-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis,
-                recusandae! Illum eligendi totam sapiente exercitationem quidem
-                culpa voluptatem, magni labore animi perferendis adipisci quasi
-                tempore molestiae maiores sunt quis voluptatibus.
-              </p>
+              <CardList items={CardListPublisherItems} isAlternative={true} />
             </div>
           </div>
         </main>
