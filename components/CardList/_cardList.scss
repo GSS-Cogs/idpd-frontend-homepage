@@ -55,7 +55,8 @@
   // We use grid to split the container into column widths, so manage the horizontal spacing with
   // internal margins.
   margin: 0 govuk-spacing(3);
-  padding: govuk-spacing(0) 0 govuk-spacing(0) 0;
+  // padding: govuk-spacing(0) 0 govuk-spacing(0) 0;
+  padding: govuk-spacing(2) govuk-spacing(6) govuk-spacing(0) 0;
 }
 
 .app-cards__list-item-wrapper--topic {
@@ -64,10 +65,6 @@
   // there is space above and below each link
   padding: govuk-spacing(2) govuk-spacing(6) govuk-spacing(2) 0;
   position: relative;
-}
-
-.app-cards__list-item-wrapper--publisher {
-  margin: govuk-spacing(2) govuk-spacing(6) govuk-spacing(0) 0;
 }
 
 .app-cards__sub-heading {

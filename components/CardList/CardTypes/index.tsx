@@ -3,13 +3,11 @@ import { CardProps } from "../types";
 export function PublisherCard({ heading, href }: CardProps) {
   return (
     <li className="app-cards__list-item--publisher">
-      <div className="app-cards__list-item-wrapper--publisher">
-        <h2 className="app-cards__sub-heading govuk-heading-s">
-          <a className="govuk-link app-cards__link--publisher" href={href}>
-            {heading}
-          </a>
-        </h2>
-      </div>
+      <h2 className="app-cards__sub-heading govuk-heading-s">
+        <a className="govuk-link app-cards__link--publisher" href={href}>
+          {heading}
+        </a>
+      </h2>
     </li>
   );
 }
