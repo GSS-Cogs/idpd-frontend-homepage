@@ -67,14 +67,14 @@ export default async function Home() {
       <Hero
         title="Find government statistics and data"
         description="Browse statistical summaries and download associated data to help you understand and analyse our range of statistics."
-        startButton={{ href: "/catalogue", text: "View data catalogue" }}
+        startButton={{ href: "/datasets", text: "View data catalogue" }}
         phaseBanner={{
           href: "#",
           tag: { children: "prototype" },
         }}
       />
       <SubHero>
-        <Search />
+        <Search searchLabel="Search data catalogue" />
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
