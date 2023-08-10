@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
-// import useDataList from "@/hooks/useDataList";
-// import useSortData from "@/hooks/useSortData";
-
 import { MdRssFeed } from "react-icons/md";
-// import Dropdown from "../Dropdown";
 
 function DatasetsListItem(props: {
   dataset: any;
@@ -77,12 +72,6 @@ function formatDate(date: string | number | Date) {
 }
 
 export default function DatasetsList(items: any) {
-  //   const sortedData = useSortData(items, sortBy, searchText);
-  const changeSortBy = (e: { target: { value: any } }) => {
-    const tempSortBy = e.target.value;
-    // setSortBy(tempSortBy);
-  };
-
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
       <div className="app-datasets-header">
@@ -100,15 +89,6 @@ export default function DatasetsList(items: any) {
           </a>
         </div>
       </div>
-      {/* <Dropdown
-        options={[
-          { value: "alphabetical", name: "Alphabetical" },
-          { value: "date", name: "Release Date" },
-          { value: "relevance", name: "Relevance" },
-        ]}
-        onChange={changeSortBy}
-        value={sortBy}
-      /> */}
       <ul className="app-datasets-list">
         {items.items.map((item: any, index: any) => {
           return <DatasetsListItem {...item} key={index} searchText={""} />;
