@@ -58,7 +58,7 @@ function DatasetsListItem(props: {
   );
 }
 
-function formatDate(date: string | number | Date) {
+function formatDate(date: string) {
   const d = new Date(date);
   const options: Intl.DateTimeFormatOptions = {
     day: "numeric",
@@ -72,6 +72,17 @@ function formatDate(date: string | number | Date) {
 }
 
 export default function DatasetsList(items: any) {
+  // TODO this is a temp solution until we add in a correct sort by process
+  const sortByDate = (data: any[]) => {
+    return data.sort((a, b) => {
+      const dateA = new Date(a.modified).getTime();
+      const dateB = new Date(b.modified).getTime();
+      return dateB - dateA;
+    });
+  };
+
+  const sortedItems = sortByDate(items.items);
+
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
       <div className="app-datasets-header">
@@ -90,7 +101,7 @@ export default function DatasetsList(items: any) {
         </div>
       </div>
       <ul className="app-datasets-list">
-        {items.items.map((item: any, index: any) => {
+        {sortedItems.map((item: any, index: any) => {
           return <DatasetsListItem {...item} key={index} searchText={""} />;
         })}
       </ul>
