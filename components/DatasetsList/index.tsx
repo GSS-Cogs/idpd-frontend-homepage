@@ -1,11 +1,12 @@
+"use client";
 import Image from "next/image";
 import { MdRssFeed } from "react-icons/md";
+import Pagination from "../PaginationPage";
 
 function DatasetsListItem(props: {
   dataset: any;
   datasetTitle: any;
   shortDescription: any;
-  themeName: any | undefined;
   modified: any;
   creator: any;
   publisher: any;
@@ -71,7 +72,20 @@ function formatDate(date: string) {
     .replace(/( AM| PM)/g, (m) => m.trim().toLowerCase());
 }
 
-export default function DatasetsList(items: any) {
+export default function DatasetsList({
+  items,
+  page = 1,
+  searchParams,
+}: {
+  items: any;
+  page: number;
+  searchParams: URLSearchParams;
+}) {
+  const RESULTS_LENGTH = 20;
+  const sliceStart = page * RESULTS_LENGTH - RESULTS_LENGTH;
+  const sliceEnd = page * RESULTS_LENGTH;
+  const totalPages = Math.ceil(items.length / RESULTS_LENGTH);
+
   // TODO this is a temp solution until we add in a correct sort by process
   const sortByDate = (data: any[]) => {
     return data.sort((a, b) => {
@@ -81,13 +95,13 @@ export default function DatasetsList(items: any) {
     });
   };
 
-  const sortedItems = sortByDate(items.items);
+  const sortedItems = sortByDate(items);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
       <div className="app-datasets-header">
         <h3 className="app-datasets-header__results">
-          {items.items.length} results
+          {sortedItems.length} results
         </h3>
         <div
           style={{
@@ -101,10 +115,21 @@ export default function DatasetsList(items: any) {
         </div>
       </div>
       <ul className="app-datasets-list">
-        {sortedItems.map((item: any, index: any) => {
-          return <DatasetsListItem {...item} key={index} searchText={""} />;
-        })}
+        {sortedItems
+          .slice(sliceStart, sliceEnd)
+          .map((item: any, index: any) => {
+            return (
+              <>
+                <DatasetsListItem {...item} key={index} searchText={""} />
+              </>
+            );
+          })}
       </ul>
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

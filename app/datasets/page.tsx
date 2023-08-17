@@ -2,10 +2,19 @@ import "./datasets.scss";
 import Search from "@/components/Search";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DatasetsList from "@/components/DatasetsList";
-import data from "../../data/data.json";
 import PhaseBanner from "@/components/PhaseBanner";
 
-export default function Datasets() {
+import data from "../data/data.json";
+
+export default async function Datasets({
+  searchParams,
+}: {
+  searchParams: any;
+}) {
+  const KEY = "page";
+  const params = new URLSearchParams(searchParams);
+  params.delete(KEY);
+
   return (
     <div className="app-width-container">
       <PhaseBanner
@@ -23,12 +32,15 @@ export default function Datasets() {
         </div>
 
         <Search />
-
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
             <h3></h3>
           </div>
-          <DatasetsList items={data.results.bindings} />
+          <DatasetsList
+            items={data?.results.bindings}
+            page={searchParams.page}
+            searchParams={params}
+          />
         </div>
       </main>
     </div>
