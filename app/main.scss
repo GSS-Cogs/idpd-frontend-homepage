@@ -11,7 +11,7 @@
 
 .app-section-row {
   display: flex;
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($until: tablet) {
     flex-direction: column;
   }
 }
