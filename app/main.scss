@@ -8,3 +8,10 @@
 .app-width-container {
   @include govuk-width-container(1280px);
 }
+
+.app-section-row {
+  display: flex;
+  @include govuk-media-query($until: tablet) {
+    flex-direction: column;
+  }
+}
