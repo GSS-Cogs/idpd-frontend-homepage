@@ -1,5 +1,16 @@
+$icon-size: 20px;
+$black-bar-height: 50px;
+$search-width-or-height: $black-bar-height;
+$pseudo-underline-height: 3px;
+$button-pipe-colour: darken(govuk-colour("mid-grey"), 20%);
+$after-link-padding: govuk-spacing(4);
+
 .govuk-header {
   border-bottom: revert !important;
+
+  [hidden] {
+    display: none;
+  }
 }
 
 .govuk-header__container {
@@ -10,4 +21,399 @@
 
 .govuk-header__logo {
   margin-bottom: revert !important;
+}
+
+@mixin chevron($colour, $update: false) {
+  @if $update == true {
+    border-bottom-color: $colour;
+    border-right-color: $colour;
+  } @else {
+    border-bottom: 2px solid $colour;
+    border-right: 2px solid $colour;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 10px 0 2px;
+    vertical-align: middle;
+    width: 8px;
+  }
+}
+
+@mixin make-selectable-area-bigger {
+  background: none;
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@mixin pseudo-underline(
+  $left: govuk-spacing(4),
+  $right: govuk-spacing(4),
+  $width: false
+) {
+  background: none;
+  content: "";
+  height: $pseudo-underline-height;
+  left: $left;
+  position: absolute;
+  right: $right;
+  bottom: 0;
+  top: auto;
+  @if $width {
+    width: $width;
+  }
+}
+
+@mixin focus-and-focus-visible {
+  &:focus {
+    @content;
+  }
+
+  &:focus-visible {
+    @content;
+  }
+}
+
+@mixin focus-not-focus-visible {
+  & {
+    @content;
+  }
+
+  &:focus:not(:focus-visible) {
+    @content;
+  }
+}
+
+// double check
+.app-navigation-header__container {
+  position: relative;
+}
+
+.app-navigation-header__button-width-container {
+  position: relative;
+}
+
+.app-navigation-header__button-container {
+  @include govuk-media-query($until: "tablet") {
+    margin-right: govuk-spacing(-3);
+  }
+
+  top: -$black-bar-height;
+  position: absolute;
+  right: 0;
+
+  @include govuk-media-query($until: 300px) {
+    position: static;
+  }
+}
+
+.app-navigation-header__content {
+  width: 100%;
+}
+
+.app-navigation-header__search-item {
+  background: govuk-colour("black");
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+// Top level navigation links and search link.
+.app-navigation-header__search-item-link {
+  @include govuk-link-common;
+  @include govuk-link-style-no-visited-state;
+
+  display: inline-block;
+  font-size: 19px;
+  font-size: govuk-px-to-rem(19px);
+  font-weight: bold;
+  padding: govuk-spacing(3) 0;
+  position: relative;
+
+  @include govuk-media-query($from: "desktop") {
+    display: block;
+    margin: 0;
+  }
+
+  &:hover {
+    @include govuk-link-hover-decoration;
+  }
+
+  &,
+  &:link,
+  &:visited {
+    @include focus-and-focus-visible {
+      @include govuk-focused-text;
+    }
+
+    // Undoes the :focus styles *only* for browsers that support :focus-visible.
+    // See https://www.tpgi.com/focus-visible-and-backwards-compatibility/
+    &:focus:not(:focus-visible) {
+      background: none;
+      box-shadow: none;
+      color: $govuk-link-colour;
+
+      .app-navigation-header__navigation-item-link-inner {
+        border-color: $button-pipe-colour;
+      }
+
+      &:hover {
+        @include govuk-link-decoration;
+        @include govuk-link-hover-decoration;
+        color: $govuk-link-hover-colour;
+      }
+    }
+
+    &:after {
+      @include make-selectable-area-bigger;
+      @include pseudo-underline(
+        $left: $after-link-padding,
+        $right: $after-link-padding
+      );
+    }
+
+    // stylelint-disable max-nesting-depth
+    float: left;
+    font-size: 16px;
+    font-size: govuk-px-to-rem(16px);
+    height: govuk-spacing(4);
+
+    &:before {
+      @include chevron(govuk-colour("white"), true);
+    }
+
+    &:hover {
+      color: govuk-colour("mid-grey");
+
+      &:after {
+        background: govuk-colour("mid-grey");
+      }
+    }
+
+    @include focus-and-focus-visible {
+      .app-navigation-header__navigation-item-link-inner {
+        border-color: $govuk-focus-colour;
+        background: $govuk-focus-colour;
+      }
+
+      &,
+      &:hover {
+        box-shadow: none;
+        color: $govuk-focus-text-colour;
+
+        &:after {
+          background: $govuk-focus-text-colour;
+        }
+      }
+    }
+
+    @include focus-not-focus-visible {
+      &,
+      &:hover {
+        text-decoration: none;
+      }
+
+      & {
+        color: govuk-colour("white");
+      }
+
+      &:hover {
+        color: govuk-colour("mid-grey");
+
+        &:after {
+          background: govuk-colour("mid-grey");
+        }
+      }
+
+      &:after {
+        background: none;
+      }
+    }
+  }
+
+  &:after {
+    @include make-selectable-area-bigger;
+  }
+}
+
+// Search link and dropdown.
+.app-navigation-header__search-item-link {
+  padding: govuk-spacing(3);
+
+  @include govuk-media-query($until: "desktop") {
+    margin: 0;
+  }
+
+  &:link,
+  &:visited {
+    background: $govuk-brand-colour;
+
+    &:hover {
+      background: govuk-colour("black");
+
+      &:before {
+        left: 0;
+        right: 0;
+      }
+    }
+
+    &:focus {
+      background: $govuk-focus-colour;
+
+      &:before {
+        content: none;
+      }
+    }
+
+    &:after {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    @include focus-not-focus-visible {
+      background: $govuk-link-colour;
+
+      &:hover {
+        background: govuk-colour("black");
+      }
+    }
+
+    @include focus-and-focus-visible {
+      &:hover {
+        background: $govuk-focus-colour;
+      }
+
+      &:after,
+      &:hover:after {
+        background: $govuk-focus-colour;
+      }
+    }
+  }
+}
+
+.app-navigation-header__search-toggle-button-link-icon {
+  height: $icon-size;
+  pointer-events: none;
+  width: $icon-size;
+}
+
+// Styles for search toggle button.
+.app-navigation-header__search-toggle-button,
+.app-navigation-header__search-toggle-button-open {
+  @include govuk-font($size: 19, $weight: "bold", $line-height: 20px);
+  background: $govuk-brand-colour;
+  border: 0;
+  color: govuk-colour("white");
+  cursor: pointer;
+  height: $search-width-or-height;
+  padding: govuk-spacing(3);
+  position: relative;
+  width: $search-width-or-height;
+
+  @include focus-and-focus-visible {
+    @include govuk-focused-text;
+    border-color: $govuk-focus-colour;
+    box-shadow: none;
+    z-index: 11;
+  }
+
+  &:focus:not(:focus-visible) {
+    background: none;
+    border-color: govuk-colour("white");
+    box-shadow: none;
+    color: govuk-colour("white");
+  }
+
+  @include govuk-media-query($from: "desktop") {
+    margin: 0;
+    right: 0;
+
+    @include focus-not-focus-visible {
+      border-left: none;
+    }
+
+    &:hover {
+      background: govuk-colour("black");
+      border-bottom: $pseudo-underline-height solid govuk-colour("mid-grey");
+      color: govuk-colour("mid-grey");
+    }
+
+    @include focus-and-focus-visible {
+      @include govuk-focused-text;
+      border-bottom-color: $govuk-focus-colour;
+      box-shadow: none;
+    }
+  }
+}
+
+// Open button modifier
+.app-navigation-header__search-toggle-button-open {
+  @include focus-not-focus-visible {
+    background: govuk-colour("light-grey");
+    border-bottom-color: govuk-colour("light-grey");
+    color: govuk-colour("black");
+  }
+}
+
+.app-navigation-header__navigation-top-toggle-close-icon {
+  font-size: 36px;
+  font-weight: normal;
+  left: 0;
+  line-height: 22px;
+  padding: govuk-spacing(3) 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+
+  &:hover {
+    color: govuk-colour("mid-grey");
+  }
+}
+
+.app-navigation-header__search-container {
+  padding-bottom: govuk-spacing(3);
+}
+
+// Dropdown menu.
+.app-navigation-header__navigation-dropdown-menu {
+  @include govuk-media-query($until: 300px) {
+    padding-top: 80px;
+  }
+
+  background: govuk-colour("light-grey");
+  border-bottom: 1px govuk-colour("mid-grey") solid;
+  padding-top: govuk-spacing(6);
+
+  @include govuk-media-query($from: "desktop") {
+    padding-top: govuk-spacing(5);
+  }
+}
+
+// Popular links.
+.app-navigation-header__popular-item {
+  position: relative;
+  padding: govuk-spacing(1) 0;
+}
+
+.app-navigation-header__popular-link {
+  display: inline-block;
+  font-size: 16px;
+  font-size: govuk-px-to-rem(16px);
+  padding: 0;
+
+  &:after {
+    @include make-selectable-area-bigger;
+  }
+}
+
+@include govuk-media-query($media-type: print) {
+  .app-navigation-header__content {
+    display: none;
+  }
 }
