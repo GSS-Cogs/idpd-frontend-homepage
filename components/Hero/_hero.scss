@@ -6,6 +6,11 @@
   background-color: govuk-colour("blue");
 }
 
+.app-hero.alternative {
+  border-bottom: 1px solid govuk-colour("dark-grey");
+  background-color: govuk-colour("dark-grey");
+}
+
 .app-hero__title {
   color: govuk-colour("white");
   @include govuk-responsive-margin(6, "bottom");
@@ -14,6 +19,10 @@
 .app-hero__description {
   @include govuk-font(24);
   margin-bottom: 0;
+}
+
+.app-hero__caption {
+  color: govuk-colour("white");
 }
 
 .app-hero__image {
@@ -28,4 +37,9 @@
 .app-hero__phase-banner__tag {
   background-color: govuk-colour("white");
   color: govuk-colour("blue");
+}
+
+.app-hero__phase-banner__tag.alternative {
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white");
 }

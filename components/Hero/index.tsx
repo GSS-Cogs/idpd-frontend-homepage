@@ -41,20 +41,31 @@ function HeroPhaseBanner({
 export default function Hero({
   title,
   description,
+  caption,
   startButton,
   phaseBanner,
+  className,
 }: {
   title: string;
   description: string;
+  caption?: string;
   startButton?: { href: string; text: string };
   phaseBanner?: PhaseBannerProps;
+  className?: string;
 }) {
   return (
-    <div className={"app-hero" + (phaseBanner ? " govuk-!-padding-top-0" : "")}>
+    <div
+      className={
+        `app-hero ${className}` + (phaseBanner ? " govuk-!-padding-top-0" : "")
+      }
+    >
       <div className="app-width-container">
         {phaseBanner ? <HeroPhaseBanner {...phaseBanner} /> : null}
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
+            <span className="govuk-caption-xl app-hero__caption">
+              {caption}
+            </span>
             <h1 className="govuk-heading-xl app-hero__title">{title}</h1>
             <p className="app-hero__description">{description}</p>
           </div>
