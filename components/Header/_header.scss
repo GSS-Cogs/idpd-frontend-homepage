@@ -1,13 +1,35 @@
-.govuk-header {
-  border-bottom: revert !important;
+.govuk-header,
+.govuk-header__container {
+  border-bottom-width: 10px;
+  border-bottom-style: solid;
 }
 
 .govuk-header__container {
-  margin-bottom: revert !important;
-  border-bottom: revert !important;
-  padding-bottom: 10px;
+  margin-bottom: -10px;
 }
 
-.govuk-header__logo {
-  margin-bottom: revert !important;
+// Main coloured borders:
+.govuk-header.root-header {
+  border-bottom-color: govuk-colour("blue");
+}
+
+.govuk-header.non-root-header {
+  border-bottom-color: #ffffff;
+}
+
+.govuk-header.non-root-alt-header {
+  border-bottom-color: govuk-colour("dark-grey");
+}
+
+// Background blended borders:
+.govuk-header__container.root-header {
+  border-bottom-color: govuk-colour("yellow");
+}
+
+.govuk-header__container.non-root-header {
+  border-bottom-color: govuk-colour("blue");
+}
+
+.govuk-header__container.non-root-alt-header {
+  border-bottom-color: govuk-colour("blue");
 }

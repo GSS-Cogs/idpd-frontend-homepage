@@ -1,13 +1,21 @@
 export default function Header({
   href,
   serviceName,
+  className = "root-header",
 }: {
   href?: string;
   serviceName?: string;
+  className?: string;
 }) {
   return (
-    <header className="govuk-header" role="banner" data-module="govuk-header">
-      <div className="govuk-header__container app-width-container">
+    <header
+      className={`govuk-header ${className}`}
+      role="banner"
+      data-module="govuk-header"
+    >
+      <div
+        className={`app-width-container govuk-header__container ${className}`}
+      >
         <div className="govuk-header__logo">
           <a
             href={href || "/"}
