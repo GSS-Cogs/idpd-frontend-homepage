@@ -3,9 +3,7 @@ import CardList from "@/components/CardList";
 import {
   Hero,
   HeroActionButton,
-  HeroBreadcrumbs,
   HeroMainContent,
-  HeroMainContentCaption,
   HeroMainContentDescription,
   HeroMainContentTitle,
   HeroPhaseBanner,
@@ -137,38 +135,6 @@ export default async function Home() {
         </HeroMainContent>
         <HeroActionButton href="/catalogue" text="View data catalogue" />
       </Hero>
-      <div style={{ paddingBottom: 200 }}></div>
-      <Hero className="alternative">
-        <HeroPhaseBanner
-          href="#"
-          tag={{ children: "alpha", className: "alternative" }}
-        />
-        <HeroBreadcrumbs />
-        <HeroMainContent>
-          <HeroMainContentCaption caption="Topic" />
-          <HeroMainContentTitle title="Agriculture, energy and environment" />
-          <HeroMainContentDescription description="Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality." />
-        </HeroMainContent>
-      </Hero>
-      {/* <Hero
-        title="Find government statistics and data"
-        description="Browse statistical summaries and download associated data to help you understand and analyse our range of statistics."
-        startButton={{ href: "/catalogue", text: "View data catalogue" }}
-        phaseBanner={{
-          href: "#",
-          tag: { children: "alpha" },
-        }}
-      /> */}
-      {/* <Hero
-        title="Agriculture, energy and environment"
-        caption="Topic"
-        description="Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality."
-        className="alternative"
-        phaseBanner={{
-          href: "#",
-          tag: { children: "alpha", className: "alternative" },
-        }}
-      /> */}
       <SubHero>
         <Search />
       </SubHero>
