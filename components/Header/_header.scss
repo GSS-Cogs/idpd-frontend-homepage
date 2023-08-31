@@ -643,12 +643,6 @@ $after-button-padding-left: govuk-spacing(4);
   }
 }
 
-// @include govuk-media-query($media-type: print) {
-//   .app-header__list {
-//     display: block;
-//   }
-// }
-
 .app-header__list li {
   margin-bottom: govuk-spacing(1);
 }
