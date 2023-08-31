@@ -432,17 +432,18 @@ $after-button-padding-left: govuk-spacing(4);
   @include govuk-media-query($from: "desktop") {
     padding: govuk-spacing(3) 0;
   }
-
-  .js-module-initialised & {
-    margin-left: govuk-spacing(4);
-    @include govuk-link-style-no-underline;
-  }
 }
 
 .app-navigation-header__navigation-item-link-inner {
   background-color: govuk-colour("black");
   border-left: 1px solid $button-pipe-colour;
   padding: govuk-spacing(1) $after-link-padding;
+
+  @include govuk-media-query($from: 360px) {
+    &:before {
+      @include chevron(govuk-colour("white"));
+    }
+  }
 }
 
 // Styles for top level navigation toggle button.
@@ -568,20 +569,10 @@ $after-button-padding-left: govuk-spacing(4);
       }
     }
   }
-
-  // Open button modifier
-  &.app-navigation-header__open-button {
-  }
 }
 
 // Open button modifier
 .app-navigation-header__navigation-top-toggle-button-open {
-  // @include focus-not-focus-visible {
-  //   background: govuk-colour("light-grey");
-  //   border-bottom-color: govuk-colour("light-grey");
-  //   color: govuk-colour("black");
-  // }
-  // stylelint-disable max-nesting-depth
   @include focus-and-focus-visible {
     @include govuk-focused-text;
     box-shadow: none;

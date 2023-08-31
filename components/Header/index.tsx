@@ -192,6 +192,29 @@ export default function Header({
     </button>
   );
 
+  const MenuButtonJsDisabled = () => (
+    <a className="app-navigation-header__navigation-item-link" href="/topics">
+      <span className="app-navigation-header__navigation-item-link-inner">
+        Menu
+      </span>
+    </a>
+  );
+
+  const MenuButtonJsEnabled = () => (
+    <button
+      aria-label="Show navigation menu"
+      className={`app-navigation-header__navigation-top-toggle-button${
+        !isMenuHidden ? "-open" : ""
+      }`}
+      type="button"
+      onClick={() => toggleMenu()}
+    >
+      <span className="app-navigation-header__navigation-top-toggle-button-inner">
+        Menu
+      </span>
+    </button>
+  );
+
   return (
     <header
       className="govuk-header app-navigation-header"
@@ -230,29 +253,7 @@ export default function Header({
         <div className="app-width-container app-navigation-header__button-width-container">
           <div className="app-navigation-header__button-container">
             <div className="app-navigation-header__navigation-item">
-              {isJsEnabled ? (
-                <button
-                  aria-label="Show navigation menu"
-                  className={`app-navigation-header__navigation-top-toggle-button${
-                    !isMenuHidden ? "-open" : ""
-                  }`}
-                  type="button"
-                  onClick={() => toggleMenu()}
-                >
-                  <span className="app-navigation-header__navigation-top-toggle-button-inner">
-                    Menu
-                  </span>
-                </button>
-              ) : (
-                <a
-                  className="app-navigation-header__navigation-item-link"
-                  href="/topics"
-                >
-                  <span className="app-navigation-header__navigation-item-link-inner">
-                    Menu
-                  </span>
-                </a>
-              )}
+              {isJsEnabled ? <MenuButtonJsEnabled /> : <MenuButtonJsDisabled />}
             </div>
             <div className="app-navigation-header__search-item">
               {isJsEnabled ? (
