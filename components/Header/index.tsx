@@ -1,13 +1,24 @@
 export default function Header({
   href,
   serviceName,
+  borderColour = "yellow-border",
 }: {
   href?: string;
   serviceName?: string;
+  borderColour?: "yellow-border" | "blue-border" | "blue-alt-border";
 }) {
+  const headerClass = "govuk-header--" + borderColour;
+  const containerClass = "govuk-header__container--" + borderColour;
+
   return (
-    <header className="govuk-header" role="banner" data-module="govuk-header">
-      <div className="govuk-header__container app-width-container">
+    <header
+      className={`govuk-header ${headerClass}`}
+      role="banner"
+      data-module="govuk-header"
+    >
+      <div
+        className={`app-width-container govuk-header__container ${containerClass}`}
+      >
         <div className="govuk-header__logo">
           <a
             href={href || "/"}
