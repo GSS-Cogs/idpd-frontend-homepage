@@ -1,20 +1,23 @@
 export default function Header({
   href,
   serviceName,
-  className = "root-header",
+  className = "yellow-border",
 }: {
   href?: string;
   serviceName?: string;
   className?: string;
 }) {
+  const headerClass = "govuk-header--" + className;
+  const containerClass = "govuk-header__container--" + className;
+
   return (
     <header
-      className={`govuk-header ${className}`}
+      className={`govuk-header ${headerClass}`}
       role="banner"
       data-module="govuk-header"
     >
       <div
-        className={`app-width-container govuk-header__container ${className}`}
+        className={`app-width-container govuk-header__container ${containerClass}`}
       >
         <div className="govuk-header__logo">
           <a

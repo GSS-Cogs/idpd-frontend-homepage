@@ -9,27 +9,27 @@
 }
 
 // Main coloured borders:
-.govuk-header.root-header {
+.govuk-header--yellow-border {
   border-bottom-color: govuk-colour("blue");
 }
 
-.govuk-header.non-root-header {
+.govuk-header--blue-border {
   border-bottom-color: #ffffff;
 }
 
-.govuk-header.non-root-alt-header {
+.govuk-header--blue-alt-border {
   border-bottom-color: govuk-colour("dark-grey");
 }
 
 // Background blended borders:
-.govuk-header__container.root-header {
+.govuk-header__container--yellow-border {
   border-bottom-color: govuk-colour("yellow");
 }
 
-.govuk-header__container.non-root-header {
+.govuk-header__container--blue-border {
   border-bottom-color: govuk-colour("blue");
 }
 
-.govuk-header__container.non-root-alt-header {
+.govuk-header__container--blue-alt-border {
   border-bottom-color: govuk-colour("blue");
 }
