@@ -6,9 +6,9 @@ export default function Search({}: {}) {
           Search data catalogue
         </label>
       </h1>
-      <div className="govuk-input__wrapper">
+      <div className="govuk-input__wrapper govuk-!-width-two-thirds">
         <input
-          className="govuk-input govuk-!-width-two-thirds govuk-search__item govuk-search__input js-class-toggle"
+          className="govuk-input govuk-search__item govuk-search__input js-class-toggle"
           id="weight"
           name="weight"
           type="search"
