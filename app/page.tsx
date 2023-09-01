@@ -7,6 +7,8 @@ import {
   HeroMainContentDescription,
   HeroMainContentTitle,
   HeroPhaseBanner,
+  HeroPhaseBannerTag,
+  HeroPhaseBannerDescription,
 } from "@/components/Hero";
 import SubHero from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
@@ -128,12 +130,28 @@ export default async function Home() {
   return (
     <>
       <Hero>
-        <HeroPhaseBanner href="#" tag={{ children: "alpha" }} />
+        <HeroPhaseBanner>
+          <HeroPhaseBannerTag>Alpha</HeroPhaseBannerTag>
+          <HeroPhaseBannerDescription>
+            This is a new service - your{" "}
+            <a className="govuk-link govuk-link--inverse" href="/">
+              feedback
+            </a>{" "}
+            will help us to improve it.
+          </HeroPhaseBannerDescription>
+        </HeroPhaseBanner>
         <HeroMainContent>
-          <HeroMainContentTitle title="Find government statistics and data" />
-          <HeroMainContentDescription description="Browse statistical summaries and download associated data to help you understand and analyse our range of statistics." />
+          <HeroMainContentTitle>
+            Find government statistics and data
+          </HeroMainContentTitle>
+          <HeroMainContentDescription>
+            Browse statistical summaries and download associated data to help
+            you understand and analyse our range of statistics.
+          </HeroMainContentDescription>
         </HeroMainContent>
-        <HeroActionButton href="/catalogue" text="View data catalogue" />
+        <HeroActionButton href="/catalogue">
+          View data catalogue
+        </HeroActionButton>
       </Hero>
       <SubHero>
         <Search />

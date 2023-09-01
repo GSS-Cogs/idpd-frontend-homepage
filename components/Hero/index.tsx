@@ -26,19 +26,23 @@ const HeroMainContent = ({ children }: { children: any }) => {
   );
 };
 
-const HeroMainContentCaption = ({ caption }: { caption: string }) => (
-  <span className="govuk-caption-xl app-hero__caption">{caption}</span>
+const HeroMainContentCaption = ({ children }: { children: any }) => (
+  <span className="govuk-caption-xl app-hero__caption">{children}</span>
 );
-const HeroMainContentTitle = ({ title }: { title: string }) => (
-  <h1 className="govuk-heading-xl app-hero__title">{title}</h1>
+const HeroMainContentTitle = ({ children }: { children: any }) => (
+  <h1 className="govuk-heading-xl app-hero__title">{children}</h1>
 );
-const HeroMainContentDescription = ({
-  description,
-}: {
-  description: string;
-}) => <p className="app-hero__description">{description}</p>;
+const HeroMainContentDescription = ({ children }: { children: any }) => (
+  <p className="app-hero__description">{children}</p>
+);
 
-const HeroActionButton = ({ href, text }: { href: string; text: string }) => (
+const HeroActionButton = ({
+  children,
+  href,
+}: {
+  children: any;
+  href: string;
+}) => (
   <a
     href={href}
     role="button"
@@ -46,7 +50,7 @@ const HeroActionButton = ({ href, text }: { href: string; text: string }) => (
     className="govuk-button govuk-button--inverse govuk-!-margin-top-6 govuk-!-margin-bottom-0 govuk-button--start"
     data-module="govuk-button"
   >
-    {text}
+    {children}
     <svg
       className="govuk-button__start-icon"
       xmlns="http://www.w3.org/2000/svg"
@@ -62,36 +66,46 @@ const HeroActionButton = ({ href, text }: { href: string; text: string }) => (
 );
 
 function HeroPhaseBanner({
-  href,
-  tag,
+  children,
   className,
-  attributes,
-}: PhaseBannerProps) {
+}: {
+  children: any;
+  className?: string;
+}) {
   return (
     <div
       className={`govuk-phase-banner govuk-phase-banner--inverse govuk-!-margin-bottom-2 ${
         className || ""
       }`}
-      {...attributes}
     >
-      <p className="govuk-phase-banner__content">
-        <Tag
-          className={`govuk-phase-banner__content__tag app-hero__phase-banner__tag ${
-            tag.className || ""
-          }`}
-          {...tag.attributes}
-        >
-          {tag.children}
-        </Tag>
-        <span className="govuk-phase-banner__text govuk-phase-banner__text--inverse">
-          This is a new service - your{" "}
-          <a className="govuk-link govuk-link--inverse" href={href}>
-            feedback
-          </a>{" "}
-          will help us to improve it.
-        </span>
-      </p>
+      <p className="govuk-phase-banner__content">{children}</p>
     </div>
+  );
+}
+
+function HeroPhaseBannerTag({
+  children,
+  className,
+}: {
+  children: any;
+  className?: string;
+}) {
+  return (
+    <Tag
+      className={`govuk-phase-banner__content__tag app-hero__phase-banner__tag ${
+        className || ""
+      }`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function HeroPhaseBannerDescription({ children }: { children?: any }) {
+  return (
+    <span className="govuk-phase-banner__text govuk-phase-banner__text--inverse">
+      {children}
+    </span>
   );
 }
 
@@ -111,6 +125,8 @@ export {
   Hero,
   HeroBreadcrumbs,
   HeroPhaseBanner,
+  HeroPhaseBannerTag,
+  HeroPhaseBannerDescription,
   HeroMainContent,
   HeroMainContentCaption,
   HeroMainContentTitle,
