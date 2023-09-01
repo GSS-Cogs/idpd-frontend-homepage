@@ -4,84 +4,132 @@ import { PhaseBannerProps } from "@/components/PhaseBanner";
 // The phase banner within the Hero component needs inverse colours to show up
 // against a coloured background.
 
-function HeroPhaseBanner({
+const HeroBreadcrumbs = () => {
+  return (
+    <div className="govuk-breadcrumbs govuk-breadcrumbs--inverse">
+      <ol className="govuk-breadcrumbs__list">
+        <li className="govuk-breadcrumbs__list-item">
+          <a className="govuk-breadcrumbs__link" href="#">
+            Home
+          </a>
+        </li>
+      </ol>
+    </div>
+  );
+};
+
+const HeroMainContent = ({ children }: { children: any }) => {
+  return (
+    <div className="govuk-grid-row">
+      <div className="govuk-grid-column-two-thirds">{children}</div>
+    </div>
+  );
+};
+
+const HeroMainContentCaption = ({ children }: { children: any }) => (
+  <span className="govuk-caption-xl app-hero__caption">{children}</span>
+);
+const HeroMainContentTitle = ({ children }: { children: any }) => (
+  <h1 className="govuk-heading-xl app-hero__title">{children}</h1>
+);
+const HeroMainContentDescription = ({ children }: { children: any }) => (
+  <p className="app-hero__description">{children}</p>
+);
+
+const HeroActionButton = ({
+  children,
   href,
-  tag,
+}: {
+  children: any;
+  href: string;
+}) => (
+  <a
+    href={href}
+    role="button"
+    draggable="false"
+    className="govuk-button govuk-button--inverse govuk-!-margin-top-6 govuk-!-margin-bottom-0 govuk-button--start"
+    data-module="govuk-button"
+  >
+    {children}
+    <svg
+      className="govuk-button__start-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17.5"
+      height="19"
+      viewBox="0 0 33 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+    </svg>
+  </a>
+);
+
+function HeroPhaseBanner({
+  children,
   className,
-  attributes,
-}: PhaseBannerProps) {
+}: {
+  children: any;
+  className?: string;
+}) {
   return (
     <div
       className={`govuk-phase-banner govuk-phase-banner--inverse govuk-!-margin-bottom-2 ${
         className || ""
       }`}
-      {...attributes}
     >
-      <p className="govuk-phase-banner__content">
-        <Tag
-          className={`govuk-phase-banner__content__tag app-hero__phase-banner__tag ${
-            tag.className || ""
-          }`}
-          {...tag.attributes}
-        >
-          {tag.children}
-        </Tag>
-        <span className="govuk-phase-banner__text govuk-phase-banner__text--inverse">
-          This is a new service - your{" "}
-          <a className="govuk-link govuk-link--inverse" href={href}>
-            feedback
-          </a>{" "}
-          will help us to improve it.
-        </span>
-      </p>
+      <p className="govuk-phase-banner__content">{children}</p>
     </div>
   );
 }
 
-export default function Hero({
-  title,
-  description,
-  startButton,
-  phaseBanner,
+function HeroPhaseBannerTag({
+  children,
+  className,
 }: {
-  title: string;
-  description: string;
-  startButton?: { href: string; text: string };
-  phaseBanner?: PhaseBannerProps;
+  children: any;
+  className?: string;
 }) {
   return (
-    <div className={"app-hero" + (phaseBanner ? " govuk-!-padding-top-0" : "")}>
-      <div className="app-width-container">
-        {phaseBanner ? <HeroPhaseBanner {...phaseBanner} /> : null}
-        <div className="govuk-grid-row">
-          <div className="govuk-grid-column-two-thirds">
-            <h1 className="govuk-heading-xl app-hero__title">{title}</h1>
-            <p className="app-hero__description">{description}</p>
-          </div>
-        </div>
-        {startButton ? (
-          <a
-            href={startButton.href}
-            role="button"
-            draggable="false"
-            className="govuk-button govuk-button--inverse govuk-!-margin-top-6 govuk-!-margin-bottom-0 govuk-button--start"
-            data-module="govuk-button"
-          >
-            {startButton.text}
-            <svg
-              className="govuk-button__start-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="17.5"
-              height="19"
-              viewBox="0 0 33 40"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
-            </svg>
-          </a>
-        ) : null}
-      </div>
+    <Tag
+      className={`govuk-phase-banner__content__tag app-hero__phase-banner__tag ${
+        className || ""
+      }`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function HeroPhaseBannerDescription({ children }: { children?: any }) {
+  return (
+    <span className="govuk-phase-banner__text govuk-phase-banner__text--inverse">
+      {children}
+    </span>
+  );
+}
+
+function Hero({ children, className }: { children: any; className?: string }) {
+  return (
+    <div
+      className={
+        `app-hero ${className} govuk-!-padding-top-0` //todo change this for phasebanner conditional
+      }
+    >
+      <div className="app-width-container">{children}</div>
     </div>
   );
 }
+
+export {
+  Hero,
+  HeroBreadcrumbs,
+  HeroPhaseBanner,
+  HeroPhaseBannerTag,
+  HeroPhaseBannerDescription,
+  HeroMainContent,
+  HeroMainContentCaption,
+  HeroMainContentTitle,
+  HeroMainContentDescription,
+  HeroActionButton,
+};
