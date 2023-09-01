@@ -6,7 +6,7 @@
   background-color: govuk-colour("blue");
 }
 
-.app-hero.alternative {
+.app-hero--alternative {
   border-bottom: 1px solid govuk-colour("dark-grey");
   background-color: govuk-colour("dark-grey");
 }
@@ -39,7 +39,7 @@
   color: govuk-colour("blue");
 }
 
-.app-hero__phase-banner__tag.alternative {
+.app-hero__phase-banner__tag--alternative {
   background-color: govuk-colour("blue");
   color: govuk-colour("white");
 }
