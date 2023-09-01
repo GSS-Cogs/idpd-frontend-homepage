@@ -1,14 +1,14 @@
 export default function Header({
   href,
   serviceName,
-  className = "yellow-border",
+  borderColour = "yellow-border",
 }: {
   href?: string;
   serviceName?: string;
-  className?: string;
+  borderColour?: "yellow-border" | "blue-border" | "blue-alt-border";
 }) {
-  const headerClass = "govuk-header--" + className;
-  const containerClass = "govuk-header__container--" + className;
+  const headerClass = "govuk-header--" + borderColour;
+  const containerClass = "govuk-header__container--" + borderColour;
 
   return (
     <header
