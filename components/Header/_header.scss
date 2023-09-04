@@ -666,10 +666,3 @@ $after-button-padding-left: govuk-spacing(4);
     }
   }
 }
-
-.app-navigation-header__search-row {
-  @include govuk-media-query($from: "desktop") {
-    margin-left: govuk-spacing(4);
-    margin-right: govuk-spacing(4);
-  }
-}

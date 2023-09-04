@@ -293,7 +293,7 @@ export default function Header({
           hidden={isMenuHidden}
         >
           <div className="app-width-container app-navigation-header__search-container">
-            <div className="govuk-grid-row app-navigation-header__search-row">
+            <div className="govuk-grid-row">
               <div className="govuk-grid-column-two-thirds">
                 <h3 className="govuk-heading-m">Topics</h3>
                 <ul className="govuk-list app-header__list">
