@@ -33,6 +33,10 @@ $large-input-size: 50px;
   left: $icon-position;
 }
 
+.govuk-input__wrapper {
+  display: table;
+}
+
 .govuk-search__item {
   position: relative;
   display: table-cell;

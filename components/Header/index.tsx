@@ -22,9 +22,11 @@ const PopularItem = ({ text, href }: { text: string; href: string }) => (
 export default function Header({
   href,
   serviceName,
+  borderColour = "yellow-border",
 }: {
   href?: string;
   serviceName?: string;
+  borderColour?: "yellow-border" | "blue-border" | "blue-alt-border";
 }) {
   const [isSearchMenuHidden, setIsSearchMenuHidden] = useState(true);
   const [isJsEnabled, setIsJsEnabled] = useState(false);
@@ -117,13 +119,18 @@ export default function Header({
     </button>
   );
 
+  const headerClass = "govuk-header--" + borderColour;
+  const containerClass = "govuk-header__container--" + borderColour;
+
   return (
     <header
-      className="govuk-header app-navigation-header"
+      className={`govuk-header ${headerClass}`}
       role="banner"
       data-module="govuk-header"
     >
-      <div className="govuk-header__container app-width-container">
+      <div
+        className={`app-width-container govuk-header__container ${containerClass}`}
+      >
         <div className="govuk-header__logo">
           <a
             href={href || "/"}
