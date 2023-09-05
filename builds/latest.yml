@@ -1,23 +1,19 @@
 steps:
-
   - name: 'gcr.io/kaniko-project/executor:latest'
     args:
-      - >-
-        --destination=${_IMAGE_REPOSITORY}/frontend-homepage:latest
-      - >-
-        --destination=${_IMAGE_REPOSITORY}/frontend-homepage:$SHORT_SHA
-        
+      - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:latest'
+      - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:$SHORT_SHA'
   - name: gcr.io/cloud-builders/kubectl
     env:
-      - CLOUDSDK_COMPUTE_REGION=${_REGION}
-      - CLOUDSDK_CONTAINER_CLUSTER=${_K8S_CLUSTER_NAME}
+      - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_K8S_CLUSTER_NAME}'
     args:
       - set
       - image
       - deployment/idpd-frontend-homepage
       - '--namespace=cms'
-      - >-
-        idpd-frontend-homepage=${_IMAGE_REPOSITORY}/frontend-homepage:$SHORT_SHA
+      - 'idpd-frontend-homepage=${_IMAGE_REPOSITORY}/frontend-homepage:$SHORT_SHA'
 timeout: 7200s
 options:
-  - machine_type = "E2_HIGHCPU_32"
+  machineType: E2_HIGHCPU_32
+
