@@ -1,3 +1,24 @@
+"use client";
+
+import { Children, ReactNode, useEffect, useState } from "react";
+import Search from "@/components/Search";
+import React from "react";
+
+const popularItems = [
+  { text: "About the data service", href: "/" },
+  { text: "IDS Hub", href: "/" },
+  { text: "Climate change portal", href: "/" },
+  { text: "Violence against women and girls portal", href: "/" },
+];
+
+const PopularItem = ({ text, href }: { text: string; href: string }) => (
+  <li className="app-navigation-header__popular-item">
+    <a className="govuk-link app-navigation-header__popular-link" href={href}>
+      {text}
+    </a>
+  </li>
+);
+
 export default function Header({
   href,
   serviceName,
@@ -7,6 +28,97 @@ export default function Header({
   serviceName?: string;
   borderColour?: "yellow-border" | "blue-border" | "blue-alt-border";
 }) {
+  const [isSearchMenuHidden, setIsSearchMenuHidden] = useState(true);
+  const [isJsEnabled, setIsJsEnabled] = useState(false);
+
+  const jsCheck = () => {
+    const hasJavaScript =
+      typeof window !== "undefined" && "IntersectionObserver" in window;
+    setIsJsEnabled(hasJavaScript);
+  };
+  useEffect(() => {
+    jsCheck();
+  });
+
+  const toggleSearchMenu = () => {
+    setIsSearchMenuHidden(!isSearchMenuHidden);
+  };
+
+  const SearchButtonJsDisabled = () => (
+    <a className="app-navigation-header__search-item-link" href="/datasets">
+      <span className="govuk-visually-hidden">Search GOV.UK</span>
+      <svg
+        className="app-navigation-header__search-toggle-button-link-icon"
+        width="27"
+        height="27"
+        viewBox="0 0 27 27"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12.0161"
+          cy="11.0161"
+          r="8.51613"
+          stroke="currentColor"
+          strokeWidth="3"
+        ></circle>
+        <line
+          x1="17.8668"
+          y1="17.3587"
+          x2="26.4475"
+          y2="25.9393"
+          stroke="currentColor"
+          strokeWidth="3"
+        ></line>
+      </svg>
+    </a>
+  );
+
+  const SearchButtonJsEnabled = () => (
+    <button
+      onClick={() => toggleSearchMenu()}
+      className={`app-navigation-header__search-toggle-button${
+        !isSearchMenuHidden ? "-open" : ""
+      }`}
+      id="super-search-menu-toggle"
+      type="button"
+    >
+      <span className="govuk-visually-hidden">Search GOV.UK</span>
+
+      <svg
+        className="app-navigation-header__search-toggle-button-link-icon"
+        width="27"
+        height="27"
+        viewBox="0 0 27 27"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        visibility={isSearchMenuHidden ? "visible" : "hidden"}
+      >
+        <circle
+          cx="12.0161"
+          cy="11.0161"
+          r="8.51613"
+          stroke="currentColor"
+          strokeWidth="3"
+        ></circle>
+        <line
+          x1="17.8668"
+          y1="17.3587"
+          x2="26.4475"
+          y2="25.9393"
+          stroke="currentColor"
+          strokeWidth="3"
+        ></line>
+      </svg>
+      <span
+        className="app-navigation-header__navigation-top-toggle-close-icon"
+        hidden={isSearchMenuHidden}
+      >
+        ×
+      </span>
+    </button>
+  );
+
   const headerClass = "govuk-header--" + borderColour;
   const containerClass = "govuk-header__container--" + borderColour;
 
@@ -26,8 +138,6 @@ export default function Header({
           >
             <span className="govuk-header__logotype">
               <svg
-                aria-hidden="true"
-                focusable="false"
                 className="govuk-header__logotype-crown"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 132 97"
@@ -55,6 +165,42 @@ export default function Header({
           </div>
         ) : null}
       </div>
+      <nav className="app-navigation-header__content">
+        <div className="app-width-container app-navigation-header__button-width-container">
+          <div className="app-navigation-header__button-container">
+            <div className="app-navigation-header__search-item">
+              {isJsEnabled ? (
+                <SearchButtonJsEnabled />
+              ) : (
+                <SearchButtonJsDisabled />
+              )}
+            </div>
+          </div>
+        </div>
+        <div
+          id="super-search-menu"
+          className="app-navigation-header__navigation-dropdown-menu"
+          hidden={isSearchMenuHidden}
+        >
+          <div className="app-width-container app-navigation-header__search-container">
+            <Search />
+            <div className="govuk-grid-row">
+              <div className="govuk-grid-column-full">
+                <h3 className="govuk-heading-m">Popular on GOV.UK</h3>
+                <ul className="govuk-list">
+                  {popularItems.map((item) => (
+                    <PopularItem
+                      key={item.text}
+                      text={item.text}
+                      href={item.href}
+                    />
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

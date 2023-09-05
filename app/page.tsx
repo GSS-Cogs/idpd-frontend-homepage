@@ -130,7 +130,7 @@ export default async function Home() {
   return (
     <>
       <Hero>
-        <HeroPhaseBanner>
+        <HeroPhaseBanner className="govuk-!-padding-top-4">
           <HeroPhaseBannerTag>Alpha</HeroPhaseBannerTag>
           <HeroPhaseBannerDescription>
             This is a new service - your{" "}
