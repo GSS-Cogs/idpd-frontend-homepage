@@ -1,5 +1,7 @@
 import "./main.scss";
 
+import { GlobalContextProvider } from "./context/store";
+
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SkipLink from "@/components/SkipLink";
@@ -19,7 +21,7 @@ export default function RootLayout({
       <body className="govuk-template__body">
         <SkipLink />
         <Header />
-        {children}
+        <GlobalContextProvider>{children}</GlobalContextProvider>
         <Footer />
       </body>
     </html>
