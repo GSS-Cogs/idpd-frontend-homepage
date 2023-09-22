@@ -414,7 +414,6 @@ $after-button-padding-left: govuk-spacing(4);
 .app-navigation-header__popular-link {
   display: inline-block;
   @include govuk-font($size: 16, $weight: bold);
-  // font-size: govuk-px-to-rem(16px);
   padding: 0;
 
   &:after {
@@ -613,7 +612,6 @@ $after-button-padding-left: govuk-spacing(4);
       }
     }
   }
-  // stylelint-enable max-nesting-depth
 }
 
 .app-navigation-header__navigation-top-toggle-button-inner {
