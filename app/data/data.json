@@ -29,8 +29,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-06-30T08:30:15Z",
@@ -43,8 +43,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -57,8 +57,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -71,8 +71,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-02-01T09:30:00Z",
@@ -85,8 +85,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-02-01T09:30:00Z",
@@ -99,8 +99,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-03-31T12:10:26.937229",
@@ -132,12 +132,12 @@
         "published": "2023-03-31T12:10:42.291868",
         "modified": "2023-03-31T12:10:42.291868",
         "datasetTitle": "Additions to the housing stock",
-        "longDescription": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2021 - 2022.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing and Communities](https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants) \n\n\n### Source Notes and Caveats \nNet additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9).",
+        "longDescription": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2021 - 2022.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing & Communities](https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants) \n\n\n### Source Notes and Caveats \nNet additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9).",
         "shortDescription": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, England, financial year 2021 - 2022.",
         "licenceURL": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
         "licence": "OGLv3",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing",
         "topic": "Housing"
       },
@@ -145,12 +145,12 @@
         "published": "2023-03-31T12:10:42.291868",
         "modified": "2023-03-31T12:10:42.291868",
         "datasetTitle": "Additions to the housing stock",
-        "longDescription": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2021 - 2022.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing and Communities](https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants) \n\n\n### Source Notes and Caveats \nNet additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9).",
+        "longDescription": "This dataset shows the net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, in England, for financial year 2021 - 2022.\n\n### Coverage \n\nEngland\n\n#### Geography definition\n\nLocal Authority Districts and Unitary Authorities,\nCounties,\nMetropolitan Counties,\nNation (England) \n\n### Source\n\n - England: [Department for Levelling Up, Housing & Communities](https://www.gov.uk/government/statistical-data-sets/live-tables-on-dwelling-stock-including-vacants) \n\n\n### Source Notes and Caveats \nNet additional dwellings per 1,000 stock are available at an England, regional and local authority district level in DLUHC [net additional dwellings interactive dashboard](https://app.powerbi.com/view?r=eyJrIjoiZTE5YWQ3MDYtZmFjMC00N2YwLWIxM2EtYWY2NTk1NjExYjgwIiwidCI6ImJmMzQ2ODEwLTljN2QtNDNkZS1hODcyLTI0YTJlZjM5OTVhOCJ9).",
         "shortDescription": "Net additions to the dwelling stock (including new builds, conversions, changes of use, other gains/losses and offset by demolitions) per 1,000 stock, England, financial year 2021 - 2022.",
         "licenceURL": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
         "licence": "Open Government Licence v3.0",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "https://www.ons.gov.uk/peoplepopulationandcommunity/housing",
         "topic": "Housing"
       },
@@ -178,8 +178,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-10-07T14:25:45.415398",
@@ -257,8 +257,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -271,8 +271,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -285,8 +285,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -299,8 +299,8 @@
         "creator": "https://www.gov.uk/government/organisations/met-office",
         "publisher": "Met Office",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -313,8 +313,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -327,8 +327,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-03-31T12:10:55.677219",
@@ -445,7 +445,7 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "",
-        "topic": "Agriculture, Energy and Environment"
+        "topic": "Agriculture, energy and environment"
       },
       {
         "published": "2021-06-11T00:00:00",
@@ -458,7 +458,7 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "",
-        "topic": "Agriculture, Energy and Environment"
+        "topic": "Agriculture, energy and environment"
       },
       {
         "published": "2021-06-11T00:00:00",
@@ -551,8 +551,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -565,8 +565,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -579,8 +579,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2012-12-13T00:00:00Z",
@@ -593,8 +593,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-10-14T09:30:00Z",
@@ -607,8 +607,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2012-12-13T00:00:00Z",
@@ -621,8 +621,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-10-14T09:30:00Z",
@@ -635,8 +635,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2012-12-13T00:00:00Z",
@@ -649,8 +649,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs",
         "publisher": "Department for Environment, Food & Rural Affairs",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-03-31T12:11:10.799381",
@@ -743,10 +743,10 @@
         "licenceURL": "",
         "licence": "",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2014-07-30T08:30:00Z",
@@ -757,10 +757,10 @@
         "licenceURL": "",
         "licence": "",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2014-07-30T08:30:00Z",
@@ -771,10 +771,10 @@
         "licenceURL": "",
         "licence": "",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-05-03T13:48:45.403621Z",
@@ -785,9 +785,9 @@
         "licenceURL": "",
         "licence": "",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
-        "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
+        "publisher": "Department for Levelling Up, Housing & Communities",
+        "topicURL": "/datasets/Domestic Energy Performance Certificates for new dwellings by energy efficiency rating (updated)",
+        "topic": "Agriculture, energy and environment",
         "subTopic": "Climate Change"
       },
       {
@@ -799,10 +799,10 @@
         "licenceURL": "",
         "licence": "",
         "creator": "https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities",
-        "publisher": "Department for Levelling Up, Housing and Communities",
+        "publisher": "Department for Levelling Up, Housing & Communities",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-03-31T12:11:48.656892",
@@ -919,8 +919,8 @@
         "creator": "https://www.gov.uk/government/organisations/ministry-of-housing-communities-and-local-government",
         "publisher": "Ministry of Housing, Communities & Local Government",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -933,8 +933,8 @@
         "creator": "https://www.gov.uk/government/organisations/ministry-of-housing-communities-and-local-government",
         "publisher": "Ministry of Housing, Communities & Local Government",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -947,8 +947,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-09-29T08:30:00Z",
@@ -961,8 +961,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-11-10T00:00:00",
@@ -1066,8 +1066,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-04-10T00:00:00",
@@ -1080,8 +1080,8 @@
         "creator": "",
         "publisher": "",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2023-03-31T12:12:13.993013",
@@ -1161,8 +1161,8 @@
         "creator": "https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy",
         "publisher": "Department for Business, Energy & Industrial Strategy",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2020-12-21T00:00:00",
@@ -1227,8 +1227,8 @@
         "creator": "https://www.gov.uk/government/organisations/forest-research",
         "publisher": "Forest Research",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2021-02-02T09:30:00Z",
@@ -1241,8 +1241,8 @@
         "creator": "https://www.gov.uk/government/organisations/forest-research",
         "publisher": "Forest Research",
         "topicURL": "http://gss-data.org.uk/def/gdp#climate-change",
-        "topic": "Agriculture, Energy and Environment",
-        "subTopic": "Climate Change and Energy"
+        "topic": "Agriculture, energy and environment",
+        "subTopic": "Climate change and energy"
       },
       {
         "published": "2022-10-24T11:47:09.209928",
@@ -1255,7 +1255,7 @@
         "creator": "",
         "publisher": "",
         "topicURL": "https://uksa.statisticsauthority.gov.uk/themes/agriculture-energy-environment",
-        "topic": "Agriculture, Energy and Environment"
+        "topic": "Agriculture, energy and environment"
       },
       {
         "published": "2022-10-24T11:00:21.702685",
@@ -1268,7 +1268,7 @@
         "creator": "",
         "publisher": "",
         "topicURL": "https://uksa.statisticsauthority.gov.uk/themes/agriculture-energy-environment",
-        "topic": "Agriculture, Energy and Environment"
+        "topic": "Agriculture, energy and environment"
       },
       {
         "published": "2021-03-31",

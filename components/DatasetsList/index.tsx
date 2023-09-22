@@ -1,6 +1,10 @@
 "use client";
+import { useGlobalContext } from "@/app/context/store";
 import Image from "next/image";
+import { useCallback, useEffect } from "react";
+import { useState } from "react";
 import { MdRssFeed } from "react-icons/md";
+import FilterDisplay from "../FilterDisplay";
 import Pagination from "../PaginationPage";
 
 function DatasetsListItem(props: {
@@ -79,12 +83,37 @@ export default function DatasetsList({
 }: {
   items: any;
   page: number;
-  searchParams: URLSearchParams;
+  searchParams: any;
 }) {
   const RESULTS_LENGTH = 20;
   const sliceStart = page * RESULTS_LENGTH - RESULTS_LENGTH;
   const sliceEnd = page * RESULTS_LENGTH;
   const totalPages = Math.ceil(items.length / RESULTS_LENGTH);
+
+  const [isJsEnabled, setIsJsEnabled] = useState(false);
+
+  const jsCheck = () => {
+    const hasJavaScript =
+      typeof window !== "undefined" && "IntersectionObserver" in window;
+    setIsJsEnabled(hasJavaScript);
+  };
+  useEffect(() => {
+    jsCheck();
+  });
+
+  let tempParams = new URLSearchParams(searchParams);
+  const {
+    topicFilter,
+    subtopicsFilter,
+    publisherFilter,
+    afterDate,
+    beforeDate,
+  } = useGlobalContext();
+  const initialTopicFilter = tempParams.get("topic");
+  const initialSubtopicsFilter = searchParams?.subtopics;
+  const initialPublisherFilter = tempParams.get("publisher");
+  const initialAfterDateFilter = tempParams.get("from_date");
+  const initialBeforeDateFilter = tempParams.get("to_date");
 
   // TODO this is a temp solution until we add in a correct sort by process
   const sortByDate = (data: any[]) => {
@@ -95,7 +124,70 @@ export default function DatasetsList({
     });
   };
 
-  const sortedItems = sortByDate(items);
+  function parseUKDate(date: string) {
+    const splitDate = date.split("/");
+    if (splitDate.length < 2) {
+      return Date.parse(date);
+    }
+    const [day, month, year] = splitDate;
+    const newDate = `${year}-${month}-${day}T00:00:00.000Z`;
+    return Date.parse(newDate);
+  }
+
+  const filterData = useCallback(
+    (data: any[]) => {
+      let filteredData = [...data];
+      let activeTopicFilter = topicFilter || "All topics";
+      let activeSubtopicsFilter = subtopicsFilter;
+      let activePublisherFilter = publisherFilter || "All publisher";
+      let activeAfterDateFilter = parseUKDate(afterDate || "");
+      let activeBeforeDateFilter = parseUKDate(beforeDate || "");
+
+      if (!isJsEnabled) {
+        activeTopicFilter = initialTopicFilter || "All topics";
+        activeSubtopicsFilter = initialSubtopicsFilter;
+        activePublisherFilter = initialPublisherFilter || "All publisher";
+        activeAfterDateFilter = parseUKDate(initialAfterDateFilter || "");
+        activeBeforeDateFilter = parseUKDate(initialBeforeDateFilter || "");
+      }
+
+      if (activeTopicFilter !== "All topics") {
+        filteredData = filteredData.filter(
+          (x) => x.topic === activeTopicFilter
+        );
+      }
+
+      if (activeSubtopicsFilter?.length > 0) {
+        filteredData = filteredData.filter((x) =>
+          activeSubtopicsFilter.includes(x.subTopic)
+        );
+      }
+
+      if (activePublisherFilter !== "All publisher") {
+        filteredData = filteredData.filter(
+          (x) => x.publisher === activePublisherFilter
+        );
+      }
+
+      if (activeAfterDateFilter) {
+        filteredData = filteredData.filter(
+          (x) => Date.parse(x.modified) >= activeAfterDateFilter
+        );
+      }
+
+      if (activeBeforeDateFilter) {
+        filteredData = filteredData.filter(
+          (x) => Date.parse(x.modified) <= activeBeforeDateFilter
+        );
+      }
+
+      return filteredData;
+    },
+    [topicFilter, subtopicsFilter, publisherFilter, afterDate, beforeDate]
+  );
+
+  const filteredItems = filterData(items);
+  const sortedItems = sortByDate(filteredItems);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -114,15 +206,12 @@ export default function DatasetsList({
           </a>
         </div>
       </div>
+      <FilterDisplay searchParams={searchParams} />
       <ul className="app-datasets-list">
         {sortedItems
           .slice(sliceStart, sliceEnd)
           .map((item: any, index: any) => {
-            return (
-              <>
-                <DatasetsListItem {...item} key={index} searchText={""} />
-              </>
-            );
+            return <DatasetsListItem {...item} key={index} searchText={""} />;
           })}
       </ul>
       <Pagination
