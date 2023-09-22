@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { MdRssFeed } from "react-icons/md";
 import Pagination from "../Pagination";
 
 function DatasetsListItem(props: {
@@ -103,16 +102,6 @@ export default function DatasetsList({
         <h3 className="app-datasets-header__results">
           {sortedItems.length} results
         </h3>
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
-          <MdRssFeed className="app-datasets-header__icon" />
-          <a className="app-datasets-header__link govuk-link" href={"#"}>
-            Subscribe to feed
-          </a>
-        </div>
       </div>
       <ul className="app-datasets-list">
         {sortedItems
