@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Search from "@/components/Search";
-import idsLogo from "../../public/assets/images/ids/IDS logo_landscape_WHITE.svg";
+import idsLogo from "../../public/assets/images/ids/IDS_logo_landscape_WHITE.svg";
 
 const cardListTopicItems = [
   {
