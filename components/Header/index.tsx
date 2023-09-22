@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "@/components/Search";
 import React from "react";
 
