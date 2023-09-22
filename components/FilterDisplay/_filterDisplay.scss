@@ -1,0 +1,40 @@
+.app-filter-display {
+  font-family: GDS Transport;
+  margin-bottom: govuk-spacing(1);
+}
+
+.app-filter-display > div:nth-of-type(odd) {
+  background-color: govuk-colour(light-grey);
+}
+.app-filter-display > div:nth-of-type(even) {
+  background-color: govuk-colour("white");
+}
+
+.app-filter-display__row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: govuk-spacing(2) 8px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.app-filter-display__row-title {
+  @include govuk-font($size: 19, $weight: bold);
+  margin-right: govuk-spacing(1);
+}
+
+.app-filter-display__item {
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  display: flex;
+  padding: govuk-spacing(2) 8px;
+  @include govuk-font($size: 16);
+
+  cursor: pointer;
+}
+
+.app-filter-display__item:hover {
+  background-color: govuk-colour("mid-grey");
+}
