@@ -4,63 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Search from "@/components/Search";
 import idsLogo from "../../public/assets/images/ids/IDS_logo_landscape_WHITE.svg";
-
-const cardListTopicItems = [
-  {
-    heading: "Agriculture, energy and environment",
-    href: "",
-    description:
-      "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
-  },
-  {
-    heading: "Business, trade and international development",
-    href: "",
-    description:
-      "Company structure, size and location; closures or mergers; and turnover, international and UK trade, and research and development.",
-  },
-  {
-    heading: "Children, education and skills",
-    href: "",
-    description:
-      "Teachers and lecturers, learners, and those not in education, employment or training.",
-  },
-  {
-    heading: "Crime and security",
-    href: "",
-    description:
-      "Crime; justice systems (family, civil and criminal); and policing, people, organizations, and money.",
-  },
-  {
-    heading: "Economy",
-    href: "",
-    description:
-      "The UK economy and the economies of Devolved Administrations and UK regions.",
-  },
-  {
-    heading: "Health and social Care",
-    href: "",
-    description:
-      "Health care provision, social care provision, health status and disease, disability, cause of death, and health and safety at work.",
-  },
-  {
-    heading: "Housing, planning and local services",
-    href: "",
-    description:
-      "Current housing, household estimates and projections, homelessness, housing requirements, and commercial, industrial, retail and residential planning.",
-  },
-  {
-    heading: "Labour market and welfare",
-    href: "",
-    description:
-      "Includes statistics measuring different aspects of work and jobs and covers people's employment, working patterns, and the types of work they do.",
-  },
-  {
-    heading: "Travel, transport and tourism",
-    href: "",
-    description:
-      "All modes of travel and transport, transport infrastructure, and tourism; travel patterns and distances travelled using various modes of transport; and international visits to the UK.",
-  },
-];
+import topicItems from "../../app/data/topicItems.json";
 
 const popularItems = [
   { text: "About the data service", href: "" },
@@ -297,13 +241,15 @@ export default function Header({
               <div className="govuk-grid-column-two-thirds">
                 <h3 className="govuk-heading-m">Topics</h3>
                 <ul className="govuk-list app-header__list">
-                  {cardListTopicItems.map((item) => (
-                    <PopularItem
-                      key={item.heading}
-                      text={item.heading}
-                      href={item.href}
-                    />
-                  ))}
+                  {topicItems.data?.map(
+                    (item: { heading: string; href: string }) => (
+                      <PopularItem
+                        key={item.heading}
+                        text={item.heading}
+                        href={item.href}
+                      />
+                    )
+                  )}
                 </ul>
               </div>
               <div className="govuk-grid-column-one-third">
