@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { MdRssFeed } from "react-icons/md";
-import Pagination from "../PaginationPage";
+import Pagination from "../Pagination";
 
 function DatasetsListItem(props: {
   dataset: any;
