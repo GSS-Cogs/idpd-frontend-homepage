@@ -30,9 +30,11 @@ const PopularItem = ({ text, href }: { text: string; href: string }) => (
 export default function Header({
   href,
   serviceName,
+  borderColour = "yellow-border",
 }: {
   href?: string;
   serviceName?: string;
+  borderColour?: "yellow-border" | "blue-border" | "blue-alt-border";
 }) {
   const [isSearchMenuHidden, setIsSearchMenuHidden] = useState(true);
   const [isMenuHidden, setIsMenuHidden] = useState(true);
@@ -158,30 +160,38 @@ export default function Header({
       </span>
     </button>
   );
+  const headerClass = "govuk-header--" + borderColour;
+  const containerClass = "govuk-header__container--" + borderColour;
+
 
   return (
     <header
-      className="govuk-header app-navigation-header"
+      className={`govuk-header ${headerClass}`}
       role="banner"
       data-module="govuk-header"
     >
-      <div className="govuk-header__container app-width-container">
-        <a
-          className="govuk-header__link govuk-header__link--homepage"
-          href={"/"}
-          id="logo"
-          title="Go to the Data Explorer homepage"
-        >
-          <span className="govuk-header__logotype">
-            <Image
-              priority
-              src={idsLogo}
-              alt="IDS Data Explorer"
-              className="govuk-header__logotype-crown"
-              height={30}
-            />
-          </span>
-        </a>
+      <div
+        className={`app-width-container govuk-header__container ${containerClass}`}
+      >
+        <div className="govuk-header__logo">
+          <a
+            href={href || "/"}
+            className="govuk-header__link govuk-header__link--homepage"
+            id="logo"
+            title="Go to the Data Explorer homepage"
+          >
+            <span className="govuk-header__logotype">
+              <Image
+                priority
+                src={idsLogo}
+                alt="IDS Data Explorer"
+                className="govuk-header__logotype-crown"
+                height={30}
+              />
+              <span className="govuk-header__logotype-text">GOV.UK</span>
+            </span>
+          </a>
+        </div>
         {serviceName ? (
           <div className="govuk-header__content">
             <a

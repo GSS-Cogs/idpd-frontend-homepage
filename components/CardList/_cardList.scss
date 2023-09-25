@@ -111,16 +111,6 @@
 }
 
 .app-cards__link--publisher {
-  // Make the entire list item area clickable
-  &:after {
-    bottom: 0;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
   &:hover {
     &:before {
       border-color: $govuk-link-hover-colour;
