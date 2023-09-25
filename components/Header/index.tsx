@@ -163,7 +163,6 @@ export default function Header({
   const headerClass = "govuk-header--" + borderColour;
   const containerClass = "govuk-header__container--" + borderColour;
 
-
   return (
     <header
       className={`govuk-header ${headerClass}`}
@@ -188,7 +187,6 @@ export default function Header({
                 className="govuk-header__logotype-crown"
                 height={30}
               />
-              <span className="govuk-header__logotype-text">GOV.UK</span>
             </span>
           </a>
         </div>
