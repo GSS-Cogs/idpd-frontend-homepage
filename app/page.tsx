@@ -1,5 +1,9 @@
 import BigNumber from "@/components/BigNumber";
-import CardList from "@/components/CardList";
+import {
+  CardList,
+  CardListPublisherCard,
+  CardListTopicCard,
+} from "@/components/CardList";
 import {
   Hero,
   HeroActionButton,
@@ -12,7 +16,6 @@ import {
 } from "@/components/Hero";
 import SubHero from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
-import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
 import Header from "@/components/Header";
 
 const CardListTopicItems = [
@@ -169,7 +172,11 @@ export default async function Home() {
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={CardListTopicItems} CardComponent={TopicCard} />
+              <CardList>
+                <CardListTopicCard
+                  items={CardListTopicItems}
+                ></CardListTopicCard>
+              </CardList>
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
@@ -182,10 +189,11 @@ export default async function Home() {
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList
-                items={CardListPublisherItems}
-                CardComponent={PublisherCard}
-              />
+              <CardList>
+                <CardListPublisherCard
+                  items={CardListPublisherItems}
+                ></CardListPublisherCard>
+              </CardList>
             </div>
           </div>
         </main>
