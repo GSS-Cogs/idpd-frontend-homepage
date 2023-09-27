@@ -1,7 +1,13 @@
 import Header from "@/components/Header";
 import BigNumber from "@/components/BigNumber";
-import CardList from "@/components/CardList";
-import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
+import {
+  CardList,
+  CardListDatasetCard,
+  CardListLink,
+  CardListPublisherCard,
+  CardListTitle,
+  CardListTopicCard,
+} from "@/components/CardList";
 import {
   Hero,
   HeroMainContent,
@@ -19,6 +25,32 @@ const data = {
   topicDescription:
     "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
 };
+
+const datasetItems = [
+  {
+    heading:
+      "Domestic Energy Performance Certificates for new dwellings by energy efficiency rating (updated)",
+    href: "",
+  },
+  {
+    heading:
+      "Domestic Energy Performance Certificates for existing dwellings by energy efficiency rating 2022",
+    href: "",
+  },
+  {
+    heading:
+      "Domestic Energy Performance Certificates for new dwellings by energy efficiency rating 2022",
+    href: "",
+  },
+  {
+    heading: "Energy Intensity Extract 1970 - 2021",
+    href: "",
+  },
+  {
+    heading: "Inland energy consumption: primary fuel input basis 2021",
+    href: "",
+  },
+];
 
 const subtopicItems = [
   {
@@ -157,13 +189,35 @@ const Topics = ({
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
+                number={datasetItems.length}
+                label="datasets"
+                subtext={
+                  "View and download datasets related to " +
+                  data.topicTitle.toLowerCase()
+                }
+              />
+            </div>
+            <div className="govuk-grid-column-three-quarters">
+              <CardList>
+                <CardListTitle>Latest datasets</CardListTitle>
+                <CardListDatasetCard items={datasetItems}></CardListDatasetCard>
+                <CardListLink href="/datasets">View all datasets</CardListLink>
+              </CardList>
+            </div>
+          </div>
+          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
+          <div className="govuk-grid-row app-section-row">
+            <div className="govuk-grid-column-one-quarter">
+              <BigNumber
                 number={subtopicItems.length}
                 label="subtopics"
                 subtext="View and download datasets by subtopics"
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={subtopicItems} CardComponent={TopicCard} />
+              <CardList>
+                <CardListTopicCard items={subtopicItems}></CardListTopicCard>
+              </CardList>
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
@@ -176,7 +230,11 @@ const Topics = ({
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={publisherItems} CardComponent={PublisherCard} />
+              <CardList>
+                <CardListPublisherCard
+                  items={publisherItems}
+                ></CardListPublisherCard>
+              </CardList>
             </div>
           </div>
         </main>
