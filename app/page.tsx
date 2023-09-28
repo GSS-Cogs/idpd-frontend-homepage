@@ -131,7 +131,7 @@ export default async function Home() {
     <>
       <Hero>
         <HeroPhaseBanner>
-          <HeroPhaseBannerTag>Alpha</HeroPhaseBannerTag>
+          <HeroPhaseBannerTag>Prototype</HeroPhaseBannerTag>
           <HeroPhaseBannerDescription>
             This is a new service - your{" "}
             <a className="govuk-link govuk-link--inverse" href="/">
