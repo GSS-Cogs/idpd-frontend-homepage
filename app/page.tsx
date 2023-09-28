@@ -154,7 +154,7 @@ export default async function Home() {
         </HeroActionButton>
       </Hero>
       <SubHero>
-        <Search />
+        <Search searchLabel="Search data catalogue" />
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
