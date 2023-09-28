@@ -4,9 +4,9 @@ export default function Search({ searchLabel }: { searchLabel?: string }) {
       <h1 className="govuk-label-wrapper">
         <label className="govuk-label govuk-label--m">{searchLabel}</label>
       </h1>
-      <div className="govuk-input__wrapper">
+      <div className="govuk-input__wrapper govuk-!-width-two-thirds">
         <input
-          className="govuk-input govuk-!-width-two-thirds govuk-search__item govuk-search__input js-class-toggle"
+          className="govuk-input govuk-search__item govuk-search__input js-class-toggle"
           id="weight"
           name="weight"
           type="search"

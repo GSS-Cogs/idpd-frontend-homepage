@@ -1,11 +1,12 @@
 "use client";
 import { useGlobalContext } from "@/app/context/store";
 import Image from "next/image";
+
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { MdRssFeed } from "react-icons/md";
 import FilterDisplay from "../FilterDisplay";
-import Pagination from "../PaginationPage";
+import Pagination from "../Pagination";
 
 function DatasetsListItem(props: {
   dataset: any;
@@ -195,16 +196,6 @@ export default function DatasetsList({
         <h3 className="app-datasets-header__results">
           {sortedItems.length} results
         </h3>
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
-          <MdRssFeed className="app-datasets-header__icon" />
-          <a className="app-datasets-header__link govuk-link" href={"#"}>
-            Subscribe to feed
-          </a>
-        </div>
       </div>
       <FilterDisplay searchParams={searchParams} />
       <ul className="app-datasets-list">

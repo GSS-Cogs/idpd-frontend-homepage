@@ -1,10 +1,20 @@
 import BigNumber from "@/components/BigNumber";
 import CardList from "@/components/CardList";
-import Hero from "@/components/Hero";
+import {
+  Hero,
+  HeroActionButton,
+  HeroMainContent,
+  HeroMainContentDescription,
+  HeroMainContentTitle,
+  HeroPhaseBanner,
+  HeroPhaseBannerTag,
+  HeroPhaseBannerDescription,
+} from "@/components/Hero";
 import SubHero from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
+import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
 
-const CardListItems = [
+const CardListTopicItems = [
   {
     heading: "Agriculture, energy and environment",
     href: "",
@@ -61,24 +71,94 @@ const CardListItems = [
   },
 ];
 
+const CardListPublisherItems = [
+  {
+    heading: "Department for Business, Energy & Industrial Strategy",
+    href: "",
+  },
+  {
+    heading: "Department for Education",
+    href: "",
+  },
+  {
+    heading: "Department for Environment, Food & Rural Affairs",
+    href: "",
+  },
+  {
+    heading: "Department for Levelling Up, Housing & Communities",
+    href: "",
+  },
+  {
+    heading: "Department for Transport",
+    href: "",
+  },
+  {
+    heading: "Forest Research",
+    href: "",
+  },
+  {
+    heading: "HM Revenue & Customs",
+    href: "",
+  },
+  {
+    heading: "Met Office",
+    href: "",
+  },
+  {
+    heading: "Ministry of Housing, Communities & Local Government",
+    href: "",
+  },
+  {
+    heading: "Ofcom",
+    href: "",
+  },
+  {
+    heading: "Office for Health Improvement and Disparities",
+    href: "",
+  },
+  {
+    heading: "Office for National Statistics",
+    href: "",
+  },
+  {
+    heading: "Welsh Government",
+    href: "",
+  },
+];
+
 export default async function Home() {
   return (
     <>
-      <Hero
-        title="Find government statistics and data"
-        description="Browse statistical summaries and download associated data to help you understand and analyse our range of statistics."
-        startButton={{ href: "/datasets", text: "View data catalogue" }}
-        phaseBanner={{
-          href: "#",
-          tag: { children: "prototype" },
-        }}
-      />
+      <Hero>
+        <HeroPhaseBanner className="govuk-!-padding-top-4">
+          <HeroPhaseBannerTag>Alpha</HeroPhaseBannerTag>
+          <HeroPhaseBannerDescription>
+            This is a new service - your{" "}
+            <a className="govuk-link govuk-link--inverse" href="/">
+              feedback
+            </a>{" "}
+            will help us to improve it.
+          </HeroPhaseBannerDescription>
+        </HeroPhaseBanner>
+        <HeroMainContent>
+          <HeroMainContentTitle>
+            Find government statistics and data
+          </HeroMainContentTitle>
+          <HeroMainContentDescription>
+            Browse statistical summaries and download associated data to help
+            you understand and analyse our range of statistics.
+          </HeroMainContentDescription>
+        </HeroMainContent>
+        <HeroActionButton href="/catalogue">
+          View data catalogue
+        </HeroActionButton>
+      </Hero>
       <SubHero>
         <Search searchLabel="Search data catalogue" />
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
-          <div className="govuk-grid-row">
+          <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
                 number={9}
@@ -87,21 +167,23 @@ export default async function Home() {
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={CardListItems} />
+              <CardList items={CardListTopicItems} CardComponent={TopicCard} />
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
-          <div className="govuk-grid-row">
+          <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
-              <BigNumber number={13} label="publishers" />
+              <BigNumber
+                number={13}
+                label="publishers"
+                subtext="View and download datasets by publishers"
+              />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <p className="govuk-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis,
-                recusandae! Illum eligendi totam sapiente exercitationem quidem
-                culpa voluptatem, magni labore animi perferendis adipisci quasi
-                tempore molestiae maiores sunt quis voluptatibus.
-              </p>
+              <CardList
+                items={CardListPublisherItems}
+                CardComponent={PublisherCard}
+              />
             </div>
           </div>
         </main>

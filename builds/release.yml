@@ -1,0 +1,18 @@
+steps:
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    args:
+      - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:latest-release'
+      - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:$TAG_NAME'
+  - name: gcr.io/cloud-builders/kubectl
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${_K8S_CLUSTER_NAME}'
+    args:
+      - set
+      - image
+      - deployment/idpd-frontend-homepage
+      - '--namespace=cms'
+      - 'idpd-frontend-homepage=${_IMAGE_REPOSITORY}/frontend-homepage:$TAG_NAME'
+timeout: 7200s
+options:
+  machineType: E2_HIGHCPU_32
