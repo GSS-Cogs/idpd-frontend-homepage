@@ -249,7 +249,7 @@ export default function Header({
               <div className="govuk-grid-column-two-thirds">
                 <h3 className="govuk-heading-m">Topics</h3>
                 <ul className="govuk-list app-header__list">
-                  {topicItems.data?.map(
+                  {topicItems.topics?.map(
                     (item: { heading: string; href: string }) => (
                       <PopularItem
                         key={item.heading}
