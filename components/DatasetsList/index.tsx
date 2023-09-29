@@ -107,11 +107,7 @@ export default function DatasetsList({
         {sortedItems
           .slice(sliceStart, sliceEnd)
           .map((item: any, index: any) => {
-            return (
-              <>
-                <DatasetsListItem {...item} key={index} searchText={""} />
-              </>
-            );
+            return <DatasetsListItem {...item} key={index} searchText={""} />;
           })}
       </ul>
       <Pagination

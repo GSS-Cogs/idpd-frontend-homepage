@@ -130,8 +130,8 @@ export default async function Home() {
   return (
     <>
       <Hero>
-        <HeroPhaseBanner className="govuk-!-padding-top-4">
-          <HeroPhaseBannerTag>Alpha</HeroPhaseBannerTag>
+        <HeroPhaseBanner>
+          <HeroPhaseBannerTag>Prototype</HeroPhaseBannerTag>
           <HeroPhaseBannerDescription>
             This is a new service - your{" "}
             <a className="govuk-link govuk-link--inverse" href="/">
@@ -149,7 +149,7 @@ export default async function Home() {
             you understand and analyse our range of statistics.
           </HeroMainContentDescription>
         </HeroMainContent>
-        <HeroActionButton href="/catalogue">
+        <HeroActionButton href="/datasets">
           View data catalogue
         </HeroActionButton>
       </Hero>
