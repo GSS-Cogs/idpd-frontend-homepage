@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useGlobalContext } from "@/app/context/store";
 
 const MultiSelect = ({ options }: { options: string[] }) => {
@@ -30,6 +30,25 @@ const MultiSelect = ({ options }: { options: string[] }) => {
     history.pushState(null, "", newURL);
     setSubtopicsFilter(subtopics);
   };
+
+  const CheckboxItem = useCallback(
+    ({ option }: { option: string }) => (
+      <div
+        key={option}
+        className="govuk-checkboxes__item"
+        style={{ marginLeft: 10 }}
+      >
+        <input
+          className="govuk-checkboxes__input"
+          type="checkbox"
+          checked={subtopicsFilter?.includes(option)}
+          onChange={() => toggleOption(option)}
+        />
+        <label className="govuk-label govuk-checkboxes__label">{option}</label>
+      </div>
+    ),
+    [subtopicsFilter]
+  );
 
   return (
     <div className="app-multi-select">
@@ -63,21 +82,7 @@ const MultiSelect = ({ options }: { options: string[] }) => {
       {isOpen && (
         <div className="app-multi-select__dropdown govuk-checkboxes govuk-checkboxes--small">
           {options.map((option: string) => (
-            <div
-              key={option}
-              className="govuk-checkboxes__item"
-              style={{ marginLeft: 10 }}
-            >
-              <input
-                className="govuk-checkboxes__input"
-                type="checkbox"
-                defaultChecked={subtopicsFilter?.includes(option)}
-                onChange={() => toggleOption(option)}
-              />
-              <label className="govuk-label govuk-checkboxes__label">
-                {option}
-              </label>
-            </div>
+            <CheckboxItem option={option} />
           ))}
         </div>
       )}
