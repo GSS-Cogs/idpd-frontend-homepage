@@ -25,6 +25,9 @@ interface ContextProps {
   setBeforeDate: Dispatch<SetStateAction<string | null>>;
 
   setAllFilters: () => void;
+
+  fullSearchParams: URLSearchParams | null;
+  setFullSearchParams: Dispatch<SetStateAction<URLSearchParams | null>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -39,6 +42,8 @@ const GlobalContext = createContext<ContextProps>({
   beforeDate: null,
   setBeforeDate: () => {},
   setAllFilters: () => {},
+  fullSearchParams: null,
+  setFullSearchParams: () => {},
 });
 
 export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -49,11 +54,12 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [publisherFilter, setPublisherFilter] = useState<string | null>(null);
   const [afterDate, setAfterDate] = useState<string | null>(null);
   const [beforeDate, setBeforeDate] = useState<string | null>(null);
+  const [fullSearchParams, setFullSearchParams] =
+    useState<URLSearchParams | null>(null);
 
   const setAllFilters = () => {
     const params = new URLSearchParams(window.location.search);
     const topic = params.get("topic") || null;
-
     if (topic !== topicFilter && topicFilter !== null) {
       setSubtopicsFilter([]);
     } else {
@@ -61,6 +67,7 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
       setSubtopicsFilter(subtopics);
     }
 
+    setFullSearchParams(params);
     setTopicFilter(topic);
     setPublisherFilter(params.get("publisher") || null);
     setBeforeDate(params.get("to_date") || null);
@@ -81,6 +88,8 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
         beforeDate,
         setBeforeDate,
         setAllFilters,
+        fullSearchParams,
+        setFullSearchParams,
       }}
     >
       {children}
