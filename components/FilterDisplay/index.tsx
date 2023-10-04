@@ -126,19 +126,21 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
       const prefixText = getPrefixText(index);
 
       return (
-        <span
-          key={index}
-          className="app-filter-display__item"
-          onClick={() => removeFilter(index > 0 ? "subtopics" : filter, index)}
-        >
-          <div style={{ marginRight: 8 }}>X</div>
-          <div>
-            {prefixText && (
-              <div style={{ marginLeft: 5, marginRight: 5 }}>{prefixText}</div>
-            )}
-            {item}
-          </div>
-        </span>
+        <>
+          {prefixText && (
+            <div style={{ marginLeft: 5, marginRight: 5 }}>{prefixText}</div>
+          )}
+          <span
+            key={index}
+            className="app-filter-display__item"
+            onClick={() =>
+              removeFilter(index > 0 ? "subtopics" : filter, index)
+            }
+          >
+            <div style={{ marginRight: 8 }}>X</div>
+            <div>{item}</div>
+          </span>
+        </>
       );
     };
 
@@ -213,87 +215,6 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
       </div>
     );
   };
-
-  // const FilterDisplayDateItem = ({
-  //   fromDate,
-  //   toDate,
-  // }: {
-  //   fromDate: string;
-  //   toDate: string;
-  // }) => {
-  //   let prefixText = "";
-  //   if (fromDate && toDate) {
-  //     prefixText = "Updated between";
-  //   } else if (fromDate) {
-  //     prefixText = "Updated after";
-  //   } else if (toDate) {
-  //     prefixText = "Updated before";
-  //   } else {
-  //     return null;
-  //   }
-
-  // function formatDate(inputDate: Date) {
-  //   if (!inputDate) {
-  //     return null;
-  //   }
-  //   const options: Intl.DateTimeFormatOptions = {
-  //     year: "numeric",
-  //     month: "long",
-  //     day: "numeric",
-  //   };
-  //   return new Intl.DateTimeFormat("en-GB", options).format(inputDate);
-  // }
-
-  //   return (
-  //     <div className="app-filter-display__row">
-  //       <div className="app-filter-display__row-title">{prefixText}</div>
-  //       <span
-  //         style={{
-  //           display: "flex",
-  //           flexDirection: "row",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         {fromDate && (
-  //           <div
-  //             className="app-filter-display__item"
-  //             onClick={() => removeFilter("from_date")}
-  //           >
-  //             <div
-  //               style={{
-  //                 marginRight: 8,
-  //               }}
-  //             >
-  //               X
-  //             </div>
-  //             {/* <div>{formatDate(tempFromDate)}</div> */}
-  //             <div>{formatDate(parseUKDate(fromDate))}</div>
-  //           </div>
-  //         )}
-  //         {fromDate && toDate && (
-  //           <div style={{ marginLeft: 5, marginRight: 5 }}>{"and"}</div>
-  //         )}
-  //         {toDate && (
-  //           <div
-  //             className="app-filter-display__item"
-  //             onClick={() => removeFilter("to_date")}
-  //           >
-  //             <div
-  //               style={{
-  //                 marginRight: 8,
-  //               }}
-  //             >
-  //               X
-  //             </div>
-  //             <div>{formatDate(parseUKDate(toDate))}</div>
-  //           </div>
-  //         )}
-  //       </span>
-  //     </div>
-  //   );
-  // };
-
-  console.log("js status: ", isJsEnabled);
 
   return (
     <div className="app-filter-display">
