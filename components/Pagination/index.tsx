@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useGlobalContext } from "@/app/context/store";
+
 interface Props {
   page: number;
   totalPages: number;
@@ -5,15 +8,37 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({ page, totalPages, searchParams }) => {
-  const nextPage =
+  const { fullSearchParams } = useGlobalContext();
+  const [nextPage, setNextPage] = useState(
     `/datasets?` +
-    (searchParams != "" ? `${new URLSearchParams(searchParams)}&` : "") +
-    `page=${+page + 1}`;
+      (searchParams != "" ? `${new URLSearchParams(searchParams)}&` : "") +
+      `page=${+page + 1}`
+  );
+  const [previousPage, setPreviousPage] = useState(
+    `/datasets?` +
+      (searchParams != "" ? `${new URLSearchParams(searchParams)}&` : "") +
+      `page=${page - 1}`
+  );
 
-  const previousPage =
-    `/datasets?` +
-    (searchParams != "" ? `${new URLSearchParams(searchParams)}&` : "") +
-    `page=${page - 1}`;
+  useEffect(() => {
+    const tempSearchParams: URLSearchParams =
+      fullSearchParams || new URLSearchParams("");
+    if (tempSearchParams?.size >= 1) {
+      const KEY = "page";
+      tempSearchParams?.delete(KEY);
+
+      setNextPage(
+        `/datasets?` +
+          (tempSearchParams?.size >= 1 ? `${tempSearchParams}&` : "") +
+          `page=${+page + 1}`
+      );
+      setPreviousPage(
+        `/datasets?` +
+          (tempSearchParams?.size >= 1 ? `${tempSearchParams}&` : "") +
+          `page=${page - 1}`
+      );
+    }
+  }, [fullSearchParams]);
 
   return (
     <nav
