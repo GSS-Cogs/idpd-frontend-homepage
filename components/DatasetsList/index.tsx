@@ -101,7 +101,7 @@ export default function DatasetsList({
     jsCheck();
   });
 
-  let tempParams = new URLSearchParams(searchParams);
+  let filterParams = new URLSearchParams(searchParams);
   const {
     topicFilter,
     subtopicsFilter,
@@ -109,11 +109,11 @@ export default function DatasetsList({
     afterDate,
     beforeDate,
   } = useGlobalContext();
-  const initialTopicFilter = tempParams.get("topic");
+  const initialTopicFilter = filterParams.get("topic");
   const initialSubtopicsFilter = searchParams?.subtopics;
-  const initialPublisherFilter = tempParams.get("publisher");
-  const initialAfterDateFilter = tempParams.get("from_date");
-  const initialBeforeDateFilter = tempParams.get("to_date");
+  const initialPublisherFilter = filterParams.get("publisher");
+  const initialAfterDateFilter = filterParams.get("from_date");
+  const initialBeforeDateFilter = filterParams.get("to_date");
 
   // TODO this is a temp solution until we add in a correct sort by process
   const sortByDate = (data: any[]) => {
@@ -208,7 +208,7 @@ export default function DatasetsList({
       <Pagination
         page={page}
         totalPages={totalPages}
-        searchParams={tempParams}
+        searchParams={filterParams}
       />
     </div>
   );
