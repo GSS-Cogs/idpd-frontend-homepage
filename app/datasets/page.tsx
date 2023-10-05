@@ -37,7 +37,7 @@ export default async function Datasets({
           <DatasetsList
             items={data?.results.bindings}
             page={searchParams.page}
-            searchParams={searchParams}
+            searchParams={params}
           />
         </div>
       </main>
