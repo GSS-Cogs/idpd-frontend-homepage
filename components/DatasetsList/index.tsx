@@ -100,7 +100,7 @@ export default function DatasetsList({
   };
   useEffect(() => {
     jsCheck();
-  });
+  }, []);
 
   // filterParams needs to be parsed as new UrlSearchParams to get the 'get' function to work
   filterParams = new URLSearchParams(filterParams);

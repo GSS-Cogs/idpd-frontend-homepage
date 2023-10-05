@@ -1,5 +1,6 @@
 "use client";
 
+import { usePushStateListener } from "@/hooks/usePushStateListener";
 import {
   createContext,
   useContext,
@@ -73,6 +74,8 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setBeforeDate(params.get("to_date") || null);
     setAfterDate(params.get("from_date") || null);
   };
+
+  usePushStateListener(setAllFilters);
 
   return (
     <GlobalContext.Provider

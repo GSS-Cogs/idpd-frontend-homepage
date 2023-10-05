@@ -12,7 +12,7 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
   };
   useEffect(() => {
     jsCheck();
-  });
+  }, []);
 
   const {
     topicFilter,
@@ -50,10 +50,6 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
 
     return new Date(date);
   }
-
-  useEffect(() => {
-    setAllFilters();
-  }, [topicFilter, beforeDate, afterDate]);
 
   const removeFilter = (filter: string, offsetIndex = 0) => {
     if (filter === "topic") {
