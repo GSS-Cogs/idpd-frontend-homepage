@@ -89,7 +89,6 @@ export default function DatasetsList({
   const RESULTS_LENGTH = 20;
   const sliceStart = page * RESULTS_LENGTH - RESULTS_LENGTH;
   const sliceEnd = page * RESULTS_LENGTH;
-  const totalPages = Math.ceil(items.length / RESULTS_LENGTH);
 
   const [isJsEnabled, setIsJsEnabled] = useState(false);
 
@@ -189,6 +188,7 @@ export default function DatasetsList({
 
   const filteredItems = filterData(items);
   const sortedItems = sortByDate(filteredItems);
+  const totalPages = Math.ceil(sortedItems.length / RESULTS_LENGTH);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -208,7 +208,7 @@ export default function DatasetsList({
       <Pagination
         page={page}
         totalPages={totalPages}
-        searchParams={searchParams}
+        searchParams={tempParams}
       />
     </div>
   );
