@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { MdRssFeed } from "react-icons/md";
 import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
@@ -81,10 +80,12 @@ export default function DatasetsList({
   items,
   page = 1,
   searchParams,
+  filterParams,
 }: {
   items: any;
   page: number;
   searchParams: any;
+  filterParams: URLSearchParams;
 }) {
   const RESULTS_LENGTH = 20;
   const sliceStart = page * RESULTS_LENGTH - RESULTS_LENGTH;
@@ -101,7 +102,8 @@ export default function DatasetsList({
     jsCheck();
   });
 
-  let filterParams = new URLSearchParams(searchParams);
+  // filterParams needs to be parsed as new UrlSearchParams to get the 'get' function to work
+  filterParams = new URLSearchParams(filterParams);
   const {
     topicFilter,
     subtopicsFilter,
@@ -109,8 +111,11 @@ export default function DatasetsList({
     afterDate,
     beforeDate,
   } = useGlobalContext();
-  const initialTopicFilter = filterParams.get("topic");
+  // subtopics uses a different method here because using '.getAll("subtopics")'
+  // returns the array as a single string, eg.
+  // ["Business and the environment,Climate change and energy"]
   const initialSubtopicsFilter = searchParams?.subtopics;
+  const initialTopicFilter = filterParams.get("topic");
   const initialPublisherFilter = filterParams.get("publisher");
   const initialAfterDateFilter = filterParams.get("from_date");
   const initialBeforeDateFilter = filterParams.get("to_date");
