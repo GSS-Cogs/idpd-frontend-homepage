@@ -111,14 +111,6 @@ export default function DatasetsList({
     afterDate,
     beforeDate,
   } = useGlobalContext();
-  // subtopics uses a different method here because using '.getAll("subtopics")'
-  // returns the array as a single string, eg.
-  // ["Business and the environment,Climate change and energy"]
-  const initialSubtopicsFilter = searchParams?.subtopics;
-  const initialTopicFilter = filterParams.get("topic");
-  const initialPublisherFilter = filterParams.get("publisher");
-  const initialAfterDateFilter = filterParams.get("from_date");
-  const initialBeforeDateFilter = filterParams.get("to_date");
 
   // TODO this is a temp solution until we add in a correct sort by process
   const sortByDate = (data: any[]) => {
@@ -149,11 +141,25 @@ export default function DatasetsList({
       let activeBeforeDateFilter = parseUKDate(beforeDate || "");
 
       if (!isJsEnabled) {
-        activeTopicFilter = initialTopicFilter || "All topics";
+        // subtopics uses a different method here because using '.getAll("subtopics")'
+        // returns the array as a single string, eg.
+        // ["Business and the environment,Climate change and energy"]
+        const initialSubtopicsFilter = searchParams?.subtopics;
+        const initialTopicFilter = filterParams.get("topic") || "All topics";
+        const initialPublisherFilter =
+          filterParams.get("publisher") || "All publisher";
+        const initialAfterDateFilter = parseUKDate(
+          filterParams.get("from_date") || ""
+        );
+        const initialBeforeDateFilter = parseUKDate(
+          filterParams.get("to_date") || ""
+        );
+
+        activeTopicFilter = initialTopicFilter;
         activeSubtopicsFilter = initialSubtopicsFilter;
-        activePublisherFilter = initialPublisherFilter || "All publisher";
-        activeAfterDateFilter = parseUKDate(initialAfterDateFilter || "");
-        activeBeforeDateFilter = parseUKDate(initialBeforeDateFilter || "");
+        activePublisherFilter = initialPublisherFilter;
+        activeAfterDateFilter = initialAfterDateFilter;
+        activeBeforeDateFilter = initialBeforeDateFilter;
       }
 
       if (activeTopicFilter !== "All topics") {
