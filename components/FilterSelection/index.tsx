@@ -239,7 +239,6 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   );
 
   useEffect(() => {
-    setAllFilters();
     if (afterDate === null) {
       setAfterDateCurrentInput("");
     }

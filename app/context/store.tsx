@@ -7,6 +7,7 @@ import {
   Dispatch,
   SetStateAction,
   useState,
+  useEffect,
 } from "react";
 
 interface ContextProps {
@@ -57,6 +58,10 @@ export const GlobalContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [beforeDate, setBeforeDate] = useState<string | null>(null);
   const [fullSearchParams, setFullSearchParams] =
     useState<URLSearchParams | null>(null);
+
+  useEffect(() => {
+    setAllFilters();
+  }, []);
 
   const setAllFilters = () => {
     const params = new URLSearchParams(window.location.search);
