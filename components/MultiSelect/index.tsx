@@ -34,11 +34,7 @@ const MultiSelect = ({ options }: { options: string[] }) => {
       };
 
       return (
-        <div
-          key={option}
-          className="govuk-checkboxes__item"
-          style={{ marginLeft: 10 }}
-        >
+        <div className="govuk-checkboxes__item" style={{ marginLeft: 10 }}>
           <input
             className="govuk-checkboxes__input"
             type="checkbox"
@@ -86,7 +82,7 @@ const MultiSelect = ({ options }: { options: string[] }) => {
       {isOpen && (
         <div className="app-multi-select__dropdown govuk-checkboxes govuk-checkboxes--small">
           {options.map((option: string) => (
-            <CheckboxItem option={option} />
+            <CheckboxItem option={option} key={option} />
           ))}
         </div>
       )}
