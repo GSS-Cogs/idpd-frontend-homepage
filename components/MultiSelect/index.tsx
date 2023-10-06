@@ -10,14 +10,6 @@ const MultiSelect = ({ options }: { options: string[] }) => {
     setIsOpen(!isOpen);
   };
 
-  const toggleOption = async (option: string) => {
-    const updatedOptions = subtopicsFilter?.includes(option)
-      ? subtopicsFilter.filter((o) => o !== option)
-      : [...(subtopicsFilter || []), option];
-
-    addSubtopics([...updatedOptions]);
-  };
-
   const addSubtopics = (subtopics: string[]) => {
     const params = new URLSearchParams(window.location.search);
 
@@ -32,21 +24,33 @@ const MultiSelect = ({ options }: { options: string[] }) => {
   };
 
   const CheckboxItem = useCallback(
-    ({ option }: { option: string }) => (
-      <div
-        key={option}
-        className="govuk-checkboxes__item"
-        style={{ marginLeft: 10 }}
-      >
-        <input
-          className="govuk-checkboxes__input"
-          type="checkbox"
-          checked={subtopicsFilter?.includes(option)}
-          onChange={() => toggleOption(option)}
-        />
-        <label className="govuk-label govuk-checkboxes__label">{option}</label>
-      </div>
-    ),
+    ({ option }: { option: string }) => {
+      const toggleOption = async (option: string) => {
+        const updatedOptions = subtopicsFilter?.includes(option)
+          ? subtopicsFilter.filter((o) => o !== option)
+          : [...(subtopicsFilter || []), option];
+
+        addSubtopics([...updatedOptions]);
+      };
+
+      return (
+        <div
+          key={option}
+          className="govuk-checkboxes__item"
+          style={{ marginLeft: 10 }}
+        >
+          <input
+            className="govuk-checkboxes__input"
+            type="checkbox"
+            checked={subtopicsFilter?.includes(option)}
+            onChange={() => toggleOption(option)}
+          />
+          <label className="govuk-label govuk-checkboxes__label">
+            {option}
+          </label>
+        </div>
+      );
+    },
     [subtopicsFilter]
   );
 
