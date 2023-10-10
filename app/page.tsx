@@ -10,7 +10,11 @@ import {
   HeroPhaseBannerTag,
   HeroPhaseBannerDescription,
 } from "@/components/Hero";
-import SubHero from "@/components/Hero/SubHero";
+import {
+  SubHero,
+  SubHeroButton,
+  SubHeroSearch,
+} from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
 import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
 import Header from "@/components/Header";
@@ -47,7 +51,7 @@ const CardListTopicItems = [
       "The UK economy and the economies of Devolved Administrations and UK regions.",
   },
   {
-    heading: "Health and social Care",
+    heading: "Health and social care",
     href: "/health-and-social-care",
     description:
       "Health care provision, social care provision, health status and disease, disability, cause of death, and health and safety at work.",
@@ -128,6 +132,7 @@ const CardListPublisherItems = [
 ];
 
 export default async function Home() {
+  const datasets = 189;
   return (
     <>
       <Header />
@@ -156,7 +161,27 @@ export default async function Home() {
         </HeroActionButton>
       </Hero>
       <SubHero>
-        <Search searchLabel="Search data catalogue" />
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-full">
+            <h2 className="govuk-heading-l">Explore our data</h2>
+          </div>
+        </div>
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-one-half app-sub-hero__search--divider">
+            <SubHeroSearch />
+          </div>
+          <div className="govuk-grid-column-one-half">
+            <h2 className="govuk-label-wrapper">
+              <span className=" govuk-label govuk-label--m">
+                {datasets} datasets
+              </span>
+            </h2>
+            <div className="govuk-hint">
+              Browse datasets in the dataset catalogue.
+            </div>
+            <SubHeroButton>View all datasets</SubHeroButton>
+          </div>
+        </div>
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
