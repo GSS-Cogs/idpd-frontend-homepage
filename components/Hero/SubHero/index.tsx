@@ -27,7 +27,7 @@ function SubHeroSearch() {
 function SubHeroButton({ children }: { children: any }) {
   return (
     <a
-      href="#"
+      href="/datasets"
       role="button"
       draggable="false"
       className="govuk-button"
