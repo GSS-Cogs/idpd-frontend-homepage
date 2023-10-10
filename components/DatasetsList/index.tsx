@@ -8,14 +8,13 @@ import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
 function DatasetsListItem(props: {
-  dataset: any;
-  datasetTitle: any;
-  shortDescription: any;
-  modified: any;
-  creator: any;
-  publisher: any;
-  topic: any;
-  subTopic: any;
+  title: string;
+  summary: string;
+  release_date: string;
+  creator: string;
+  publisher: string;
+  topic: string;
+  subTopic: string;
 }) {
   return (
     <li className="app-datasets-list__item">
@@ -24,11 +23,9 @@ function DatasetsListItem(props: {
           className="app-datasets-list__item-title app-datasets-list__item-title--context govuk-link"
           href={props.creator}
         >
-          {props?.datasetTitle}
+          {props?.title}
         </a>
-        <p className="app-datasets-list__item-description">
-          {props?.shortDescription}
-        </p>
+        <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
         <div className="app-datasets-list__item-bottom-publisher">
@@ -50,11 +47,11 @@ function DatasetsListItem(props: {
             <div>{props?.topic}</div>
           </li>
           <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>{props?.subTopic}</time>
+            <div>{props?.subTopic}</div>
           </li>
           <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>
-              Updated: {formatDate(props.modified)}
+            <time dateTime={props.release_date}>
+              Updated: {formatDate(props.release_date)}
             </time>
           </li>
         </ul>
