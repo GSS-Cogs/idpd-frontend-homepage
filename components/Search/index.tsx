@@ -1,10 +1,8 @@
-export default function Search({}: {}) {
+export default function Search({ searchLabel }: { searchLabel?: string }) {
   return (
     <div className="govuk-form-group govuk-search--on-white">
       <h1 className="govuk-label-wrapper">
-        <label className="govuk-label govuk-label--m">
-          Search data catalogue
-        </label>
+        <label className="govuk-label govuk-label--m">{searchLabel}</label>
       </h1>
       <div className="govuk-input__wrapper govuk-!-width-two-thirds">
         <input
