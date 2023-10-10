@@ -13,59 +13,60 @@ import {
 import SubHero from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
 import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
+import Header from "@/components/Header";
 
 const CardListTopicItems = [
   {
     heading: "Agriculture, energy and environment",
-    href: "",
+    href: "/agriculture-energy-and-environment",
     description:
       "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
   },
   {
     heading: "Business, trade and international development",
-    href: "",
+    href: "/business-trade-and-international-development",
     description:
       "Company structure, size and location; closures or mergers; and turnover, international and UK trade, and research and development.",
   },
   {
     heading: "Children, education and skills",
-    href: "",
+    href: "/children-education-and-skills",
     description:
       "Teachers and lecturers, learners, and those not in education, employment or training.",
   },
   {
     heading: "Crime and security",
-    href: "",
+    href: "/crime-and-security",
     description:
       "Crime; justice systems (family, civil and criminal); and policing, people, organizations, and money.",
   },
   {
     heading: "Economy",
-    href: "",
+    href: "/economy",
     description:
       "The UK economy and the economies of Devolved Administrations and UK regions.",
   },
   {
     heading: "Health and social Care",
-    href: "",
+    href: "/health-and-social-care",
     description:
       "Health care provision, social care provision, health status and disease, disability, cause of death, and health and safety at work.",
   },
   {
     heading: "Housing, planning and local services",
-    href: "",
+    href: "/housing-planning-and-local-services",
     description:
       "Current housing, household estimates and projections, homelessness, housing requirements, and commercial, industrial, retail and residential planning.",
   },
   {
     heading: "Labour market and welfare",
-    href: "",
+    href: "/labour-market-and-welfare",
     description:
       "Includes statistics measuring different aspects of work and jobs and covers people's employment, working patterns, and the types of work they do.",
   },
   {
     heading: "Travel, transport and tourism",
-    href: "",
+    href: "/travel-transport-and-tourism",
     description:
       "All modes of travel and transport, transport infrastructure, and tourism; travel patterns and distances travelled using various modes of transport; and international visits to the UK.",
   },
@@ -129,6 +130,7 @@ const CardListPublisherItems = [
 export default async function Home() {
   return (
     <>
+      <Header />
       <Hero>
         <HeroPhaseBanner>
           <HeroPhaseBannerTag>Prototype</HeroPhaseBannerTag>

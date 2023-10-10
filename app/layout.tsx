@@ -1,7 +1,6 @@
 import "./main.scss";
 
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import SkipLink from "@/components/SkipLink";
 
 export const metadata = {
@@ -18,7 +17,6 @@ export default function RootLayout({
     <html lang="en" className="govuk-template">
       <body className="govuk-template__body">
         <SkipLink />
-        <Header />
         {children}
         <Footer />
       </body>
