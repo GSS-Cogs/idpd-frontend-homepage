@@ -5,6 +5,7 @@ import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
 import data from "../data/data.json";
+import Header from "@/components/Header";
 
 export default async function Datasets({
   searchParams,
@@ -16,33 +17,36 @@ export default async function Datasets({
   params.delete(KEY);
 
   return (
-    <div className="app-width-container">
-      <PhaseBanner
-        href="/"
-        tag={{ children: "prototype" }}
-        className="govuk-phase-banner--inverse"
-      />
-      <Breadcrumbs items={[{ text: "Home", href: "/" }]} />
-      <main className="app-datasets" id="main-content" role="main">
-        <div className="govuk-grid-row">
-          <div className="govuk-grid-column-two-thirds">
-            <h1 className="govuk-caption-xl app-datasets_caption">Dataset</h1>
-            <h1 className="govuk-heading-xl">Data catalogue</h1>
+    <>
+      <Header borderColour="blue-border" />
+      <div className="app-width-container">
+        <PhaseBanner
+          href="/"
+          tag={{ children: "prototype" }}
+          className="govuk-phase-banner--inverse"
+        />
+        <Breadcrumbs items={[{ text: "Home", href: "/" }]} />
+        <main className="app-datasets" id="main-content" role="main">
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-two-thirds">
+              <h1 className="govuk-caption-xl app-datasets_caption">Dataset</h1>
+              <h1 className="govuk-heading-xl">Data catalogue</h1>
+            </div>
           </div>
-        </div>
 
-        <Search />
-        <div className="govuk-grid-row">
-          <div className="govuk-grid-column-one-third-from-desktop">
-            <h3></h3>
+          <Search />
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-one-third-from-desktop">
+              <h3></h3>
+            </div>
+            <DatasetsList
+              items={data?.results.bindings}
+              page={searchParams.page}
+              searchParams={params}
+            />
           </div>
-          <DatasetsList
-            items={data?.results.bindings}
-            page={searchParams.page}
-            searchParams={params}
-          />
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
