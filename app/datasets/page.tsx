@@ -4,9 +4,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
-import data from "../data/data.json";
 import FilterSelection from "@/components/FilterSelection";
-import { getDataset, getDatasets } from "../libs/dataRequests";
+import { getDatasets } from "../libs/dataRequests";
 
 export default async function Datasets({
   searchParams,
@@ -42,12 +41,6 @@ export default async function Datasets({
             searchParams={searchParams}
             filterParams={params}
           />
-          {/* <DatasetsList
-            items={data?.results.bindings}
-            page={searchParams.page}
-            searchParams={searchParams}
-            filterParams={params}
-          /> */}
         </div>
       </main>
     </div>
