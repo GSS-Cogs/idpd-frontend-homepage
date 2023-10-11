@@ -7,7 +7,7 @@ import { useState } from "react";
 import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
-function DatasetsListItem(props: {
+const DatasetsListItem = (props: {
   title: string;
   summary: string;
   release_date: string;
@@ -15,7 +15,9 @@ function DatasetsListItem(props: {
   publisher: string;
   topic: string;
   subTopic: string;
-}) {
+  spatial_coverage: string;
+  temporal_coverage: { start: string; end: string };
+}) => {
   return (
     <li className="app-datasets-list__item">
       <div className="app-datasets-list__item-top">
@@ -25,6 +27,11 @@ function DatasetsListItem(props: {
         >
           {props?.title}
         </a>
+        <div className="app-datasets-list__item-topic">
+          Topic
+          <div className="app-datasets-list__chevron" />
+          Subtopic
+        </div>
         <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
@@ -44,20 +51,31 @@ function DatasetsListItem(props: {
           style={{ textAlign: "right" }}
         >
           <li className="app-datasets-list__item-metadata-row">
-            <div>{props?.topic}</div>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
-            <div>{props?.subTopic}</div>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
             <time dateTime={props.release_date}>
               Updated: {formatDate(props.release_date)}
             </time>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>
+              Time Period:{" "}
+              {getYear(props?.temporal_coverage.start) +
+                " - " +
+                getYear(props?.temporal_coverage.end)}
+            </div>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>Coverage: {props?.spatial_coverage}</div>
           </li>
         </ul>
       </div>
     </li>
   );
+};
+
+function getYear(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  return year;
 }
 
 function formatDate(date: string) {
