@@ -15,7 +15,7 @@ const DatasetsListItem = (props: {
   publisher: string;
   topic: string;
   subTopic: string;
-  spatial_coverage: string;
+  spatial_coverage_name: string;
   temporal_coverage: { start: string; end: string };
 }) => {
   return (
@@ -64,7 +64,7 @@ const DatasetsListItem = (props: {
             </div>
           </li>
           <li className="app-datasets-list__item-metadata-row">
-            <div>Coverage: {props?.spatial_coverage}</div>
+            <div>Coverage: {props?.spatial_coverage_name}</div>
           </li>
         </ul>
       </div>

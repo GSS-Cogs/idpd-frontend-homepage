@@ -5,14 +5,14 @@ import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
 import FilterSelection from "@/components/FilterSelection";
-import { getDatasets } from "../libs/dataRequests";
+import { getDatasetsWithSpatialCoverageInfo } from "../libs/dataRequests";
 
 export default async function Datasets({
   searchParams,
 }: {
   searchParams: any;
 }) {
-  const datasets = await getDatasets();
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
   const KEY = "page";
   const params = new URLSearchParams(searchParams);
   params.delete(KEY);
