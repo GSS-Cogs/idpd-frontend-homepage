@@ -7,16 +7,17 @@ import { useState } from "react";
 import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
-function DatasetsListItem(props: {
-  dataset: any;
-  datasetTitle: any;
-  shortDescription: any;
-  modified: any;
-  creator: any;
-  publisher: any;
-  topic: any;
-  subTopic: any;
-}) {
+const DatasetsListItem = (props: {
+  title: string;
+  summary: string;
+  release_date: string;
+  creator: string;
+  publisher: string;
+  topic: string;
+  subTopic: string;
+  spatial_coverage_name: string;
+  temporal_coverage: { start: string; end: string };
+}) => {
   return (
     <li className="app-datasets-list__item">
       <div className="app-datasets-list__item-top">
@@ -24,11 +25,14 @@ function DatasetsListItem(props: {
           className="app-datasets-list__item-title app-datasets-list__item-title--context govuk-link"
           href={props.creator}
         >
-          {props?.datasetTitle}
+          {props?.title}
         </a>
-        <p className="app-datasets-list__item-description">
-          {props?.shortDescription}
-        </p>
+        <div className="app-datasets-list__item-topic">
+          Topic
+          <div className="app-datasets-list__chevron" />
+          Subtopic
+        </div>
+        <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
         <div className="app-datasets-list__item-bottom-publisher">
@@ -47,20 +51,31 @@ function DatasetsListItem(props: {
           style={{ textAlign: "right" }}
         >
           <li className="app-datasets-list__item-metadata-row">
-            <div>{props?.topic}</div>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>{props?.subTopic}</time>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>
-              Updated: {formatDate(props.modified)}
+            <time dateTime={props.release_date}>
+              Updated: {formatDate(props.release_date)}
             </time>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>
+              Time Period:{" "}
+              {getYear(props?.temporal_coverage.start) +
+                " - " +
+                getYear(props?.temporal_coverage.end)}
+            </div>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>Coverage: {props?.spatial_coverage_name}</div>
           </li>
         </ul>
       </div>
     </li>
   );
+};
+
+function getYear(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  return year;
 }
 
 function formatDate(date: string) {
