@@ -1,5 +1,4 @@
 import Tag from "@/components/Tag";
-import { PhaseBannerProps } from "@/components/PhaseBanner";
 
 // The phase banner within the Hero component needs inverse colours to show up
 // against a coloured background.
