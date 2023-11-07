@@ -239,7 +239,6 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   );
 
   useEffect(() => {
-    setAllFilters();
     if (afterDate === null) {
       setAfterDateCurrentInput("");
     }
@@ -264,7 +263,9 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
     setFilter: (value: string | null) => void
   ) => {
     const params = new URLSearchParams(window.location.search);
-
+    if (key === "topic") {
+      params.delete("subtopics");
+    }
     if (value === "All publishers" || value === "All topics") {
       params.delete(key);
       setFilter(null);

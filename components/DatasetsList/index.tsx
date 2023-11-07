@@ -4,20 +4,20 @@ import Image from "next/image";
 
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { MdRssFeed } from "react-icons/md";
 import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
-function DatasetsListItem(props: {
-  dataset: any;
-  datasetTitle: any;
-  shortDescription: any;
-  modified: any;
-  creator: any;
-  publisher: any;
-  topic: any;
-  subTopic: any;
-}) {
+const DatasetsListItem = (props: {
+  title: string;
+  summary: string;
+  release_date: string;
+  creator: string;
+  publisher: string;
+  topic: string;
+  subTopic: string;
+  spatial_coverage_name: string;
+  temporal_coverage: { start: string; end: string };
+}) => {
   return (
     <li className="app-datasets-list__item">
       <div className="app-datasets-list__item-top">
@@ -25,11 +25,14 @@ function DatasetsListItem(props: {
           className="app-datasets-list__item-title app-datasets-list__item-title--context govuk-link"
           href={props.creator}
         >
-          {props?.datasetTitle}
+          {props?.title}
         </a>
-        <p className="app-datasets-list__item-description">
-          {props?.shortDescription}
-        </p>
+        <div className="app-datasets-list__item-topic">
+          Topic
+          <div className="app-datasets-list__chevron" />
+          Subtopic
+        </div>
+        <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
         <div className="app-datasets-list__item-bottom-publisher">
@@ -48,20 +51,31 @@ function DatasetsListItem(props: {
           style={{ textAlign: "right" }}
         >
           <li className="app-datasets-list__item-metadata-row">
-            <div>{props?.topic}</div>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>{props?.subTopic}</time>
-          </li>
-          <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.modified?.value}>
-              Updated: {formatDate(props.modified)}
+            <time dateTime={props.release_date}>
+              Updated: {formatDate(props.release_date)}
             </time>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>
+              Time Period:{" "}
+              {getYear(props?.temporal_coverage.start) +
+                " - " +
+                getYear(props?.temporal_coverage.end)}
+            </div>
+          </li>
+          <li className="app-datasets-list__item-metadata-row">
+            <div>Coverage: {props?.spatial_coverage_name}</div>
           </li>
         </ul>
       </div>
     </li>
   );
+};
+
+function getYear(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  return year;
 }
 
 function formatDate(date: string) {
@@ -81,15 +95,16 @@ export default function DatasetsList({
   items,
   page = 1,
   searchParams,
+  filterParams,
 }: {
   items: any;
   page: number;
   searchParams: any;
+  filterParams: URLSearchParams;
 }) {
   const RESULTS_LENGTH = 20;
   const sliceStart = page * RESULTS_LENGTH - RESULTS_LENGTH;
   const sliceEnd = page * RESULTS_LENGTH;
-  const totalPages = Math.ceil(items.length / RESULTS_LENGTH);
 
   const [isJsEnabled, setIsJsEnabled] = useState(false);
 
@@ -100,9 +115,10 @@ export default function DatasetsList({
   };
   useEffect(() => {
     jsCheck();
-  });
+  }, []);
 
-  let tempParams = new URLSearchParams(searchParams);
+  // filterParams needs to be parsed as new UrlSearchParams to get the 'get' function to work
+  filterParams = new URLSearchParams(filterParams);
   const {
     topicFilter,
     subtopicsFilter,
@@ -110,11 +126,6 @@ export default function DatasetsList({
     afterDate,
     beforeDate,
   } = useGlobalContext();
-  const initialTopicFilter = tempParams.get("topic");
-  const initialSubtopicsFilter = searchParams?.subtopics;
-  const initialPublisherFilter = tempParams.get("publisher");
-  const initialAfterDateFilter = tempParams.get("from_date");
-  const initialBeforeDateFilter = tempParams.get("to_date");
 
   // TODO this is a temp solution until we add in a correct sort by process
   const sortByDate = (data: any[]) => {
@@ -145,11 +156,25 @@ export default function DatasetsList({
       let activeBeforeDateFilter = parseUKDate(beforeDate || "");
 
       if (!isJsEnabled) {
-        activeTopicFilter = initialTopicFilter || "All topics";
+        // subtopics uses a different method here because using '.getAll("subtopics")'
+        // returns the array as a single string, eg.
+        // ["Business and the environment,Climate change and energy"]
+        const initialSubtopicsFilter = searchParams?.subtopics;
+        const initialTopicFilter = filterParams.get("topic") || "All topics";
+        const initialPublisherFilter =
+          filterParams.get("publisher") || "All publisher";
+        const initialAfterDateFilter = parseUKDate(
+          filterParams.get("from_date") || ""
+        );
+        const initialBeforeDateFilter = parseUKDate(
+          filterParams.get("to_date") || ""
+        );
+
+        activeTopicFilter = initialTopicFilter;
         activeSubtopicsFilter = initialSubtopicsFilter;
-        activePublisherFilter = initialPublisherFilter || "All publisher";
-        activeAfterDateFilter = parseUKDate(initialAfterDateFilter || "");
-        activeBeforeDateFilter = parseUKDate(initialBeforeDateFilter || "");
+        activePublisherFilter = initialPublisherFilter;
+        activeAfterDateFilter = initialAfterDateFilter;
+        activeBeforeDateFilter = initialBeforeDateFilter;
       }
 
       if (activeTopicFilter !== "All topics") {
@@ -189,6 +214,7 @@ export default function DatasetsList({
 
   const filteredItems = filterData(items);
   const sortedItems = sortByDate(filteredItems);
+  const totalPages = Math.ceil(sortedItems.length / RESULTS_LENGTH);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -208,7 +234,7 @@ export default function DatasetsList({
       <Pagination
         page={page}
         totalPages={totalPages}
-        searchParams={searchParams}
+        searchParams={filterParams}
       />
     </div>
   );

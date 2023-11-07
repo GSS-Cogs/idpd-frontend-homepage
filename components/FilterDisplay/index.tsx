@@ -12,7 +12,7 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
   };
   useEffect(() => {
     jsCheck();
-  });
+  }, []);
 
   const {
     topicFilter,
@@ -51,33 +51,16 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
     return new Date(date);
   }
 
-  useEffect(() => {
-    setAllFilters();
-  }, [topicFilter, beforeDate, afterDate]);
-
-  const removeFilter = (filter: string, offsetIndex = 0) => {
-    if (filter === "topic") {
-      setTopicFilter(null);
-      setSubtopicsFilter([]);
-    } else if (filter === "subtopics") {
-      const tempSubtopics = subtopicsFilter.filter(
-        (x, index) => index !== offsetIndex - 1
-      );
-      setSubtopicsFilter([...tempSubtopics]);
-    } else if (filter === "publisher") {
-      setPublisherFilter(null);
-    } else if (filter === "from_date") {
-      setAfterDate(null);
-    } else if (filter === "to_date") {
-      setBeforeDate(null);
-    }
-
-    removeFromUrl(filter);
-  };
-
-  const removeFromUrl = (value: string) => {
+  const removeFromUrl = (value: string, offsetIndex = 0) => {
     const params = new URLSearchParams(window.location.search);
     params.delete(value);
+    if (value === "subtopics") {
+      subtopicsFilter.forEach((x, index) => {
+        if (index !== offsetIndex - 1) {
+          params.append("subtopics", x);
+        }
+      });
+    }
     if (value === "topic") {
       params.delete("subtopics");
     }
@@ -134,7 +117,7 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
             key={index}
             className="app-filter-display__item"
             onClick={() =>
-              removeFilter(index > 0 ? "subtopics" : filter, index)
+              removeFromUrl(index > 0 ? "subtopics" : filter, index)
             }
           >
             <div style={{ marginRight: 8 }}>X</div>
@@ -173,7 +156,7 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
       return (
         <div
           className="app-filter-display__item"
-          onClick={() => removeFilter(filterName)}
+          onClick={() => removeFromUrl(filterName)}
         >
           <div style={{ marginRight: 8 }}>X</div>
           <div>{formattedDate}</div>
