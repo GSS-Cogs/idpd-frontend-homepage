@@ -51,7 +51,7 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
   const data = await fetchData("/datasets", "GET");
   let codes = new Set<string>();
 
-  data.items.forEach((item: { spatial_coverage: string }) => {
+  data.datasets.forEach((item: { spatial_coverage: string }) => {
     codes.add(item.spatial_coverage);
   });
 
@@ -69,7 +69,7 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
     })
   );
 
-  data.items.forEach(
+  data.datasets.forEach(
     (item: {
       spatial_coverage_name: { code: string; coverage: any };
       spatial_coverage: string;
