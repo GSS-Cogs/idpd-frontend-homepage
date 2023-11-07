@@ -20,3 +20,10 @@
   height: 5px;
   width: 5px;
 }
+
+@mixin chevron-right-small($colour, $update: false) {
+  @include chevron-small($colour, $update);
+  @include prefixed-transform($rotate: -45deg, $translateY: 130%);
+  border-bottom: 1px solid $colour;
+  border-right: 1px solid $colour;
+}
