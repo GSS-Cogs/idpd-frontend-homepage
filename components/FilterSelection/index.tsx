@@ -241,9 +241,13 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   useEffect(() => {
     if (afterDate === null) {
       setAfterDateCurrentInput("");
+    } else {
+      setAfterDateCurrentInput(afterDate);
     }
     if (beforeDate === null) {
       setBeforeDateCurrentInput("");
+    } else {
+      setBeforeDateCurrentInput(beforeDate);
     }
   }, [afterDate, beforeDate]);
 
@@ -387,8 +391,11 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               className="govuk-input"
               id="from-date-input"
               type="text"
-              value={afterDateCurrentInput || ""}
-              defaultValue={afterDate || ""}
+              value={
+                (afterDateCurrentInput === null
+                  ? initialTimeAfterFilter
+                  : afterDateCurrentInput) || ""
+              }
               onKeyPress={(event) => handleDateKeyPress(event)}
               onChange={(event) =>
                 handleDateInputChange(event, setAfterDateCurrentInput)
@@ -405,7 +412,6 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               id="to-date-input"
               type="text"
               value={beforeDateCurrentInput || ""}
-              defaultValue={beforeDate || ""}
               onKeyPress={(event) => handleDateKeyPress(event)}
               onChange={(event) =>
                 handleDateInputChange(event, setBeforeDateCurrentInput)
