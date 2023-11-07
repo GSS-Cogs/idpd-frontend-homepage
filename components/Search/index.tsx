@@ -1,15 +1,19 @@
-export default function Search({ searchLabel }: { searchLabel?: string }) {
+export default function Search({
+  id,
+  ariaDescribedBy,
+}: {
+  id?: string;
+  ariaDescribedBy?: string;
+}) {
   return (
     <div className="govuk-form-group govuk-search--on-white">
-      <h1 className="govuk-label-wrapper">
-        <label className="govuk-label govuk-label--m">{searchLabel}</label>
-      </h1>
-      <div className="govuk-input__wrapper govuk-!-width-two-thirds">
+      <div className="govuk-input__wrapper">
         <input
           className="govuk-input govuk-search__item govuk-search__input js-class-toggle"
-          id="weight"
-          name="weight"
+          id={id}
+          name="q"
           type="search"
+          aria-describedby={ariaDescribedBy}
         />
         <div className="govuk-search__item govuk-search__submit-wrapper">
           <button

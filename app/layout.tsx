@@ -3,7 +3,6 @@ import "./main.scss";
 import { GlobalContextProvider } from "./context/store";
 
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import SkipLink from "@/components/SkipLink";
 
 export const metadata = {
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang="en" className="govuk-template">
       <body className="govuk-template__body">
         <SkipLink />
-        <Header />
         <GlobalContextProvider>{children}</GlobalContextProvider>
         <Footer />
       </body>

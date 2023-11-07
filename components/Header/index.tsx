@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Search from "@/components/Search";
 import idsLogo from "../../public/assets/images/ids/IDS_logo_landscape_WHITE.svg";
@@ -222,7 +223,7 @@ export default function Header({
           hidden={isSearchMenuHidden}
         >
           <div className="app-width-container app-navigation-header__search-container">
-            <Search />
+            <Search id="search-header" />
             <div className="govuk-grid-row">
               <div className="govuk-grid-column-full">
                 <h3 className="govuk-heading-m">Popular on GOV.UK</h3>
