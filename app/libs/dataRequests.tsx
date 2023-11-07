@@ -78,6 +78,24 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
     }
   );
 
+  const response = await getPublishers();
+  let publishersDict: any = {};
+
+  for (const pub of response.publishers) {
+    if (pub.hasOwnProperty("@id")) {
+      publishersDict[pub["@id"]] = pub;
+    }
+  }
+
+  data.datasets.forEach(
+    (item: {
+      publisher_full: { code: string; coverage: any };
+      publisher: string;
+    }) => {
+      item.publisher_full = publishersDict[item.publisher];
+    }
+  );
+
   return data;
 };
 

@@ -12,7 +12,7 @@ const DatasetsListItem = (props: {
   summary: string;
   issued: string;
   creator: string;
-  publisher: string;
+  publisher_full: { title: string };
   topic: string;
   subTopic: string;
   spatial_coverage_name: string;
@@ -43,7 +43,7 @@ const DatasetsListItem = (props: {
             alt="Govuk Crest"
           />
           <h3 className="app-datasets-list__item-publisher-inner">
-            {props?.publisher}
+            {props?.publisher_full.title}
           </h3>
         </div>
         <ul
