@@ -257,7 +257,7 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
     updateFilter("topic", topic, setTopicFilter);
   };
 
-  const updateFilter = (
+  const updateFilter = async (
     key: string,
     value: string | null,
     setFilter: (value: string | null) => void
@@ -273,36 +273,41 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
       params.set(key, value || "");
       setFilter(value);
     }
-
     const newURL = `${window.location.pathname}?${params}`;
     history.pushState(null, "", newURL);
+
+    updateDateFilters();
   };
 
-  const handleDateKeyPress = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-    dateType: "from_date" | "to_date"
-  ) => {
-    const date = event.currentTarget.value;
-    if (event.key === "Enter" && (isValidDate(date) || date === "")) {
-      if (dateType === "from_date") {
-        setAfterDate(date);
-      } else if (dateType === "to_date") {
-        setBeforeDate(date);
-      }
+  const updateDateFilters = () => {
+    setAfterDate(afterDateCurrentInput);
+    setBeforeDate(beforeDateCurrentInput);
 
-      const params = new URLSearchParams(window.location.search);
-      if (date === "") {
-        params.delete(dateType);
-      } else {
-        params.set(dateType, date);
-      }
+    const params = new URLSearchParams(window.location.search);
+    const tempAfterInput = afterDateCurrentInput || "";
+    if (!isValidDate(tempAfterInput) || tempAfterInput === "") {
+      params.delete("from_date");
+    } else {
+      params.set("from_date", tempAfterInput);
+    }
+    const tempBeforeInput = beforeDateCurrentInput || "";
+    if (!isValidDate(tempBeforeInput) || tempBeforeInput === "") {
+      params.delete("to_date");
+    } else {
+      params.set("to_date", tempBeforeInput);
+    }
 
-      const newURL = `${window.location.pathname}?${params}`;
-      window.history.pushState(
-        { ...window.history.state, as: newURL, url: newURL },
-        "",
-        newURL
-      );
+    const newURL = `${window.location.pathname}?${params}`;
+    window.history.pushState(
+      { ...window.history.state, as: newURL, url: newURL },
+      "",
+      newURL
+    );
+  };
+
+  const handleDateKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      updateDateFilters();
     }
   };
 
@@ -384,7 +389,7 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               type="text"
               value={afterDateCurrentInput || ""}
               defaultValue={afterDate || ""}
-              onKeyPress={(event) => handleDateKeyPress(event, "from_date")}
+              onKeyPress={(event) => handleDateKeyPress(event)}
               onChange={(event) =>
                 handleDateInputChange(event, setAfterDateCurrentInput)
               }
@@ -401,7 +406,7 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               type="text"
               value={beforeDateCurrentInput || ""}
               defaultValue={beforeDate || ""}
-              onKeyPress={(event) => handleDateKeyPress(event, "to_date")}
+              onKeyPress={(event) => handleDateKeyPress(event)}
               onChange={(event) =>
                 handleDateInputChange(event, setBeforeDateCurrentInput)
               }
