@@ -10,7 +10,7 @@ import Pagination from "../Pagination";
 const DatasetsListItem = (props: {
   title: string;
   summary: string;
-  release_date: string;
+  issued: string;
   creator: string;
   publisher: string;
   topic: string;
@@ -51,8 +51,8 @@ const DatasetsListItem = (props: {
           style={{ textAlign: "right" }}
         >
           <li className="app-datasets-list__item-metadata-row">
-            <time dateTime={props.release_date}>
-              Updated: {formatDate(props.release_date)}
+            <time dateTime={props.issued}>
+              Updated {formatDate(props.issued)}
             </time>
           </li>
           <li className="app-datasets-list__item-metadata-row">
