@@ -237,7 +237,12 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   const [beforeDateCurrentInput, setBeforeDateCurrentInput] = useState(
     initialTimeBeforeFilter
   );
-
+  const [isAfterDateValid, setisAfterDateValid] = useState(
+    isValidDate(afterDateCurrentInput || "")
+  );
+  const [isBeforeDateValid, setisBeforeDateValid] = useState(
+    isValidDate(beforeDateCurrentInput || "")
+  );
   useEffect(() => {
     if (afterDate === null) {
       setAfterDateCurrentInput("");
@@ -289,13 +294,23 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
 
     const params = new URLSearchParams(window.location.search);
     const tempAfterInput = afterDateCurrentInput || "";
-    if (!isValidDate(tempAfterInput) || tempAfterInput === "") {
+    if (!isValidDate(tempAfterInput) && tempAfterInput !== "") {
+      setisAfterDateValid(false);
+    } else {
+      setisAfterDateValid(true);
+    }
+    if (tempAfterInput === "") {
       params.delete("from_date");
     } else {
       params.set("from_date", tempAfterInput);
     }
     const tempBeforeInput = beforeDateCurrentInput || "";
-    if (!isValidDate(tempBeforeInput) || tempBeforeInput === "") {
+    if (!isValidDate(tempBeforeInput) && tempBeforeInput !== "") {
+      setisBeforeDateValid(false);
+    } else {
+      setisBeforeDateValid(true);
+    }
+    if (tempBeforeInput === "") {
       params.delete("to_date");
     } else {
       params.set("to_date", tempBeforeInput);
@@ -382,13 +397,25 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
       <details className="app-accordion">
         <summary className="app-accordian__title">Updated</summary>
         <div className="app-accordian__panel">
-          <div className="app-accordian__panel-inner govuk-form-group">
+          <div
+            className={`app-accordian__panel-inner govuk-form-group  ${
+              !isAfterDateValid && "govuk-form-group--error"
+            }`}
+          >
             <label className="govuk-label">Updated after</label>
             <div className="govuk-caption-m">
               For example, 2005 or 21/11/2004
             </div>
+            {!isAfterDateValid && (
+              <p id="event-name-error" className="govuk-error-message">
+                <span className="govuk-visually-hidden">Error:</span> Enter a
+                real date
+              </p>
+            )}
             <input
-              className="govuk-input"
+              className={`govuk-input ${
+                !isAfterDateValid && "govuk-input--error"
+              }`}
               id="from-date-input"
               type="text"
               value={
@@ -402,13 +429,25 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               }
             />
           </div>
-          <div className="app-accordian__panel-inner govuk-form-group">
+          <div
+            className={`app-accordian__panel-inner govuk-form-group  ${
+              !isBeforeDateValid && "govuk-form-group--error"
+            }`}
+          >
             <label className="govuk-label">Updated before</label>
             <div className="govuk-caption-m">
               For example, 2005 or 21/11/2004
             </div>
+            {!isBeforeDateValid && (
+              <p id="event-name-error" className="govuk-error-message">
+                <span className="govuk-visually-hidden">Error:</span> Enter a
+                real date
+              </p>
+            )}
             <input
-              className="govuk-input"
+              className={`govuk-input ${
+                !isBeforeDateValid && "govuk-input--error"
+              }`}
               id="to-date-input"
               type="text"
               value={beforeDateCurrentInput || ""}
