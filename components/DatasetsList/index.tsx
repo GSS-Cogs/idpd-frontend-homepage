@@ -8,6 +8,7 @@ import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
 
 const DatasetsListItem = (props: {
+  "@id": string;
   title: string;
   summary: string;
   issued: string;
@@ -23,7 +24,7 @@ const DatasetsListItem = (props: {
       <div className="app-datasets-list__item-top">
         <a
           className="app-datasets-list__item-title app-datasets-list__item-title--context govuk-link"
-          href={props.creator}
+          href={props["@id"]}
         >
           {props?.title}
         </a>
