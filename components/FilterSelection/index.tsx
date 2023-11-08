@@ -238,10 +238,10 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
     initialTimeBeforeFilter
   );
   const [isAfterDateValid, setisAfterDateValid] = useState(
-    isValidDate(afterDateCurrentInput || "")
+    !afterDateCurrentInput ? true : isValidDate(afterDateCurrentInput || "")
   );
   const [isBeforeDateValid, setisBeforeDateValid] = useState(
-    isValidDate(beforeDateCurrentInput || "")
+    !beforeDateCurrentInput ? true : isValidDate(beforeDateCurrentInput || "")
   );
   useEffect(() => {
     if (afterDate === null) {
