@@ -29,13 +29,12 @@ export const isValidFullDate = (date: string): boolean => {
 };
 
 export const isValidDate = (date: string): boolean => {
-  if (/\d{4}/.test(date)) {
+  if (/^\d{4}$/.test(date)) {
     return isValidYear(date);
-  } else if (/\d{2}\/\d{2,4}/.test(date)) {
+  } else if (/^\d{1,2}\/\d{2,4}$/.test(date)) {
     return isValidMonthYear(date);
-  } else if (/\d{2,4}\/\d{2}\/\d{2,4}/.test(date)) {
+  } else if (/^\d{1,2}\/\d{1,2}\/\d{2,4}$/.test(date)) {
     return isValidFullDate(date);
   }
-
   return false;
 };
