@@ -1,5 +1,6 @@
 "use client";
 import { useGlobalContext } from "@/app/context/store";
+import { isValidDate } from "@/utils/dateValidation";
 import { useEffect, useState } from "react";
 
 const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
@@ -142,7 +143,9 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
     fromDate: string;
     toDate: string;
   }) => {
-    if (!fromDate && !toDate) {
+    const isFromDateValid = isValidDate(fromDate);
+    const isToDateValid = isValidDate(toDate);
+    if (!isFromDateValid && !isToDateValid) {
       return null;
     }
 
@@ -165,21 +168,21 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
     };
 
     const textBetweenDates = () => {
-      if (fromDate && toDate) {
+      if (isFromDateValid && isToDateValid) {
         return <div style={{ marginLeft: 5, marginRight: 5 }}>and</div>;
       }
       return null;
     };
 
-    const getPrefixText = (value1: string, value2: string) => {
-      if (value1 && value2) {
+    const getPrefixText = () => {
+      if (isFromDateValid && isToDateValid) {
         return "Updated between";
-      } else if (value1) {
+      } else if (isFromDateValid) {
         return "Updated after";
       }
       return "Updated before";
     };
-    const prefixText = getPrefixText(fromDate, toDate);
+    const prefixText = getPrefixText();
 
     return (
       <div className="app-filter-display__row">
@@ -191,9 +194,9 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
             alignItems: "center",
           }}
         >
-          {dateItem(fromDate, "from_date")}
+          {isFromDateValid && dateItem(fromDate, "from_date")}
           {textBetweenDates()}
-          {dateItem(toDate, "to_date")}
+          {isToDateValid && dateItem(toDate, "to_date")}
         </span>
       </div>
     );
