@@ -6,6 +6,7 @@ import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import FilterDisplay from "../FilterDisplay";
 import Pagination from "../Pagination";
+import { isValidDate } from "@/utils/dateValidation";
 
 const DatasetsListItem = (props: {
   "@id": string;
@@ -153,8 +154,14 @@ export default function DatasetsList({
       let activeTopicFilter = topicFilter || "All topics";
       let activeSubtopicsFilter = subtopicsFilter;
       let activePublisherFilter = publisherFilter || "All publisher";
-      let activeAfterDateFilter = parseUKDate(afterDate || "");
-      let activeBeforeDateFilter = parseUKDate(beforeDate || "");
+      let activeAfterDateFilter: number | null = null;
+      if (isValidDate(afterDate || "")) {
+        activeAfterDateFilter = parseUKDate(afterDate || "");
+      }
+      let activeBeforeDateFilter: number | null = null;
+      if (isValidDate(beforeDate || "")) {
+        activeBeforeDateFilter = parseUKDate(beforeDate || "");
+      }
 
       if (!isJsEnabled) {
         // subtopics uses a different method here because using '.getAll("subtopics")'
@@ -198,13 +205,13 @@ export default function DatasetsList({
 
       if (activeAfterDateFilter) {
         filteredData = filteredData.filter(
-          (x) => Date.parse(x.modified) >= activeAfterDateFilter
+          (x) => Date.parse(x.modified) >= (activeAfterDateFilter || "")
         );
       }
 
       if (activeBeforeDateFilter) {
         filteredData = filteredData.filter(
-          (x) => Date.parse(x.modified) <= activeBeforeDateFilter
+          (x) => Date.parse(x.modified) <= (activeBeforeDateFilter || "")
         );
       }
 
