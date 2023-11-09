@@ -1,6 +1,16 @@
+import { headers } from "next/headers";
+
 const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
 const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+const getBackendUrl = () => {
+  const headersList = headers();
+  const domain = headersList.get("x-forwarded-host") || "";
+  const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
+  const fullUrl = `${proto}://${domain}`;
+
+  return fullUrl;
+};
 
 const getHeaders = () => {
   const headers: Record<string, string> = {
@@ -31,7 +41,8 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       credentials: "include",
     };
 
-    const response = await fetch(`${BACKEND_URL}${url}`, options);
+    const backendUrl = getBackendUrl();
+    const response = await fetch(`${backendUrl}${url}`, options);
     return handleResponse(response);
   } catch (error) {
     console.error("Fetch Error:", error);
