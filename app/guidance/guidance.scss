@@ -1,4 +1,27 @@
+@import "node_modules/govuk-frontend/govuk/all";
+
+.app-guidance__title {
+  margin-bottom: govuk-spacing(6);
+}
+
 .app-guidance__description {
   @include govuk-font(24);
-  margin-bottom: 0;
+  margin-bottom: govuk-spacing(8);
+}
+
+.app-guidance__code {
+  width: 100%;
+
+  font-family: monospace;
+
+  border: 1px solid #b1b4b6;
+  border-radius: 2px;
+  color: #0b0c0c;
+  background-color: #f3f2f1;
+  font-size: 16px;
+  padding: 3px 10px;
+
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 2;
 }
