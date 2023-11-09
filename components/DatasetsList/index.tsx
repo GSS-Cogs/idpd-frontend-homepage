@@ -205,13 +205,13 @@ export default function DatasetsList({
 
       if (activeAfterDateFilter) {
         filteredData = filteredData.filter(
-          (x) => Date.parse(x.modified) >= (activeAfterDateFilter || "")
+          (x) => Date.parse(x.modified) >= (activeAfterDateFilter || 0)
         );
       }
 
       if (activeBeforeDateFilter) {
         filteredData = filteredData.filter(
-          (x) => Date.parse(x.modified) <= (activeBeforeDateFilter || "")
+          (x) => Date.parse(x.modified) <= (activeBeforeDateFilter || 0)
         );
       }
 
