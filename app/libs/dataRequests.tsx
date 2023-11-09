@@ -41,8 +41,9 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       credentials: "include",
     };
 
-    const backendUrl = getBackendUrl();
-    const response = await fetch(`${backendUrl}${url}`, options);
+    // const backendUrl = getBackendUrl();
+    // const response = await fetch(`${backendUrl}${url}`, options);
+    const response = await fetch(`${url}`, options);
     return handleResponse(response);
   } catch (error) {
     console.error("Fetch Error:", error);
