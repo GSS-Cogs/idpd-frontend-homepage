@@ -6,8 +6,8 @@ const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
 const getBackendUrl = () => {
   const headersList = headers();
   const domain = headersList.get("x-forwarded-host") || "";
-  const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
-  const fullUrl = `${proto}://${domain}`;
+  // const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
+  const fullUrl = `https://${domain}`;
 
   return fullUrl;
 };
@@ -41,9 +41,8 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       credentials: "include",
     };
 
-    // const backendUrl = getBackendUrl();
-    // const response = await fetch(`${backendUrl}${url}`, options);
-    const response = await fetch(`${url}`, options);
+    const backendUrl = getBackendUrl();
+    const response = await fetch(`${backendUrl}${url}`, options);
     return handleResponse(response);
   } catch (error) {
     console.error("Fetch Error:", error);
