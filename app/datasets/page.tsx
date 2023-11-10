@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import "./datasets.scss";
 import Search from "@/components/Search";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -6,10 +5,7 @@ import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
 import FilterSelection from "@/components/FilterSelection";
-import {
-  getDatasetsWithSpatialCoverageInfo,
-  getBackendUrl,
-} from "../../libs/dataRequests";
+import { getDatasetsWithSpatialCoverageInfo } from "../../libs/dataRequests";
 import Header from "@/components/Header";
 
 export default async function Datasets({
@@ -18,7 +14,6 @@ export default async function Datasets({
   searchParams: any;
 }) {
   const datasets = await getDatasetsWithSpatialCoverageInfo();
-  const backendUrl = await getBackendUrl();
   const KEY = "page";
   const params = new URLSearchParams(searchParams);
   params.delete(KEY);
@@ -40,16 +35,15 @@ export default async function Datasets({
               <h1 className="govuk-heading-xl">Data catalogue</h1>
             </div>
           </div>
-          {backendUrl}
           <Search />
           <div className="govuk-grid-row">
             <FilterSelection searchParams={params} />
-            {/* <DatasetsList
+            <DatasetsList
               items={datasets.datasets}
               page={searchParams.page}
               searchParams={searchParams}
               filterParams={params}
-            /> */}
+            />
           </div>
         </main>
       </div>

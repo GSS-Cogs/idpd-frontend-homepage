@@ -1,17 +1,6 @@
-import { headers } from "next/headers";
-
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
 const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
-
-const getBackendUrl = async () => {
-  const headersList = headers();
-  const domain = headersList.get("x-forwarded-host") || "";
-  const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
-  const fullUrl = `${proto}://${domain}`;
-
-  return BACKEND_URL;
-};
 
 const getHeaders = () => {
   const headers: Record<string, string> = {
@@ -42,8 +31,7 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       credentials: "include",
     };
 
-    const backendUrl = await getBackendUrl();
-    const response = await fetch(`${backendUrl}${url}`, options);
+    const response = await fetch(`${BACKEND_URL}${url}`, options);
     return handleResponse(response);
   } catch (error) {
     console.error("Fetch Error:", error);
@@ -132,5 +120,4 @@ export {
   getDataset,
   getTopics,
   getPublishers,
-  getBackendUrl,
 };
