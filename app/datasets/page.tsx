@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import "./datasets.scss";
 import Search from "@/components/Search";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -5,7 +6,7 @@ import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
 import FilterSelection from "@/components/FilterSelection";
-import { getDatasetsWithSpatialCoverageInfo } from "../libs/dataRequests";
+import { getDatasetsWithSpatialCoverageInfo } from "../../libs/dataRequests";
 import Header from "@/components/Header";
 
 export default async function Datasets({
