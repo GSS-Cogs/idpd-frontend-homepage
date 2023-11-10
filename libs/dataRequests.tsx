@@ -10,7 +10,7 @@ const getBackendUrl = async () => {
   const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
   const fullUrl = `${proto}://${domain}`;
 
-  return fullUrl + " and  " + BACKEND_URL;
+  return BACKEND_URL;
 };
 
 const getHeaders = () => {

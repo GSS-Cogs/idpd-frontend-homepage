@@ -17,7 +17,7 @@ export default async function Datasets({
 }: {
   searchParams: any;
 }) {
-  // const datasets = await getDatasetsWithSpatialCoverageInfo();
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
   const backendUrl = await getBackendUrl();
   const KEY = "page";
   const params = new URLSearchParams(searchParams);
