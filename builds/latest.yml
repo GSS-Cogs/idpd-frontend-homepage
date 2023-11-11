@@ -3,6 +3,9 @@ steps:
     args:
       - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:latest'
       - '--destination=${_IMAGE_REPOSITORY}/frontend-homepage:$SHORT_SHA'
+      - '--build-arg NEXT_PUBLIC_BACKEND_URL=${_NEXT_PUBLIC_BACKEND_URL}'
+      - '--build-arg NEXT_PRIVATE_USERNAME=${_NEXT_PRIVATE_USERNAME}'
+      - '--build-arg NEXT_PRIVATE_PASSWORD=${_NEXT_PRIVATE_PASSWORD}'
   - name: gcr.io/cloud-builders/kubectl
     env:
       - 'CLOUDSDK_COMPUTE_REGION=${_REGION}'
