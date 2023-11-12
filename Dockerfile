@@ -15,4 +15,4 @@ ENV NEXT_PRIVATE_PASSWORD=$NEXT_PRIVATE_PASSWORD
 RUN yarn
 RUN make build
 
-RUN ["make", "start"]
+CMD ["make", "start"]
