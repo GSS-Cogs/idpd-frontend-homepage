@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import "./datasets.scss";
 import Search from "@/components/Search";
 import Breadcrumbs from "@/components/Breadcrumbs";
