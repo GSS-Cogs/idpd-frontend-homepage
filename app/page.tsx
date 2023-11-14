@@ -156,9 +156,6 @@ export default async function Home() {
             you understand and analyse our range of statistics.
           </HeroMainContentDescription>
         </HeroMainContent>
-        <HeroActionButton href="/datasets">
-          View data catalogue
-        </HeroActionButton>
       </Hero>
       <SubHero>
         <div className="govuk-grid-row">
