@@ -1,0 +1,41 @@
+@import "../../styles/mixins/chevron";
+
+.app-accordian__panel {
+  padding-top: govuk-spacing(3);
+}
+
+.app-accordian__panel > *:nth-last-child(n + 2) {
+  margin-bottom: govuk-spacing(3);
+}
+
+.app-accordian__panel-inner {
+  background-color: white;
+
+  cursor: default;
+  @include govuk-font($size: 16);
+  @include govuk-text-colour;
+}
+
+.app-accordion {
+  @include govuk-font($size: 19, $weight: light);
+  color: govuk-colour("blue");
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: govuk-spacing(4);
+  padding-bottom: govuk-spacing(4);
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid $govuk-border-colour;
+}
+
+.app-accordion[open] {
+  padding-bottom: 0;
+}
+
+.app-accordian__title {
+  list-style-type: "";
+}
+
+.app-accordian__title:before {
+  @include chevron(govuk-colour("black"));
+}

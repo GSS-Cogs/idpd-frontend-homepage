@@ -3,3 +3,9 @@
   @include govuk-responsive-padding(7, "bottom");
   background-color: govuk-colour("light-grey");
 }
+
+.app-sub-hero__search--divider {
+  @include govuk-media-query($from: tablet) {
+    border-right: 1px solid $govuk-border-colour;
+  }
+}
