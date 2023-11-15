@@ -199,7 +199,7 @@ export default function DatasetsList({
 
       if (activePublisherFilter !== "All publisher") {
         filteredData = filteredData.filter(
-          (x) => x.publisher === activePublisherFilter
+          (x) => x.publisher_full.title === activePublisherFilter
         );
       }
 

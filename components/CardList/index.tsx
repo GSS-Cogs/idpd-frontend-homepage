@@ -10,17 +10,17 @@ const CardListLink = ({ href, children }: { href: string; children: any }) => (
   </a>
 );
 
-const CardListPublisherCard = ({ items }: { items: CardProps[] }) => {
+const CardListPublisherCard = ({ items }: { items: { title: string }[] }) => {
   return (
     <ul className="app-cards__list" data-track-count="cardList">
-      {items.map((item: CardProps) => (
+      {items.map((item: { title: string }) => (
         <li className="app-cards__list-item--publisher">
           <h2 className="app-cards__sub-heading--publisher govuk-heading-s">
             <a
               className="govuk-link app-cards__link--publisher"
-              href={item.href}
+              href={"/datasets?publisher=" + encodeURIComponent(item.title)}
             >
-              {item.heading}
+              {item.title}
             </a>
           </h2>
         </li>

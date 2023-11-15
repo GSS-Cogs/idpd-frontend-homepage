@@ -21,6 +21,7 @@ import {
 } from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
 import Header from "@/components/Header";
+import { getPublishers } from "@/libs/dataRequests";
 
 const CardListTopicItems = [
   {
@@ -79,62 +80,9 @@ const CardListTopicItems = [
   },
 ];
 
-const CardListPublisherItems = [
-  {
-    heading: "Department for Business, Energy & Industrial Strategy",
-    href: "",
-  },
-  {
-    heading: "Department for Education",
-    href: "",
-  },
-  {
-    heading: "Department for Environment, Food & Rural Affairs",
-    href: "",
-  },
-  {
-    heading: "Department for Levelling Up, Housing & Communities",
-    href: "",
-  },
-  {
-    heading: "Department for Transport",
-    href: "",
-  },
-  {
-    heading: "Forest Research",
-    href: "",
-  },
-  {
-    heading: "HM Revenue & Customs",
-    href: "",
-  },
-  {
-    heading: "Met Office",
-    href: "",
-  },
-  {
-    heading: "Ministry of Housing, Communities & Local Government",
-    href: "",
-  },
-  {
-    heading: "Ofcom",
-    href: "",
-  },
-  {
-    heading: "Office for Health Improvement and Disparities",
-    href: "",
-  },
-  {
-    heading: "Office for National Statistics",
-    href: "",
-  },
-  {
-    heading: "Welsh Government",
-    href: "",
-  },
-];
-
 export default async function Home() {
+  const publishers = await getPublishers();
+
   const datasets = 189;
   return (
     <>
@@ -185,7 +133,7 @@ export default async function Home() {
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
-          <div className="govuk-grid-row app-section-row">
+          {/* <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
                 number={9}
@@ -201,7 +149,7 @@ export default async function Home() {
               </CardList>
             </div>
           </div>
-          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
+          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr> */}
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
@@ -213,7 +161,7 @@ export default async function Home() {
             <div className="govuk-grid-column-three-quarters">
               <CardList>
                 <CardListPublisherCard
-                  items={CardListPublisherItems}
+                  items={publishers.publishers}
                 ></CardListPublisherCard>
               </CardList>
             </div>
