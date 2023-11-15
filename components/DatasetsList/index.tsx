@@ -1,7 +1,6 @@
 "use client";
 import { useGlobalContext } from "@/app/context/store";
-import Image from "next/image";
-
+import logoCompDict from "@/utils/logoCompDict";
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import FilterDisplay from "../FilterDisplay";
@@ -14,12 +13,16 @@ const DatasetsListItem = (props: {
   summary: string;
   issued: string;
   creator: string;
+  publisher: string;
   publisher_full: { title: string };
   topic: string;
   subTopic: string;
   spatial_coverage_name: string;
   temporal_coverage: { start: string; end: string };
 }) => {
+  const PublisherComponent =
+    logoCompDict[props.publisher] || logoCompDict["default"];
+
   return (
     <li className="app-datasets-list__item">
       <div className="app-datasets-list__item-top">
@@ -37,17 +40,7 @@ const DatasetsListItem = (props: {
         <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
-        <div className="app-datasets-list__item-bottom-publisher">
-          <Image
-            src="/assets/images/crest.png"
-            width={40}
-            height={34}
-            alt="Govuk Crest"
-          />
-          <h3 className="app-datasets-list__item-publisher-inner">
-            {props?.publisher_full.title}
-          </h3>
-        </div>
+        <PublisherComponent title={props?.publisher_full.title} />
         <ul
           className="app-datasets-list__item-metadata"
           style={{ textAlign: "right" }}
