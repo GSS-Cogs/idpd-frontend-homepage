@@ -271,7 +271,7 @@ const Topics = ({
               </CardList>
             </div>
           </div>
-          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
+          {/* <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
@@ -302,7 +302,7 @@ const Topics = ({
                 ></CardListPublisherCard>
               </CardList>
             </div>
-          </div>
+          </div> */}
         </main>
       </div>
     </>
