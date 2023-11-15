@@ -162,7 +162,7 @@ const topics = [
 const publishers = [
   { heading: "All publishers" },
   {
-    heading: "Department for Business, Energy & Industrial Strategy",
+    heading: "The Department for Business, Energy & Industrial Strategy",
   },
   {
     heading: "Department for Education",
@@ -195,7 +195,7 @@ const publishers = [
     heading: "Office for Health Improvement and Disparities",
   },
   {
-    heading: "Office for National Statistics",
+    heading: "The Office for National Statistics",
   },
   {
     heading: "Welsh Government",
