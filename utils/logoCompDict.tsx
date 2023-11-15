@@ -35,11 +35,7 @@ const createLogoComponent =
 const defaulLogoComponent =
   () =>
   ({ title }: LogoProps) =>
-    (
-      <div className="app-datasets-list__item-bottom-publisher">
-        {displayTitle(title)}
-      </div>
-    );
+    <div className="app-datasets-list__item-bottom-publisher">{title}</div>;
 
 const logoCompDict: LogoCompDict = {
   "https://staging.idpd.uk/publishers/office-for-national-statistics":
