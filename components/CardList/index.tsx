@@ -33,7 +33,7 @@ const CardListTopicCard = ({ items }: { items: CardProps[] }) => {
   return (
     <ul className="app-cards__list" data-track-count="cardList">
       {items.map((item: CardProps) => (
-        <li className="app-cards__list-item--topic">
+        <li className="app-cards__list-item--topic" key={item.heading}>
           <div className="app-cards__list-item-wrapper--topic">
             <h2 className="app-cards__sub-heading govuk-heading-s">
               <a className="govuk-link app-cards__link--topic" href={item.href}>
