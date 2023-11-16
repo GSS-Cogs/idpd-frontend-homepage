@@ -105,7 +105,7 @@ export default async function Home() {
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={9}
+                number={parentTopics.length}
                 label="topics"
                 subtext="View and download datasets by topics and subtopics"
               />
