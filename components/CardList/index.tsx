@@ -100,8 +100,8 @@ const DatasetCardDesktopView = ({ item }: { item: any }) => {
   return (
     <li className="app-cards__list-item--dataset">
       <h2 className="app-cards__sub-heading--dataset govuk-heading-s">
-        <a className="govuk-link app-cards__link--dataset" href={item.creator}>
-          {item?.datasetTitle}
+        <a className="govuk-link app-cards__link--dataset" href={item["@id"]}>
+          {item?.title}
         </a>
       </h2>
     </li>
@@ -116,9 +116,9 @@ const DatasetCardMobileView = ({ item }: { item: any }) => {
           className="app-cards__item-title app-cards__item-title--context govuk-link"
           href={item.creator}
         >
-          {item?.datasetTitle}
+          {item?.title}
         </a>
-        <p className="app-cards__item-description">{item?.shortDescription}</p>
+        <p className="app-cards__item-description">{item?.summary}</p>
       </div>
       <div className="app-cards__item-bottom">
         <div className="app-cards__item-bottom-publisher">
@@ -128,7 +128,9 @@ const DatasetCardMobileView = ({ item }: { item: any }) => {
             height={34}
             alt="Govuk Crest"
           />
-          <h3 className="app-cards__item-publisher-inner">{item?.publisher}</h3>
+          <h3 className="app-cards__item-publisher-inner">
+            {item?.publisher_full.title}
+          </h3>
         </div>
         <ul className="app-cards__item-metadata" style={{ textAlign: "right" }}>
           <li className="app-cards__item-metadata-row">

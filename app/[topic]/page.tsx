@@ -208,6 +208,23 @@ const Topics = async ({ params }: { params: { topic: string } }) => {
   };
   const publishers = getUniquePublishers(datasets.datasets);
 
+  const getLatestRelatedDatasets = (datasets: any[]) => {
+    const filteredDatasets = datasets.filter((item) =>
+      item.topics.includes(topic["@id"])
+    );
+
+    const sortedDatasets = filteredDatasets.sort((a, b) => {
+      const dateA = new Date(a.issued);
+      const dateB = new Date(b.issued);
+
+      return dateA.getTime() - dateB.getTime();
+    });
+
+    return sortedDatasets;
+  };
+
+  const latestDatasets = getLatestRelatedDatasets(datasets.datasets);
+
   return (
     <>
       <Header borderColour="blue-alt-border" />
@@ -238,7 +255,7 @@ const Topics = async ({ params }: { params: { topic: string } }) => {
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={datasetItems.length}
+                number={latestDatasets.length}
                 label="datasets"
                 subtext={
                   "View and download datasets related to " +
@@ -249,7 +266,9 @@ const Topics = async ({ params }: { params: { topic: string } }) => {
             <div className="govuk-grid-column-three-quarters">
               <CardList>
                 <CardListTitle>Latest datasets</CardListTitle>
-                <CardListDatasetCard items={datasetItems}></CardListDatasetCard>
+                <CardListDatasetCard
+                  items={latestDatasets}
+                ></CardListDatasetCard>
                 <CardListLink href="/datasets">View all datasets</CardListLink>
               </CardList>
             </div>
