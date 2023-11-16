@@ -21,7 +21,7 @@ import {
 } from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
 import Header from "@/components/Header";
-import { getPublishers } from "@/libs/dataRequests";
+import { getDatasetsWithSpatialCoverageInfo } from "@/libs/dataRequests";
 
 const CardListTopicItems = [
   {
@@ -81,9 +81,24 @@ const CardListTopicItems = [
 ];
 
 export default async function Home() {
-  const publishers = await getPublishers();
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
 
-  const datasets = 189;
+  const getUniquePublishers = (datasets: any[]): any[] => {
+    const uniquePublishers = new Set<string>();
+    const publisherFulls: string[] = [];
+
+    datasets.forEach((dataset) => {
+      if (!uniquePublishers.has(dataset.publisher)) {
+        uniquePublishers.add(dataset.publisher);
+        publisherFulls.push(dataset.publisher_full);
+      }
+    });
+
+    return publisherFulls;
+  };
+
+  const publishers = getUniquePublishers(datasets.datasets);
+
   return (
     <>
       <Header />
@@ -121,7 +136,7 @@ export default async function Home() {
           <div className="govuk-grid-column-one-half">
             <h2 className="govuk-label-wrapper">
               <span className=" govuk-label govuk-label--m">
-                {datasets} datasets
+                {datasets.datasets.length} datasets
               </span>
             </h2>
             <div className="govuk-hint">
@@ -153,7 +168,7 @@ export default async function Home() {
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={13}
+                number={publishers.length}
                 label="publishers"
                 subtext="View and download datasets by publishers"
               />
@@ -161,7 +176,7 @@ export default async function Home() {
             <div className="govuk-grid-column-three-quarters">
               <CardList>
                 <CardListPublisherCard
-                  items={publishers.publishers}
+                  items={publishers}
                 ></CardListPublisherCard>
               </CardList>
             </div>
