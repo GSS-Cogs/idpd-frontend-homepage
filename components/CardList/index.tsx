@@ -110,41 +110,34 @@ const DatasetCardDesktopView = ({ item }: { item: any }) => {
 
 const DatasetCardMobileView = ({ item }: { item: any }) => {
   return (
-    <li className="app-datasets-list__item">
-      <div className="app-datasets-list__item-top">
+    <li className="app-cards__item">
+      <div className="app-cards__item-top">
         <a
-          className="app-datasets-list__item-title app-datasets-list__item-title--context govuk-link"
+          className="app-cards__item-title app-cards__item-title--context govuk-link"
           href={item.creator}
         >
           {item?.datasetTitle}
         </a>
-        <p className="app-datasets-list__item-description">
-          {item?.shortDescription}
-        </p>
+        <p className="app-cards__item-description">{item?.shortDescription}</p>
       </div>
-      <div className="app-datasets-list__item-bottom">
-        <div className="app-datasets-list__item-bottom-publisher">
+      <div className="app-cards__item-bottom">
+        <div className="app-cards__item-bottom-publisher">
           <Image
             src="/assets/images/crest.png"
             width={40}
             height={34}
             alt="Govuk Crest"
           />
-          <h3 className="app-datasets-list__item-publisher-inner">
-            {item?.publisher}
-          </h3>
+          <h3 className="app-cards__item-publisher-inner">{item?.publisher}</h3>
         </div>
-        <ul
-          className="app-datasets-list__item-metadata"
-          style={{ textAlign: "right" }}
-        >
-          <li className="app-datasets-list__item-metadata-row">
+        <ul className="app-cards__item-metadata" style={{ textAlign: "right" }}>
+          <li className="app-cards__item-metadata-row">
             <div>{item?.topic}</div>
           </li>
-          <li className="app-datasets-list__item-metadata-row">
+          <li className="app-cards__item-metadata-row">
             <time dateTime={item.modified?.value}>{item?.subTopic}</time>
           </li>
-          <li className="app-datasets-list__item-metadata-row">
+          <li className="app-cards__item-metadata-row">
             <time dateTime={item.modified?.value}>
               Updated: {formatDate(item.modified)}
             </time>
