@@ -1,4 +1,3 @@
-import { CardProps } from "./types";
 import Image from "next/image";
 
 const CardListTitle = ({ children }: { children: any }) => (
@@ -29,23 +28,41 @@ const CardListPublisherCard = ({ items }: { items: { title: string }[] }) => {
   );
 };
 
-const CardListTopicCard = ({ items }: { items: CardProps[] }) => {
+const CardListTopicCard = ({
+  items,
+}: {
+  items: { title: string; description: string; "@id": string }[];
+}) => {
+  const getTopicHref = (id: string) => {
+    const splitTopic = id.split("/");
+    const result = splitTopic[splitTopic.length - 1];
+    return "/" + result;
+  };
+
   return (
     <ul className="app-cards__list" data-track-count="cardList">
-      {items.map((item: CardProps) => (
-        <li className="app-cards__list-item--topic" key={item.heading}>
-          <div className="app-cards__list-item-wrapper--topic">
-            <h2 className="app-cards__sub-heading govuk-heading-s">
-              <a className="govuk-link app-cards__link--topic" href={item.href}>
-                {item.heading}
-              </a>
-            </h2>
-            <p className="govuk-body app-cards__description">
-              {item.description}
-            </p>
-          </div>
-        </li>
-      ))}
+      {items.map(
+        (
+          item: { title: string; description: string; "@id": string },
+          index: number
+        ) => (
+          <li className="app-cards__list-item--topic" key={item.title + index}>
+            <div className="app-cards__list-item-wrapper--topic">
+              <h2 className="app-cards__sub-heading govuk-heading-s">
+                <a
+                  className="govuk-link app-cards__link--topic"
+                  href={getTopicHref(item["@id"])}
+                >
+                  {item.title}
+                </a>
+              </h2>
+              <p className="govuk-body app-cards__description">
+                {item.description}
+              </p>
+            </div>
+          </li>
+        )
+      )}
     </ul>
   );
 };

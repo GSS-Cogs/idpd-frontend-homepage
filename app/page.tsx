@@ -21,67 +21,22 @@ import {
 } from "@/components/Hero/SubHero";
 import Search from "@/components/Search";
 import Header from "@/components/Header";
-import { getDatasetsWithSpatialCoverageInfo } from "@/libs/dataRequests";
-
-const CardListTopicItems = [
-  {
-    heading: "Agriculture, energy and environment",
-    href: "/agriculture-energy-and-environment",
-    description:
-      "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
-  },
-  {
-    heading: "Business, trade and international development",
-    href: "/business-trade-and-international-development",
-    description:
-      "Company structure, size and location; closures or mergers; and turnover, international and UK trade, and research and development.",
-  },
-  {
-    heading: "Children, education and skills",
-    href: "/children-education-and-skills",
-    description:
-      "Teachers and lecturers, learners, and those not in education, employment or training.",
-  },
-  {
-    heading: "Crime and security",
-    href: "/crime-and-security",
-    description:
-      "Crime; justice systems (family, civil and criminal); and policing, people, organizations, and money.",
-  },
-  {
-    heading: "Economy",
-    href: "/economy",
-    description:
-      "The UK economy and the economies of Devolved Administrations and UK regions.",
-  },
-  {
-    heading: "Health and social care",
-    href: "/health-and-social-care",
-    description:
-      "Health care provision, social care provision, health status and disease, disability, cause of death, and health and safety at work.",
-  },
-  {
-    heading: "Housing, planning and local services",
-    href: "/housing-planning-and-local-services",
-    description:
-      "Current housing, household estimates and projections, homelessness, housing requirements, and commercial, industrial, retail and residential planning.",
-  },
-  {
-    heading: "Labour market and welfare",
-    href: "/labour-market-and-welfare",
-    description:
-      "Includes statistics measuring different aspects of work and jobs and covers people's employment, working patterns, and the types of work they do.",
-  },
-  {
-    heading: "Travel, transport and tourism",
-    href: "/travel-transport-and-tourism",
-    description:
-      "All modes of travel and transport, transport infrastructure, and tourism; travel patterns and distances travelled using various modes of transport; and international visits to the UK.",
-  },
-];
+import {
+  getDatasetsWithSpatialCoverageInfo,
+  getTopics,
+} from "@/libs/dataRequests";
 
 export default async function Home() {
   const datasets = await getDatasetsWithSpatialCoverageInfo();
+  const topics = await getTopics();
+
+  const getParentTopics = (topics: any[]) => {
+    const filteredTopics = topics.filter(
+      (topic) => topic.parent_topics.length === 0
+    );
+    return filteredTopics;
+  };
+  const parentTopics = getParentTopics(topics.topics);
 
   const getUniquePublishers = (datasets: any[]): any[] => {
     const uniquePublishers = new Set<string>();
@@ -96,7 +51,6 @@ export default async function Home() {
 
     return publisherFulls;
   };
-
   const publishers = getUniquePublishers(datasets.datasets);
 
   return (
@@ -148,7 +102,7 @@ export default async function Home() {
       </SubHero>
       <div className="app-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
-          {/* <div className="govuk-grid-row app-section-row">
+          <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
                 number={9}
@@ -158,13 +112,11 @@ export default async function Home() {
             </div>
             <div className="govuk-grid-column-three-quarters">
               <CardList>
-                <CardListTopicCard
-                  items={CardListTopicItems}
-                ></CardListTopicCard>
+                <CardListTopicCard items={parentTopics}></CardListTopicCard>
               </CardList>
             </div>
           </div>
-          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr> */}
+          <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
