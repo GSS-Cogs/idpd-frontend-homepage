@@ -109,6 +109,11 @@ const getTopics = async () => {
   return data;
 };
 
+const getTopic = async (id: string) => {
+  const data = await fetchData(`/topics/${id}`, "GET");
+  return data;
+};
+
 const getPublishers = async () => {
   const data = await fetchData(`/publishers`, "GET");
   return data;
@@ -119,5 +124,6 @@ export {
   getDatasetsWithSpatialCoverageInfo,
   getDataset,
   getTopics,
+  getTopic,
   getPublishers,
 };
