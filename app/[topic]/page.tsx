@@ -19,12 +19,10 @@ import {
   HeroBreadcrumbs,
   HeroMainContentCaption,
 } from "@/components/Hero";
-
-const data = {
-  topicTitle: "Agriculture, energy and environment",
-  topicDescription:
-    "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
-};
+import {
+  getDatasetsWithSpatialCoverageInfo,
+  getTopic,
+} from "@/libs/dataRequests";
 
 const subtopicItems = [
   {
@@ -92,37 +90,6 @@ const subtopicItems = [
     href: "",
     description:
       "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-];
-
-const publisherItems = [
-  {
-    heading: "Department for Business, Energy & Industrial Strategy",
-    href: "",
-  },
-  {
-    heading: "Department for Environment, Food & Rural Affairs",
-    href: "",
-  },
-  {
-    heading: "Forest Research",
-    href: "",
-  },
-  {
-    heading: "Met Office",
-    href: "",
-  },
-  {
-    heading: "Ministry of Housing, Communities & Local Government",
-    href: "",
-  },
-  {
-    heading: "Office for National Statistics",
-    href: "",
-  },
-  {
-    heading: "Welsh Government",
-    href: "",
   },
 ];
 
@@ -218,13 +185,29 @@ const datasetItems = [
   },
 ];
 
-const Topics = ({
-  params,
-  searchParams,
-}: {
-  params: { topic: string };
-  searchParams: any;
-}) => {
+const Topics = async ({ params }: { params: { topic: string } }) => {
+  const topic = await getTopic(params.topic);
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
+
+  const getUniquePublishers = (datasets: any[]): any[] => {
+    // this gets a unique list of publishers based on if they have a dataset with the given topic
+    const uniquePublishers = new Set<string>();
+    const publisherFulls: string[] = [];
+    const filteredDatasets = datasets.filter((item) =>
+      item.topics.includes(topic["@id"])
+    );
+
+    filteredDatasets.forEach((dataset) => {
+      if (!uniquePublishers.has(dataset.publisher)) {
+        uniquePublishers.add(dataset.publisher);
+        publisherFulls.push(dataset.publisher_full);
+      }
+    });
+
+    return publisherFulls;
+  };
+  const publishers = getUniquePublishers(datasets.datasets);
+
   return (
     <>
       <Header borderColour="blue-alt-border" />
@@ -244,9 +227,9 @@ const Topics = ({
         <HeroBreadcrumbs />
         <HeroMainContent>
           <HeroMainContentCaption>Topic</HeroMainContentCaption>
-          <HeroMainContentTitle>{data.topicTitle}</HeroMainContentTitle>
+          <HeroMainContentTitle>{topic.title}</HeroMainContentTitle>
           <HeroMainContentDescription>
-            {data.topicDescription}
+            {topic.description}
           </HeroMainContentDescription>
         </HeroMainContent>
       </Hero>
@@ -259,7 +242,7 @@ const Topics = ({
                 label="datasets"
                 subtext={
                   "View and download datasets related to " +
-                  data.topicTitle.toLowerCase()
+                  topic.title.toLowerCase()
                 }
               />
             </div>
@@ -285,12 +268,12 @@ const Topics = ({
                 <CardListTopicCard items={subtopicItems}></CardListTopicCard>
               </CardList>
             </div>
-          </div>
+          </div> */}
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={publisherItems.length}
+                number={publishers.length}
                 label="publishers"
                 subtext="View and download datasets by publishers"
               />
@@ -298,11 +281,11 @@ const Topics = ({
             <div className="govuk-grid-column-three-quarters">
               <CardList>
                 <CardListPublisherCard
-                  items={publisherItems}
+                  items={publishers}
                 ></CardListPublisherCard>
               </CardList>
             </div>
-          </div> */}
+          </div>
         </main>
       </div>
     </>
