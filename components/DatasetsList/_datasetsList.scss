@@ -95,10 +95,12 @@
 }
 
 .app-datasets-list__item-publisher-inner {
-  @include govuk-font($size: 19, $weight: "bold");
+  @include govuk-font($size: 19);
   letter-spacing: 0px;
   margin-top: govuk-spacing(0);
   margin-bottom: govuk-spacing(0);
+
+  font-family: "Helvetica Neue";
 }
 
 .app-datasets-list__item-metadata {
