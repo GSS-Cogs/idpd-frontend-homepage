@@ -12,8 +12,11 @@ const CardListLink = ({ href, children }: { href: string; children: any }) => (
 const CardListPublisherCard = ({ items }: { items: { title: string }[] }) => {
   return (
     <ul className="app-cards__list" data-track-count="cardList">
-      {items.map((item: { title: string }) => (
-        <li className="app-cards__list-item--publisher">
+      {items.map((item: { title: string }, index: number) => (
+        <li
+          className="app-cards__list-item--publisher"
+          key={item.title + index}
+        >
           <h2 className="app-cards__sub-heading--publisher govuk-heading-s">
             <a
               className="govuk-link app-cards__link--publisher"
