@@ -162,7 +162,7 @@ const topics = [
 const publishers = [
   { heading: "All publishers" },
   {
-    heading: "The Department for Business, Energy & Industrial Strategy",
+    heading: "Department for Business, Energy & Industrial Strategy",
   },
   {
     heading: "Department for Education",
