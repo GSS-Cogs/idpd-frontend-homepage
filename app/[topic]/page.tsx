@@ -269,7 +269,11 @@ const Topics = async ({ params }: { params: { topic: string } }) => {
                 <CardListDatasetCard
                   items={latestDatasets}
                 ></CardListDatasetCard>
-                <CardListLink href="/datasets">View all datasets</CardListLink>
+                <CardListLink
+                  href={"/datasets?topic=" + encodeURIComponent(topic.title)}
+                >
+                  View all datasets
+                </CardListLink>
               </CardList>
             </div>
           </div>
