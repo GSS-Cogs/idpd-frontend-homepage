@@ -195,7 +195,19 @@ export default function DatasetsList({
 
       if (activeSubtopicsFilter?.length > 0) {
         filteredData = filteredData.filter((x) =>
-          activeSubtopicsFilter.includes(x.subTopic)
+          x.topics.some((topic: string) => {
+            if (typeof activeSubtopicsFilter === "string") {
+              return topic.includes(
+                (activeSubtopicsFilter as string)
+                  ?.toLowerCase()
+                  .replaceAll(" ", "-")
+              );
+            } else {
+              return activeSubtopicsFilter?.some((subtopic) =>
+                topic.includes(subtopic.toLowerCase().replaceAll(" ", "-"))
+              );
+            }
+          })
         );
       }
 
@@ -233,8 +245,6 @@ export default function DatasetsList({
           {sortedItems.length} results
         </h3>
       </div>
-      {JSON.stringify(items)}
-      {topicFilter?.toLowerCase().replaceAll(" ", "-")}
       <FilterDisplay searchParams={searchParams} />
       <ul className="app-datasets-list">
         {sortedItems
