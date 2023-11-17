@@ -18,6 +18,21 @@ export default async function Datasets({
   const params = new URLSearchParams(searchParams);
   params.delete(KEY);
 
+  const getUniquePublishers = (datasets: any[]): any[] => {
+    const uniquePublishers = new Set<string>();
+    const publisherFulls: string[] = [];
+
+    datasets.forEach((dataset) => {
+      if (!uniquePublishers.has(dataset.publisher)) {
+        uniquePublishers.add(dataset.publisher);
+        publisherFulls.push(dataset.publisher_full);
+      }
+    });
+
+    return publisherFulls;
+  };
+  const publishers = getUniquePublishers(datasets.datasets);
+
   return (
     <>
       <Header borderColour="blue-border" />
@@ -37,7 +52,7 @@ export default async function Datasets({
           </div>
           <Search />
           <div className="govuk-grid-row">
-            <FilterSelection searchParams={params} />
+            <FilterSelection searchParams={params} publishers={publishers} />
             <DatasetsList
               items={datasets.datasets}
               page={searchParams.page}
