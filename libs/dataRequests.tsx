@@ -31,6 +31,7 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       method,
       headers: getHeaders(),
       credentials: "include",
+      next: { revalidate: 600 }, // revalidate at most every 10 minutes
     };
 
     const response = await fetch(`${BACKEND_URL}${url}`, options);
