@@ -179,20 +179,34 @@ export default function DatasetsList({
       }
 
       if (activeTopicFilter !== "All topics") {
-        filteredData = filteredData.filter(
-          (x) => x.topic === activeTopicFilter
+        filteredData = filteredData.filter((x) =>
+          x.topics.some((topic: string) =>
+            topic.includes(activeTopicFilter.toLowerCase().replaceAll(" ", "-"))
+          )
         );
       }
 
       if (activeSubtopicsFilter?.length > 0) {
         filteredData = filteredData.filter((x) =>
-          activeSubtopicsFilter.includes(x.subTopic)
+          x.topics.some((topic: string) => {
+            if (typeof activeSubtopicsFilter === "string") {
+              return topic.includes(
+                (activeSubtopicsFilter as string)
+                  ?.toLowerCase()
+                  .replaceAll(" ", "-")
+              );
+            } else {
+              return activeSubtopicsFilter?.some((subtopic) =>
+                topic.includes(subtopic.toLowerCase().replaceAll(" ", "-"))
+              );
+            }
+          })
         );
       }
 
       if (activePublisherFilter !== "All publisher") {
         filteredData = filteredData.filter(
-          (x) => x.publisher === activePublisherFilter
+          (x) => x.publisher_full.title === activePublisherFilter
         );
       }
 

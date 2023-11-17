@@ -195,7 +195,7 @@ const publishers = [
     heading: "Office for Health Improvement and Disparities",
   },
   {
-    heading: "Office for National Statistics",
+    heading: "The Office for National Statistics",
   },
   {
     heading: "Welsh Government",

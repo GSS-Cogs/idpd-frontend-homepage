@@ -16,9 +16,11 @@ const getHeaders = () => {
 };
 
 const handleResponse = async (response: Response) => {
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data. Status: ${response.status}`);
-  }
+  // TODO rework how we handle responses
+  // commented outt for the time being as was throwing errors on no subtopics
+  // if (!response.ok) {
+  //   throw new Error(`Failed to fetch data. Status: ${response.status}`);
+  // }
 
   return response.json();
 };
@@ -29,6 +31,7 @@ const fetchData = async (url: string, method: string): Promise<any> => {
       method,
       headers: getHeaders(),
       credentials: "include",
+      next: { revalidate: 600 }, // revalidate at most every 10 minutes
     };
 
     const response = await fetch(`${BACKEND_URL}${url}`, options);
@@ -109,6 +112,16 @@ const getTopics = async () => {
   return data;
 };
 
+const getTopic = async (id: string) => {
+  const data = await fetchData(`/topics/${id}`, "GET");
+  return data;
+};
+
+const getSubtopics = async (id: string) => {
+  const data = await fetchData(`/topics/${id}/subtopics`, "GET");
+  return data;
+};
+
 const getPublishers = async () => {
   const data = await fetchData(`/publishers`, "GET");
   return data;
@@ -119,5 +132,7 @@ export {
   getDatasetsWithSpatialCoverageInfo,
   getDataset,
   getTopics,
+  getTopic,
+  getSubtopics,
   getPublishers,
 };
