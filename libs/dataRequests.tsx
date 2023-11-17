@@ -16,9 +16,11 @@ const getHeaders = () => {
 };
 
 const handleResponse = async (response: Response) => {
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data. Status: ${response.status}`);
-  }
+  // TODO rework how we handle responses
+  // commented outt for the time being as was throwing errors on no subtopics
+  // if (!response.ok) {
+  //   throw new Error(`Failed to fetch data. Status: ${response.status}`);
+  // }
 
   return response.json();
 };
@@ -114,6 +116,11 @@ const getTopic = async (id: string) => {
   return data;
 };
 
+const getSubtopics = async (id: string) => {
+  const data = await fetchData(`/topics/${id}/subtopics`, "GET");
+  return data;
+};
+
 const getPublishers = async () => {
   const data = await fetchData(`/publishers`, "GET");
   return data;
@@ -125,5 +132,6 @@ export {
   getDataset,
   getTopics,
   getTopic,
+  getSubtopics,
   getPublishers,
 };

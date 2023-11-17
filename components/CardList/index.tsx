@@ -28,6 +28,50 @@ const CardListPublisherCard = ({ items }: { items: { title: string }[] }) => {
   );
 };
 
+const CardListSubtopicCard = ({
+  items,
+  parentTopic,
+}: {
+  items: { title: string; description: string; "@id": string }[];
+  parentTopic: { title: string; "@id": string };
+}) => {
+  const getDatasetHref = (id: string) => {
+    return (
+      "/datasets?topic=" +
+      encodeURIComponent(parentTopic.title) +
+      "&subtopics=" +
+      encodeURIComponent(id)
+    );
+  };
+
+  return (
+    <ul className="app-cards__list" data-track-count="cardList">
+      {items.map(
+        (
+          item: { title: string; description: string; "@id": string },
+          index: number
+        ) => (
+          <li className="app-cards__list-item--topic" key={item.title + index}>
+            <div className="app-cards__list-item-wrapper--topic">
+              <h2 className="app-cards__sub-heading govuk-heading-s">
+                <a
+                  className="govuk-link app-cards__link--topic"
+                  href={getDatasetHref(item.title)}
+                >
+                  {item.title}
+                </a>
+              </h2>
+              <p className="govuk-body app-cards__description">
+                {item.description}
+              </p>
+            </div>
+          </li>
+        )
+      )}
+    </ul>
+  );
+};
+
 const CardListTopicCard = ({
   items,
 }: {
@@ -159,6 +203,7 @@ export {
   CardListTitle,
   CardListLink,
   CardListTopicCard,
+  CardListSubtopicCard,
   CardListPublisherCard,
   CardListDatasetCard,
 };
