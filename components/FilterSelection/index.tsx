@@ -9,9 +9,11 @@ import { isValidDate } from "@/utils/dateValidation";
 const Filters = ({
   searchParams,
   publishers,
+  topics,
 }: {
   searchParams: any;
   publishers: any[];
+  topics: any[];
 }) => {
   const [isJsEnabled, setIsJsEnabled] = useState(false);
 
@@ -153,7 +155,7 @@ const Filters = ({
       <details className="app-accordion">
         <summary className="app-accordian__title">Topic</summary>
         <div className="app-accordian__panel">
-          {/* <div className="app-accordian__panel-inner govuk-form-group">
+          <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label" style={{ paddingLeft: 0 }}>
               Topic
             </label>
@@ -163,13 +165,16 @@ const Filters = ({
               onChange={addTopic}
               value={(!isJsEnabled ? initialTopicFilter : topicFilter) || ""}
             >
+              <option key={"All topics"} value={"All topics"}>
+                All topics
+              </option>
               {topics.map((item: { title: string }) => (
                 <option key={item.title} value={item.title}>
                   {item.title}
                 </option>
               ))}
             </select>
-          </div> */}
+          </div>
           {/* <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label">Subtopic</label>
             <SelectCheckbox
@@ -195,7 +200,9 @@ const Filters = ({
                 (!isJsEnabled ? initialPublisherFilter : publisherFilter) || ""
               }
             >
-              <option value={"All publishers"}>All publishers</option>
+              <option key={"All publishers"} value={"All publishers"}>
+                All publishers
+              </option>
               {publishers.map((topic) => (
                 <option key={topic.title} value={topic.title}>
                   {topic.title}
