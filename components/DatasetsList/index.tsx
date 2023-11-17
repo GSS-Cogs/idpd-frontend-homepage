@@ -186,8 +186,10 @@ export default function DatasetsList({
       }
 
       if (activeTopicFilter !== "All topics") {
-        filteredData = filteredData.filter(
-          (x) => x.topic === activeTopicFilter
+        filteredData = filteredData.filter((x) =>
+          x.topics.some((topic: string) =>
+            topic.includes(activeTopicFilter.toLowerCase().replaceAll(" ", "-"))
+          )
         );
       }
 
@@ -231,6 +233,8 @@ export default function DatasetsList({
           {sortedItems.length} results
         </h3>
       </div>
+      {JSON.stringify(items)}
+      {topicFilter?.toLowerCase().replaceAll(" ", "-")}
       <FilterDisplay searchParams={searchParams} />
       <ul className="app-datasets-list">
         {sortedItems
