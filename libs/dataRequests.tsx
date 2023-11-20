@@ -1,3 +1,4 @@
+"use server";
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
 const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
