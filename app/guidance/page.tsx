@@ -6,9 +6,12 @@ import PhaseBanner from "@/components/PhaseBanner";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { googlecode } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useEffect } from 'react';
 
 const Guidance = ({}: {}) => {
   const codeStyle = { backgroundColor: "transparent", margin: 0, padding: 0 };
+  const currentDomain = window.location.hostname;
+
   return (
     <>
       <Header borderColour="blue-border" />
@@ -46,7 +49,7 @@ const Guidance = ({}: {}) => {
                   The base URL for the Data Catalogue API is:
                 </span>
                 <code className={"app-guidance__code"}>
-                  {"https://staging.idpd.uk"}
+                  {currentDomain}
                 </code>
               </div>
               <h1
@@ -80,7 +83,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://staging.idpd.uk/dataset/{dataset_id}"
+                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -94,7 +97,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://staging.idpd.uk/dataset/{dataset_id}')\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -108,7 +111,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://staging.idpd.uk/dataset/{dataset_id}')\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -142,7 +145,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}"
+                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -156,7 +159,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}')\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -170,7 +173,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}')\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -201,7 +204,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}"
+                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -215,7 +218,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}')\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -229,7 +232,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://staging.idpd.uk/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}')\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', headers={'accept': 'application/json')\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -244,30 +247,17 @@ const Guidance = ({}: {}) => {
               </h1>
               <div className="govuk-body">
                 <div className="app-datasets__publisher">
-                  Responses from the API are typically in JSON format. You can
+                  The above eesponses from the API are in JSON format. You can
                   parse the JSON response to extract the information you need.
-                  In the examples provided, the `curl` command-line tool and the
-                  `httr` library in R return the raw JSON response. In Python,
-                  the `requests` library's `.json()` method is used to parse the
-                  response.
+                  <br></br>
+                  <br></br>
+                  In the examples provided:
+                  <ul>- The `curl` command-line tool and the `httr` library in R return the raw JSON response.</ul>
+                  <ul>- In Python, the `requests` library's `.json()` method is used to parse the response.</ul>
                 </div>
                 <div className="app-datasets__publisher">
                   Remember to handle potential errors, such as invalid IDs or
                   network issues, by checking the status code of the response.
-                </div>
-              </div>
-              <h1
-                className="govuk-heading-l"
-                id="authentication"
-                style={{ paddingTop: 0, marginTop: 50, marginBottom: 25 }}
-              >
-                Authentication
-              </h1>
-              <div className="govuk-body">
-                <div className="app-datasets__publisher">
-                  Make sure you have the necessary authentication tokens or
-                  credentials to access the Data Catalogue API. Include these in
-                  your requests' headers as required.
                 </div>
               </div>
               <h1
@@ -282,7 +272,7 @@ const Guidance = ({}: {}) => {
                   This developer guidance has provided examples of how to use
                   the Data Catalogue API endpoints to retrieve information about
                   datasets, editions, and versions. Make sure to refer to the
-                  API documentation for any additional query parameters or
+                   <a href="/openapi"> API documentation</a> for any additional query parameters or
                   features that might be available. Happy coding!
                 </div>
               </div>
