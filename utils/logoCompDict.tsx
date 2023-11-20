@@ -8,18 +8,25 @@ interface LogoCompDict {
   [key: string]: (props: LogoProps) => JSX.Element;
 }
 
-const displayTitle = (title: string) => {
+const checkTitle = (title: string) => {
   if (title === "Office for National Statistics") {
-    return null;
+    return false;
   }
-  return <h3 className="app-datasets-list__item-publisher-inner">{title}</h3>;
+  return true;
 };
 
 const createLogoComponent =
   (src: string) =>
-  ({ title }: LogoProps) =>
-    (
-      <div className="app-datasets-list__item-bottom-publisher">
+  ({ title }: LogoProps) => {
+    const shouldDisplay = checkTitle(title);
+    return (
+      <div
+        className={`app-datasets-list__item-bottom-publisher ${
+          shouldDisplay
+            ? ""
+            : "app-datasets-list__item-bottom-publisher--no_border"
+        }`}
+      >
         <Image
           src={src}
           alt="department logo"
@@ -28,9 +35,12 @@ const createLogoComponent =
           sizes="100vw"
           style={{ width: "auto", height: 34 }} // optional
         />
-        {displayTitle(title)}
+        {shouldDisplay && (
+          <h3 className="app-datasets-list__item-publisher-inner">{title}</h3>
+        )}
       </div>
     );
+  };
 
 const defaulLogoComponent =
   () =>
