@@ -83,7 +83,7 @@ const Filters = ({
     updateSubtopics(topic);
   };
 
-  const subs = initialTopicFilter
+  const initialSubtopicsFilter = initialTopicFilter
     ? allTopics.filter((x) =>
         x.parent_topics.some((topic: string) =>
           topic.includes(
@@ -93,7 +93,7 @@ const Filters = ({
       )
     : [];
 
-  const [subtopics, setSubtopics] = useState(subs);
+  const [subtopics, setSubtopics] = useState(initialSubtopicsFilter);
 
   const updateSubtopics = async (id: string) => {
     const formattedSubtopic = id.toLowerCase();
