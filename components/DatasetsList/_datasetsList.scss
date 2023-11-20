@@ -64,7 +64,7 @@
 
   border-color: govuk-colour("blue");
   border-style: solid;
-  border-width: 0px 0px 0px 5px;
+  border-width: 0px 0px 0px 2px;
 
   @include govuk-media-query($until: tablet) {
     width: 33%;
