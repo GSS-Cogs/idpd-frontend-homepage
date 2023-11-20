@@ -65,9 +65,10 @@ export default async function Datasets({
           <Search />
           <div className="govuk-grid-row">
             <FilterSelection
-              searchParams={params}
+              searchParams={searchParams}
               publishers={publishers}
               topics={parentTopics}
+              allTopics={topics.topics}
             />
             <DatasetsList
               items={datasets.datasets}

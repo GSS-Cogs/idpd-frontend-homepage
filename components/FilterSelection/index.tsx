@@ -5,15 +5,18 @@ import SelectCheckbox from "../MultiSelect";
 
 import { useGlobalContext } from "@/app/context/store";
 import { isValidDate } from "@/utils/dateValidation";
+import { getSubtopics } from "@/libs/dataRequests";
 
 const Filters = ({
   searchParams,
   publishers,
   topics,
+  allTopics,
 }: {
   searchParams: any;
   publishers: any[];
   topics: any[];
+  allTopics: any[];
 }) => {
   const [isJsEnabled, setIsJsEnabled] = useState(false);
 
@@ -42,7 +45,6 @@ const Filters = ({
   const initialPublisherFilter = tempParams.get("publisher");
   const initialTimeBeforeFilter = tempParams.get("to_date");
   const initialTimeAfterFilter = tempParams.get("from_date");
-
   const [afterDateCurrentInput, setAfterDateCurrentInput] = useState(
     initialTimeAfterFilter
   );
@@ -55,6 +57,7 @@ const Filters = ({
   const [isBeforeDateValid, setisBeforeDateValid] = useState(
     !beforeDateCurrentInput ? true : isValidDate(beforeDateCurrentInput || "")
   );
+
   useEffect(() => {
     if (afterDate === null) {
       setAfterDateCurrentInput("");
@@ -76,6 +79,30 @@ const Filters = ({
   const addTopic = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const topic = e.target.value;
     updateFilter("topic", topic, setTopicFilter);
+
+    updateSubtopics(topic);
+  };
+
+  const subs = initialTopicFilter
+    ? allTopics.filter((x) =>
+        x.parent_topics.some((topic: string) =>
+          topic.includes(
+            (initialTopicFilter || "").toLowerCase().replaceAll(" ", "-")
+          )
+        )
+      )
+    : [];
+
+  const [subtopics, setSubtopics] = useState(subs);
+
+  const updateSubtopics = async (id: string) => {
+    const formattedSubtopic = id.toLowerCase();
+    const subs = await getSubtopics(formattedSubtopic);
+    if (subs === null) {
+      setSubtopics([]);
+    } else {
+      setSubtopics(subs.topics);
+    }
   };
 
   const updateFilter = async (
@@ -160,7 +187,7 @@ const Filters = ({
               Topic
             </label>
             <select
-              className="govuk-select"
+              className="govuk-select app-select"
               id="topic-select"
               onChange={addTopic}
               value={(!isJsEnabled ? initialTopicFilter : topicFilter) || ""}
@@ -175,16 +202,10 @@ const Filters = ({
               ))}
             </select>
           </div>
-          {/* <div className="app-accordian__panel-inner govuk-form-group">
+          <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label">Subtopic</label>
-            <SelectCheckbox
-              options={
-                topicFilter === null
-                  ? []
-                  : topics.filter((x) => x.topic === topicFilter)[0]?.subtopics
-              }
-            />
-          </div> */}
+            <SelectCheckbox options={subtopics} searchParams={searchParams} />
+          </div>
         </div>
       </details>
       <details className="app-accordion">
@@ -193,7 +214,7 @@ const Filters = ({
           <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label">Publisher</label>
             <select
-              className="govuk-select"
+              className="govuk-select app-select"
               id="publisher-select"
               onChange={addPublisher}
               value={

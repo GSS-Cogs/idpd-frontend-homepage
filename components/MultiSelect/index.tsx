@@ -1,10 +1,28 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalContext } from "@/app/context/store";
 
-const MultiSelect = ({ options }: { options: string[] }) => {
+const MultiSelect = ({
+  options,
+  searchParams,
+}: {
+  options: any[];
+  searchParams: any;
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isJsEnabled, setIsJsEnabled] = useState(false);
+
+  const jsCheck = () => {
+    const hasJavaScript =
+      typeof window !== "undefined" && "IntersectionObserver" in window;
+    setIsJsEnabled(hasJavaScript);
+  };
+  useEffect(() => {
+    jsCheck();
+  });
+
   const { subtopicsFilter, setSubtopicsFilter } = useGlobalContext();
+  const initialSubtopicsFilter = searchParams?.subtopics;
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -66,10 +84,17 @@ const MultiSelect = ({ options }: { options: string[] }) => {
               : null
           }
         >
-          {subtopicsFilter?.length === 0 ? (
+          {(!isJsEnabled && initialSubtopicsFilter?.length === 0) ||
+          (isJsEnabled && subtopicsFilter?.length === 0) ? (
             <div className="app-multi-select__option">All subtopics</div>
+          ) : !isJsEnabled ? (
+            typeof initialSubtopicsFilter === "string" ? (
+              initialSubtopicsFilter
+            ) : (
+              initialSubtopicsFilter?.map((option: any) => option).join(", ")
+            )
           ) : (
-            subtopicsFilter?.map((option) => option).join(", ")
+            subtopicsFilter?.map((option: any) => option).join(", ")
           )}
         </div>
       ) : (
@@ -81,8 +106,8 @@ const MultiSelect = ({ options }: { options: string[] }) => {
       )}
       {isOpen && (
         <div className="app-multi-select__dropdown govuk-checkboxes govuk-checkboxes--small">
-          {options.map((option: string) => (
-            <CheckboxItem option={option} key={option} />
+          {options?.map((option: { title: string }) => (
+            <CheckboxItem option={option?.title} key={option?.title} />
           ))}
         </div>
       )}
