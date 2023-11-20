@@ -9,7 +9,7 @@ interface LogoCompDict {
 }
 
 const displayTitle = (title: string) => {
-  if (title === "The Office for National Statistics") {
+  if (title === "Office for National Statistics") {
     return null;
   }
   return <h3 className="app-datasets-list__item-publisher-inner">{title}</h3>;
