@@ -6,11 +6,11 @@ import PhaseBanner from "@/components/PhaseBanner";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { googlecode } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { useEffect } from 'react';
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const Guidance = ({}: {}) => {
   const codeStyle = { backgroundColor: "transparent", margin: 0, padding: 0 };
-  const currentDomain = window.location.hostname;
 
   return (
     <>
@@ -49,7 +49,7 @@ const Guidance = ({}: {}) => {
                   The base URL for the Data Catalogue API is:
                 </span>
                 <code className={"app-guidance__code"}>
-                  {currentDomain}
+                  {BACKEND_URL}
                 </code>
               </div>
               <h1
@@ -83,7 +83,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id} -H \"accept: application/json\""
+                        "bash\ncurl-X GET \""+BACKEND_URL+"/dataset/{dataset_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -97,7 +97,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('"+BACKEND_URL+"/dataset/{dataset_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -111,7 +111,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('"+BACKEND_URL+"/dataset/{dataset_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -145,7 +145,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id} -H \"accept: application/json\""
+                        "bash\ncurl-X GET "+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -159,7 +159,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('"+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -173,7 +173,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('"+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id}', headers={'accept': 'application/json'})\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -204,7 +204,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "bash\ncurl-X GET https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id} -H \"accept: application/json\""
+                        "bash\ncurl-X GET "+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id} -H \"accept: application/json\""
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -218,7 +218,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "r\nlibrary(httr)\nresponse <- GET('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
+                        "r\nlibrary(httr)\nresponse <- GET('"+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', accept(\"application/json\"))\ncontent <- content(response, 'text')\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -232,7 +232,7 @@ const Guidance = ({}: {}) => {
                       customStyle={codeStyle}
                     >
                       {
-                        "python\nimport requests\nresponse = requests.get('https://"+currentDomain+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', headers={'accept': 'application/json')\ncontent = response.json()\nprint(content)"
+                        "python\nimport requests\nresponse = requests.get('"+BACKEND_URL+"/dataset/{dataset_id}/edition/{edition_id}/version/{version_id}', headers={'accept': 'application/json')\ncontent = response.json()\nprint(content)"
                       }
                     </SyntaxHighlighter>
                   </div>
@@ -253,7 +253,7 @@ const Guidance = ({}: {}) => {
                   <br></br>
                   In the examples provided:
                   <ul>- The `curl` command-line tool and the `httr` library in R return the raw JSON response.</ul>
-                  <ul>- In Python, the `requests` library's `.json()` method is used to parse the response.</ul>
+                  <ul>- In Python, the `requests` library `.json()` method is used to parse the response.</ul>
                 </div>
                 <div className="app-datasets__publisher">
                   Remember to handle potential errors, such as invalid IDs or
