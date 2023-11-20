@@ -109,40 +109,6 @@ const CardListTopicCard = ({
   );
 };
 
-const CardListFooterTopicCard = ({
-  items,
-}: {
-  items: { title: string; description: string; identifier: string }[];
-}) => {
-  const getTopicHref = (id: string) => {
-    return "/" + encodeURIComponent(id);
-  };
-
-  return (
-    <ul className="app-cards__list" data-track-count="cardList">
-      {items.map(
-        (
-          item: { title: string; description: string; identifier: string },
-          index: number
-        ) => (
-          <li className="app-cards__list-item--topic" key={item.title + index}>
-            <div className="app-cards__list-item-wrapper--topic">
-              <h2 className="app-cards__sub-heading govuk-heading-s">
-                <a
-                  className="govuk-link app-cards__link--topic"
-                  href={getTopicHref(item.identifier)}
-                >
-                  {item.title}
-                </a>
-              </h2>
-            </div>
-          </li>
-        )
-      )}
-    </ul>
-  );
-};
-
 function formatDate(date: string) {
   const d = new Date(date);
   const options: Intl.DateTimeFormatOptions = {
@@ -235,7 +201,6 @@ export {
   CardListTitle,
   CardListLink,
   CardListTopicCard,
-  CardListFooterTopicCard,
   CardListSubtopicCard,
   CardListPublisherCard,
   CardListDatasetCard,
