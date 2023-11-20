@@ -1,3 +1,5 @@
+@import "../../styles/mixins/chevron";
+
 .app-datasets-list {
   @include govuk-text-colour;
   @include govuk-font(19);
@@ -14,12 +16,14 @@
   border-top: 1px solid $govuk-border-colour;
   padding-top: govuk-spacing(4);
   padding-bottom: govuk-spacing(4);
+
+  margin: 0;
 }
 
 .app-datasets-list__item-top {
   padding-left: 0;
   padding-right: 0;
-  margin-bottom: govuk-spacing(7);
+  margin-bottom: govuk-spacing(4);
 }
 
 .app-datasets-list__item-bottom {
@@ -72,16 +76,33 @@
   display: inline-block;
 }
 
+.app-datasets-list__item-topic {
+  @include govuk-text-colour;
+  @include govuk-font(16, "light");
+  color: $govuk-secondary-text-colour;
+  display: flex;
+  flex-direction: row;
+  margin-top: govuk-spacing(1);
+}
+
+.app-datasets-list__chevron {
+  margin-left: govuk-spacing(2) !important;
+  margin-right: govuk-spacing(2) !important;
+  @include chevron-right-small($govuk-secondary-text-colour);
+}
+
 .app-datasets-list__item-description {
   @include govuk-text-colour;
-  margin: govuk-spacing(1) 0 0 0;
+  margin: govuk-spacing(2) 0 0 0;
 }
 
 .app-datasets-list__item-publisher-inner {
-  @include govuk-font($size: 19, $weight: "bold");
+  @include govuk-font($size: 19);
   letter-spacing: 0px;
   margin-top: govuk-spacing(0);
   margin-bottom: govuk-spacing(0);
+
+  font-family: "Helvetica Neue";
 }
 
 .app-datasets-list__item-metadata {

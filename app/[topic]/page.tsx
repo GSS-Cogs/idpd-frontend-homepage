@@ -1,7 +1,13 @@
 import Header from "@/components/Header";
 import BigNumber from "@/components/BigNumber";
-import CardList from "@/components/CardList";
-import { PublisherCard, TopicCard } from "@/components/CardList/CardTypes";
+import {
+  CardList,
+  CardListDatasetCard,
+  CardListLink,
+  CardListPublisherCard,
+  CardListSubtopicCard,
+  CardListTitle,
+} from "@/components/CardList";
 import {
   Hero,
   HeroMainContent,
@@ -13,120 +19,53 @@ import {
   HeroBreadcrumbs,
   HeroMainContentCaption,
 } from "@/components/Hero";
+import {
+  getDatasetsWithSpatialCoverageInfo,
+  getTopic,
+  getSubtopics,
+} from "@/libs/dataRequests";
 
-const data = {
-  topicTitle: "Agriculture, energy and environment",
-  topicDescription:
-    "Food and farming, the natural environment, animal and plant health, flooding and water, fisheries, and environmental quality.",
-};
+const Topics = async ({ params }: { params: { topic: string } }) => {
+  const topic = await getTopic(params.topic);
+  const subtopics = await getSubtopics(params.topic);
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
 
-const subtopicItems = [
-  {
-    heading: "Chemicals",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Climate change and energy",
-    href: "",
-    description:
-      "Climate change refers to long-term shifts in temperatures and weather patterns. These shifts may be natural, but since the 1800s, human activities have been the main driver of climate change, primarily due to the burning of fossil fuels (like coal, oil and gas), which produces heat-trapping gases.",
-  },
-  {
-    heading: "Commercial fishing, fisheries and vessels",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Energy infrastructure",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Food and farming",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Marine",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Pollution and environmental quality",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "River maintenance, flooding and coastal erosion",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Rural and countryside",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Waste and recycling",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-  {
-    heading: "Wildlife, animals, biodiversity and ecosystems",
-    href: "",
-    description:
-      "Proin massa sapien, posuere in imperdiet vitae, dignissim eu nulla. Maecenas vehicula nulla dui, in vehicula nulla porttitor in. Phasellus dictum aliquam lectus, a condimentum justo iaculis sit amet. Nulla.",
-  },
-];
+  const getUniquePublishers = (datasets: any[]): any[] => {
+    // this gets a unique list of publishers based on if they have a dataset with the given topic
+    const uniquePublishers = new Set<string>();
+    const publisherFulls: string[] = [];
+    const filteredDatasets = datasets.filter((item) =>
+      item.topics.includes(topic["@id"])
+    );
 
-const publisherItems = [
-  {
-    heading: "Department for Business, Energy & Industrial Strategy",
-    href: "",
-  },
-  {
-    heading: "Department for Environment, Food & Rural Affairs",
-    href: "",
-  },
-  {
-    heading: "Forest Research",
-    href: "",
-  },
-  {
-    heading: "Met Office",
-    href: "",
-  },
-  {
-    heading: "Ministry of Housing, Communities & Local Government",
-    href: "",
-  },
-  {
-    heading: "Office for National Statistics",
-    href: "",
-  },
-  {
-    heading: "Welsh Government",
-    href: "",
-  },
-];
+    filteredDatasets.forEach((dataset) => {
+      if (!uniquePublishers.has(dataset.publisher)) {
+        uniquePublishers.add(dataset.publisher);
+        publisherFulls.push(dataset.publisher_full);
+      }
+    });
 
-const Topics = ({
-  params,
-  searchParams,
-}: {
-  params: { topic: string };
-  searchParams: any;
-}) => {
+    return publisherFulls;
+  };
+  const publishers = getUniquePublishers(datasets.datasets);
+
+  const getLatestRelatedDatasets = (datasets: any[]) => {
+    const filteredDatasets = datasets.filter((item) =>
+      item.topics.includes(topic["@id"])
+    );
+
+    const sortedDatasets = filteredDatasets.sort((a, b) => {
+      const dateA = new Date(a.issued);
+      const dateB = new Date(b.issued);
+
+      return dateA.getTime() - dateB.getTime();
+    });
+
+    return sortedDatasets;
+  };
+
+  const latestDatasets = getLatestRelatedDatasets(datasets.datasets);
+
   return (
     <>
       <Header borderColour="blue-alt-border" />
@@ -146,9 +85,9 @@ const Topics = ({
         <HeroBreadcrumbs />
         <HeroMainContent>
           <HeroMainContentCaption>Topic</HeroMainContentCaption>
-          <HeroMainContentTitle>{data.topicTitle}</HeroMainContentTitle>
+          <HeroMainContentTitle>{topic.title}</HeroMainContentTitle>
           <HeroMainContentDescription>
-            {data.topicDescription}
+            {topic.description}
           </HeroMainContentDescription>
         </HeroMainContent>
       </Hero>
@@ -157,26 +96,66 @@ const Topics = ({
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={subtopicItems.length}
-                label="subtopics"
-                subtext="View and download datasets by subtopics"
+                number={latestDatasets.length}
+                label="datasets"
+                subtext={
+                  "View and download datasets related to " +
+                  topic.title.toLowerCase()
+                }
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={subtopicItems} CardComponent={TopicCard} />
+              <CardList>
+                <CardListTitle>Latest datasets</CardListTitle>
+                <CardListDatasetCard
+                  items={latestDatasets}
+                ></CardListDatasetCard>
+                <CardListLink
+                  href={"/datasets?topic=" + encodeURIComponent(topic.title)}
+                >
+                  View all datasets
+                </CardListLink>
+              </CardList>
             </div>
           </div>
           <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
+          {subtopics && (
+            <>
+              <div className="govuk-grid-row app-section-row">
+                <div className="govuk-grid-column-one-quarter">
+                  <BigNumber
+                    number={subtopics?.topics.length}
+                    label="subtopics"
+                    subtext="View and download datasets by subtopics"
+                  />
+                </div>
+
+                <div className="govuk-grid-column-three-quarters">
+                  <CardList>
+                    <CardListSubtopicCard
+                      items={subtopics?.topics}
+                      parentTopic={topic}
+                    ></CardListSubtopicCard>
+                  </CardList>
+                </div>
+              </div>
+              <hr className="govuk-section-break govuk-section-break--l govuk-section-break--visible"></hr>
+            </>
+          )}
           <div className="govuk-grid-row app-section-row">
             <div className="govuk-grid-column-one-quarter">
               <BigNumber
-                number={publisherItems.length}
+                number={publishers.length}
                 label="publishers"
                 subtext="View and download datasets by publishers"
               />
             </div>
             <div className="govuk-grid-column-three-quarters">
-              <CardList items={publisherItems} CardComponent={PublisherCard} />
+              <CardList>
+                <CardListPublisherCard
+                  items={publishers}
+                ></CardListPublisherCard>
+              </CardList>
             </div>
           </div>
         </main>

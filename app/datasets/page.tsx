@@ -4,7 +4,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import DatasetsList from "@/components/DatasetsList";
 import PhaseBanner from "@/components/PhaseBanner";
 
-import data from "../data/data.json";
+import FilterSelection from "@/components/FilterSelection";
+import { getDatasetsWithSpatialCoverageInfo } from "../../libs/dataRequests";
 import Header from "@/components/Header";
 
 export default async function Datasets({
@@ -12,6 +13,7 @@ export default async function Datasets({
 }: {
   searchParams: any;
 }) {
+  const datasets = await getDatasetsWithSpatialCoverageInfo();
   const KEY = "page";
   const params = new URLSearchParams(searchParams);
   params.delete(KEY);
@@ -33,16 +35,14 @@ export default async function Datasets({
               <h1 className="govuk-heading-xl">Data catalogue</h1>
             </div>
           </div>
-
           <Search />
           <div className="govuk-grid-row">
-            <div className="govuk-grid-column-one-third-from-desktop">
-              <h3></h3>
-            </div>
+            <FilterSelection searchParams={params} />
             <DatasetsList
-              items={data?.results.bindings}
+              items={datasets.datasets}
               page={searchParams.page}
-              searchParams={params}
+              searchParams={searchParams}
+              filterParams={params}
             />
           </div>
         </main>
