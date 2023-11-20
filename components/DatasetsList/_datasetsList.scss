@@ -71,6 +71,11 @@
   }
 }
 
+.app-datasets-list__item-bottom-publisher--no_border {
+  padding: 0px 0px 4px 0px;
+  border-width: 0px;
+}
+
 .app-datasets-list__item-title {
   @include govuk-font($size: 19, $weight: bold);
   display: inline-block;
