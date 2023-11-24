@@ -10,12 +10,12 @@ import { getSubtopics } from "@/libs/dataRequests";
 const Filters = ({
   searchParams,
   publishers,
-  topics,
+  parentTopics,
   allTopics,
 }: {
   searchParams: any;
   publishers: any[];
-  topics: any[];
+  parentTopics: any[];
   allTopics: any[];
 }) => {
   const [isJsEnabled, setIsJsEnabled] = useState(false);
@@ -194,7 +194,7 @@ const Filters = ({
               <option key={"All topics"} value={"All topics"}>
                 All topics
               </option>
-              {topics.map((item: { title: string }) => (
+              {parentTopics.map((item: { title: string }) => (
                 <option key={item.title} value={item.title}>
                   {item.title}
                 </option>

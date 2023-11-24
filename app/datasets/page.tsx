@@ -66,7 +66,7 @@ export default async function Datasets({
             <FilterSelection
               searchParams={searchParams}
               publishers={publishers}
-              topics={parentTopics}
+              parentTopics={parentTopics}
               allTopics={topics.topics}
             />
             <DatasetsList
