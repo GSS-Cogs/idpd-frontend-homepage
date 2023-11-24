@@ -58,7 +58,6 @@ export default async function Datasets({
         <main className="app-datasets" id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <h1 className="govuk-caption-xl app-datasets_caption">Dataset</h1>
               <h1 className="govuk-heading-xl">Data catalogue</h1>
             </div>
           </div>
