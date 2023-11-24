@@ -71,6 +71,17 @@ const Filters = ({
     }
   }, [afterDate, beforeDate]);
 
+  useEffect(() => {
+    const updateSubtopics = async (id: string) => {
+      const formattedSubtopic = id.toLowerCase().replaceAll(" ", "-");
+      const subs = await getSubtopics(formattedSubtopic);
+
+      setSubtopics(subs?.topics || []);
+    };
+
+    updateSubtopics(topicFilter || "");
+  }, [topicFilter]);
+
   const addPublisher = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const publisher = e.target.value;
     updateFilter("publisher", publisher, setPublisherFilter);
@@ -79,31 +90,19 @@ const Filters = ({
   const addTopic = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const topic = e.target.value;
     updateFilter("topic", topic, setTopicFilter);
-
-    updateSubtopics(topic);
   };
 
   const initialSubtopicsFilter = initialTopicFilter
     ? allTopics.filter((x) =>
         x.parent_topics.some((topic: string) =>
           topic.includes(
-            (initialTopicFilter || "").toLowerCase().replaceAll(" ", "-")
+            initialTopicFilter.trim().toLowerCase().replaceAll(" ", "-")
           )
         )
       )
     : [];
 
   const [subtopics, setSubtopics] = useState(initialSubtopicsFilter);
-
-  const updateSubtopics = async (id: string) => {
-    const formattedSubtopic = id.toLowerCase();
-    const subs = await getSubtopics(formattedSubtopic);
-    if (subs === null) {
-      setSubtopics([]);
-    } else {
-      setSubtopics(subs.topics);
-    }
-  };
 
   const updateFilter = async (
     key: string,
