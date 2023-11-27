@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["localhost", "staging.idpd.uk"],
+      allowedOrigins: ["staging.idpd.uk"],
     },
   },
   async headers() {
