@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import React, { KeyboardEvent, useCallback, useEffect, useState } from "react";
 import { useGlobalContext } from "@/app/context/store";
 
 const MultiSelect = ({
@@ -68,35 +68,57 @@ const MultiSelect = ({
     [subtopicsFilter]
   );
 
+  const SubtopicsDisplayContainer = ({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) => (
+    <div
+      className={`govuk-select app-multi-select__box ${
+        isOpen ? "app-multi-select__box--open" : ""
+      }`}
+      onClick={toggleDropdown}
+      tabIndex={0}
+      onKeyDown={(e) => handleKeyDown(e)}
+    >
+      {children}
+    </div>
+  );
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === " " || e.code === "Space") {
+      e.preventDefault();
+      toggleDropdown();
+    }
+  };
+
+  const SubtopicsDisplay = () => {
+    if (
+      (!isJsEnabled && initialSubtopicsFilter?.length === 0) ||
+      (isJsEnabled && subtopicsFilter?.length === 0)
+    ) {
+      return <div className="app-multi-select__option">All subtopics</div>;
+    }
+
+    let displayText;
+    if (!isJsEnabled) {
+      displayText =
+        typeof initialSubtopicsFilter === "string"
+          ? initialSubtopicsFilter
+          : initialSubtopicsFilter?.join(", ");
+    } else {
+      displayText = subtopicsFilter?.join(", ");
+    }
+
+    return <div>{displayText}</div>;
+  };
+
   return (
     <div className="app-multi-select">
       {options?.length > 0 ? (
-        <div
-          className={`govuk-select app-multi-select__box ${
-            isOpen ? "app-multi-select__box--open" : ""
-          }`}
-          onClick={toggleDropdown}
-          tabIndex={0}
-          // todo this can be done better
-          onKeyDown={(e) =>
-            e.key == " " || e.code == "Space"
-              ? (e.preventDefault(), toggleDropdown())
-              : null
-          }
-        >
-          {(!isJsEnabled && initialSubtopicsFilter?.length === 0) ||
-          (isJsEnabled && subtopicsFilter?.length === 0) ? (
-            <div className="app-multi-select__option">All subtopics</div>
-          ) : !isJsEnabled ? (
-            typeof initialSubtopicsFilter === "string" ? (
-              initialSubtopicsFilter
-            ) : (
-              initialSubtopicsFilter?.map((option: any) => option).join(", ")
-            )
-          ) : (
-            subtopicsFilter?.map((option: any) => option).join(", ")
-          )}
-        </div>
+        <SubtopicsDisplayContainer>
+          <SubtopicsDisplay />
+        </SubtopicsDisplayContainer>
       ) : (
         <div className={`app-multi-select__box--disabled govuk-select`}>
           <div className="app-multi-select__option app-multi-select__option--disabled">
@@ -106,8 +128,8 @@ const MultiSelect = ({
       )}
       {isOpen && (
         <div className="app-multi-select__dropdown govuk-checkboxes govuk-checkboxes--small">
-          {options?.map((option: { title: string }) => (
-            <CheckboxItem option={option?.title} key={option?.title} />
+          {options?.map((option) => (
+            <CheckboxItem option={option.title} key={option.title} />
           ))}
         </div>
       )}
