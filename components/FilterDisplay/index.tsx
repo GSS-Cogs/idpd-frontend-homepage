@@ -110,12 +110,11 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
       const prefixText = getPrefixText(index);
 
       return (
-        <>
+        <div key={index} style={{ display: "flex", alignItems: "center" }}>
           {prefixText && (
             <div style={{ marginLeft: 5, marginRight: 5 }}>{prefixText}</div>
           )}
           <span
-            key={index}
             className="app-filter-display__item"
             onClick={() =>
               removeFromUrl(index > 0 ? "subtopics" : filter, index)
@@ -124,7 +123,7 @@ const FilterDisplay = ({ searchParams }: { searchParams: any }) => {
             <div style={{ marginRight: 8 }}>X</div>
             <div>{item}</div>
           </span>
-        </>
+        </div>
       );
     };
 

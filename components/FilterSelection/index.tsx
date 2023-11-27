@@ -5,204 +5,19 @@ import SelectCheckbox from "../MultiSelect";
 
 import { useGlobalContext } from "@/app/context/store";
 import { isValidDate } from "@/utils/dateValidation";
+import { getSubtopics } from "@/libs/dataRequests";
 
-const topics = [
-  { topic: "All topics", subtopics: [] },
-  {
-    topic: "Agriculture, energy and environment",
-    subtopics: [
-      "Business and the environment",
-      "Climate change and energy",
-      "Commercial fishing, fisheries and vessels",
-      "Food and farming",
-      "Water and Marine Management",
-      "Pollution, environmental quality and chemicals",
-      "Rural and countryside",
-      "Waste and recycling",
-      "Wildlife, animals, biodiversity and ecosystems",
-    ],
-  },
-  {
-    topic: "Business, trade and international development",
-    subtopics: [
-      "Business and local business",
-      "Charities and social enterprises",
-      "Tax and finance",
-      "International development",
-      "Media and communications",
-      "Science and innovation",
-      "Trade and investment",
-    ],
-  },
-  {
-    topic: "Children, education and skills",
-    subtopics: [
-      "Funding and finance for students",
-      "Further and higher education, skills and vocational training",
-      "Inspections and performance of education providers",
-      "Pupil wellbeing, behaviour and attendance",
-      "School curriculum",
-      "Childcare and early years",
-      "Special educational needs and disability (SEND) and high needs",
-      "Teaching and leadership",
-    ],
-  },
-  {
-    topic: "Crime and the Justice System",
-    subtopics: [
-      "Crime",
-      "Justice system",
-      "Policing and crime prevention",
-      "Violence against women and girls",
-    ],
-  },
-  {
-    topic: "Economy",
-    subtopics: [
-      "Business tax",
-      "Brexit",
-      "Court claims, debt and bankruptcy",
-      "Expenses and employee benefits",
-      "Personal tax",
-      "Tax evasion and avoidance",
-    ],
-  },
-  {
-    topic: "Health and social care",
-    subtopics: [
-      "Coronavirus",
-      "Disabled people",
-      "Medicines, medical devices",
-      "National Health Service",
-      "Public health",
-      "Social care",
-      "Children’s health and welfare",
-      "Wellbeing",
-    ],
-  },
-  {
-    topic: "Housing, planning and local services",
-    subtopics: [
-      "Housing and communities",
-      "Rent and mortgages",
-      "Planning and building",
-      "Local councils and government",
-      "Public services",
-    ],
-  },
-  {
-    topic: "Immigration and asylum",
-    subtopics: [
-      "Border control",
-      "Immigration offences",
-      "Inspections of border, immigration and asylum services",
-      "Permanent stay in the UK",
-      "Refugees, asylum and human rights",
-      "Visas and documentation",
-    ],
-  },
-  {
-    topic: "Population and society",
-    subtopics: [
-      "Certificates, register offices, changes of name or gender",
-      "Death and bereavement",
-      "Having a child, parenting and adoption",
-      "Marriage, civil partnerships and divorce",
-      "Adoption, fostering and surrogacy",
-      "Pregnancy and birth",
-    ],
-  },
-  {
-    topic: "Security, defence and international relations",
-    subtopics: [
-      "Armed forces and defence",
-      "Foreign affairs",
-      "International aid and development",
-      "Cyber security",
-      "National security",
-    ],
-  },
-  {
-    topic: "Travel, transport and tourism",
-    subtopics: [
-      "Living abroad",
-      "Travel abroad",
-      "Aviation",
-      "Driving and roads",
-      "Freight, haulage and cargo",
-      "Local transport",
-      "Maritime and shipping",
-      "Rail",
-      "Tourism",
-    ],
-  },
-  {
-    topic: "Labour market and welfare",
-    subtopics: [
-      "Self-employment",
-      "Trade unions",
-      "Work and disabled people",
-      "Pensions",
-      "Employment",
-      "Benefits",
-    ],
-  },
-  {
-    topic: "Culture and identity",
-    subtopics: [
-      "Arts and culture",
-      "Charities, volunteering and honours",
-      "Digital inclusion and accessibility in society",
-      "National events and ceremonies",
-      "Sports and leisure",
-    ],
-  },
-];
-
-const publishers = [
-  { heading: "All publishers" },
-  {
-    heading: "Department for Business, Energy & Industrial Strategy",
-  },
-  {
-    heading: "Department for Education",
-  },
-  {
-    heading: "Department for Environment, Food & Rural Affairs",
-  },
-  {
-    heading: "Department for Levelling Up, Housing & Communities",
-  },
-  {
-    heading: "Department for Transport",
-  },
-  {
-    heading: "Forest Research",
-  },
-  {
-    heading: "HM Revenue & Customs",
-  },
-  {
-    heading: "Met Office",
-  },
-  {
-    heading: "Ministry of Housing, Communities & Local Government",
-  },
-  {
-    heading: "Ofcom",
-  },
-  {
-    heading: "Office for Health Improvement and Disparities",
-  },
-  {
-    heading: "Office for National Statistics",
-  },
-  {
-    heading: "Welsh Government",
-  },
-];
-
-const Filters = ({ searchParams }: { searchParams: any }) => {
+const Filters = ({
+  searchParams,
+  publishers,
+  parentTopics,
+  allTopics,
+}: {
+  searchParams: any;
+  publishers: any[];
+  parentTopics: any[];
+  allTopics: any[];
+}) => {
   const [isJsEnabled, setIsJsEnabled] = useState(false);
 
   const jsCheck = () => {
@@ -230,7 +45,6 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   const initialPublisherFilter = tempParams.get("publisher");
   const initialTimeBeforeFilter = tempParams.get("to_date");
   const initialTimeAfterFilter = tempParams.get("from_date");
-
   const [afterDateCurrentInput, setAfterDateCurrentInput] = useState(
     initialTimeAfterFilter
   );
@@ -243,6 +57,7 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
   const [isBeforeDateValid, setisBeforeDateValid] = useState(
     !beforeDateCurrentInput ? true : isValidDate(beforeDateCurrentInput || "")
   );
+
   useEffect(() => {
     if (afterDate === null) {
       setAfterDateCurrentInput("");
@@ -256,6 +71,17 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
     }
   }, [afterDate, beforeDate]);
 
+  useEffect(() => {
+    const updateSubtopics = async (id: string) => {
+      const formattedSubtopic = id.toLowerCase().replaceAll(" ", "-");
+      const subs = await getSubtopics(formattedSubtopic);
+
+      setSubtopics(subs?.topics || []);
+    };
+
+    updateSubtopics(topicFilter || "");
+  }, [topicFilter]);
+
   const addPublisher = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const publisher = e.target.value;
     updateFilter("publisher", publisher, setPublisherFilter);
@@ -265,6 +91,18 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
     const topic = e.target.value;
     updateFilter("topic", topic, setTopicFilter);
   };
+
+  const initialSubtopicsFilter = initialTopicFilter
+    ? allTopics.filter((x) =>
+        x.parent_topics.some((topic: string) =>
+          topic.includes(
+            initialTopicFilter.trim().toLowerCase().replaceAll(" ", "-")
+          )
+        )
+      )
+    : [];
+
+  const [subtopics, setSubtopics] = useState(initialSubtopicsFilter);
 
   const updateFilter = async (
     key: string,
@@ -348,27 +186,24 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
               Topic
             </label>
             <select
-              className="govuk-select"
+              className="govuk-select app-select"
               id="topic-select"
               onChange={addTopic}
               value={(!isJsEnabled ? initialTopicFilter : topicFilter) || ""}
             >
-              {topics.map((item) => (
-                <option key={item.topic} value={item.topic}>
-                  {item.topic}
+              <option key={"All topics"} value={"All topics"}>
+                All topics
+              </option>
+              {parentTopics.map((item: { title: string }) => (
+                <option key={item.title} value={item.title}>
+                  {item.title}
                 </option>
               ))}
             </select>
           </div>
           <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label">Subtopic</label>
-            <SelectCheckbox
-              options={
-                topicFilter === null
-                  ? []
-                  : topics.filter((x) => x.topic === topicFilter)[0]?.subtopics
-              }
-            />
+            <SelectCheckbox options={subtopics} searchParams={searchParams} />
           </div>
         </div>
       </details>
@@ -378,16 +213,19 @@ const Filters = ({ searchParams }: { searchParams: any }) => {
           <div className="app-accordian__panel-inner govuk-form-group">
             <label className="govuk-label">Publisher</label>
             <select
-              className="govuk-select"
+              className="govuk-select app-select"
               id="publisher-select"
               onChange={addPublisher}
               value={
                 (!isJsEnabled ? initialPublisherFilter : publisherFilter) || ""
               }
             >
+              <option key={"All publishers"} value={"All publishers"}>
+                All publishers
+              </option>
               {publishers.map((topic) => (
-                <option key={topic.heading} value={topic.heading}>
-                  {topic.heading}
+                <option key={topic.title} value={topic.title}>
+                  {topic.title}
                 </option>
               ))}
             </select>

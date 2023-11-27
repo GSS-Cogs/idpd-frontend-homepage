@@ -39,3 +39,7 @@
 .app-accordian__title:before {
   @include chevron(govuk-colour("black"));
 }
+
+.app-select {
+  width: 100%;
+}
