@@ -55,6 +55,10 @@
   @include chevron-small(govuk-colour("black"));
 }
 
+.app-multi-select__option--open:after {
+  @include chevron-up-small(govuk-colour("black"));
+}
+
 .app-multi-select__option--disabled {
   width: 100%;
 }

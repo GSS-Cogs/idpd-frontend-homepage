@@ -21,6 +21,11 @@
   width: 5px;
 }
 
+@mixin chevron-up-small($colour, $update: false) {
+  @include chevron-small($colour, $update);
+  @include prefixed-transform($rotate: -135deg, $translateY: 30%);
+}
+
 @mixin chevron-right-small($colour, $update: false) {
   @include chevron-small($colour, $update);
   @include prefixed-transform($rotate: -45deg, $translateY: 130%);

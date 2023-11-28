@@ -97,7 +97,15 @@ const MultiSelect = ({
       (!isJsEnabled && initialSubtopicsFilter?.length === 0) ||
       (isJsEnabled && subtopicsFilter?.length === 0)
     ) {
-      return <div className="app-multi-select__option">All subtopics</div>;
+      return (
+        <div
+          className={`app-multi-select__option ${
+            isOpen && "app-multi-select__option--open"
+          }`}
+        >
+          All subtopics
+        </div>
+      );
     }
 
     let displayText;
@@ -110,7 +118,15 @@ const MultiSelect = ({
       displayText = subtopicsFilter?.join(", ");
     }
 
-    return <div>{displayText}</div>;
+    return (
+      <div
+        className={`app-multi-select__option ${
+          isOpen && "app-multi-select__option--open"
+        }`}
+      >
+        {displayText}
+      </div>
+    );
   };
 
   return (
