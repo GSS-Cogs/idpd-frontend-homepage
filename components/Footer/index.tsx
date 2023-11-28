@@ -1,9 +1,7 @@
 import { getTopics } from "../../libs/dataRequests";
-import { CardList, CardListLink, CardListTitle } from "@/components/CardList";
-import topicItems from "../../app/data/topicItems.json";
 
 const popularItems = [
-  { text: "About the data service", href: "" },
+  { text: "About the data service", href: "/" },
   { text: "IDS Hub", href: "https://integrateddataservice.gov.uk/" },
   {
     text: "Climate change portal",
