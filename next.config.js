@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+const origin = process.env.NEXT_PUBLIC_BACKEND_URL.replace("https://", "");
+
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["staging.idpd.uk"],
+      allowedOrigins: [origin],
     },
   },
   async headers() {
