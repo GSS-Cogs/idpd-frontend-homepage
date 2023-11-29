@@ -28,16 +28,19 @@
   border-bottom: 1px solid $govuk-border-colour;
 }
 
-.app-accordion[open] {
-  padding-bottom: 0;
-}
-
 .app-accordian__title {
   list-style-type: "";
 }
 
 .app-accordian__title:before {
   @include chevron(govuk-colour("black"));
+}
+
+.app-accordion[open] {
+  padding-bottom: 0;
+  .app-accordian__title:before {
+    @include chevron-up(govuk-colour("black"));
+  }
 }
 
 .app-select {
