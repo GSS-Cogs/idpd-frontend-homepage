@@ -1,4 +1,3 @@
-import "./datasets.scss";
 import Search from "@/components/Search";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DatasetsList from "@/components/DatasetsList";
