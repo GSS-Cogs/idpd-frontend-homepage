@@ -15,10 +15,20 @@
   }
 }
 
+@mixin chevron-up($colour, $update: false) {
+  @include chevron($colour, $update);
+  @include prefixed-transform($rotate: -135deg, $translateY: 30%);
+}
+
 @mixin chevron-small($colour, $update: false) {
   @include chevron($colour, $update);
   height: 5px;
   width: 5px;
+}
+
+@mixin chevron-up-small($colour, $update: false) {
+  @include chevron-small($colour, $update);
+  @include prefixed-transform($rotate: -135deg, $translateY: 30%);
 }
 
 @mixin chevron-right-small($colour, $update: false) {

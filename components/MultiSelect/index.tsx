@@ -93,24 +93,25 @@ const MultiSelect = ({
   };
 
   const SubtopicsDisplay = () => {
-    if (
-      (!isJsEnabled && initialSubtopicsFilter?.length === 0) ||
-      (isJsEnabled && subtopicsFilter?.length === 0)
-    ) {
-      return <div className="app-multi-select__option">All subtopics</div>;
-    }
+    const displayText = !isJsEnabled
+      ? Array.isArray(initialSubtopicsFilter)
+        ? initialSubtopicsFilter.join(", ")
+        : initialSubtopicsFilter
+      : subtopicsFilter?.join(", ");
 
-    let displayText;
-    if (!isJsEnabled) {
-      displayText =
-        typeof initialSubtopicsFilter === "string"
-          ? initialSubtopicsFilter
-          : initialSubtopicsFilter?.join(", ");
-    } else {
-      displayText = subtopicsFilter?.join(", ");
-    }
+    const shouldShowAllSubtopics =
+      (!isJsEnabled && !initialSubtopicsFilter?.length) ||
+      (isJsEnabled && !subtopicsFilter?.length);
 
-    return <div>{displayText}</div>;
+    return (
+      <div
+        className={`app-multi-select__option ${
+          isOpen && "app-multi-select__option--open"
+        }`}
+      >
+        {shouldShowAllSubtopics ? "All subtopics" : displayText}
+      </div>
+    );
   };
 
   return (
