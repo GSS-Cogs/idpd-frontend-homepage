@@ -1,7 +1,42 @@
 "use server";
+
+import moment from "moment";
+
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
 const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
+
+const backendUrlSplit = BACKEND_URL?.split("://");
+const scheme = backendUrlSplit?.[0];
+const domain = backendUrlSplit?.[1];
+
+const logInfo = (message: string, method: string, url: string) => {
+  console.info({
+    event: message,
+    http: {
+      method: method,
+      scheme: scheme,
+      host: domain,
+      // port: // TODO add port number
+      path: url,
+      started_at: moment(new Date()).format("YYYY-MM-DDTHH:mm:ss.SSSZZ"),
+    },
+  });
+};
+
+const logError = (message: string, method: string, url: string) => {
+  console.error({
+    event: message,
+    http: {
+      method: method,
+      scheme: scheme,
+      host: domain,
+      // port: // TODO add port number
+      path: url,
+      started_at: moment(new Date()).format("YYYY-MM-DDTHH:mm:ss.SSSZZ"),
+    },
+  });
+};
 
 const getHeaders = () => {
   const headers: Record<string, string> = {
@@ -27,6 +62,7 @@ const handleResponse = async (response: Response) => {
 };
 
 const fetchData = async (url: string, method: string): Promise<any> => {
+  logInfo(`fetching data from ${url}`, method, url);
   try {
     const options: RequestInit = {
       method,
@@ -38,7 +74,7 @@ const fetchData = async (url: string, method: string): Promise<any> => {
     const response = await fetch(`${BACKEND_URL}${url}`, options);
     return handleResponse(response);
   } catch (error) {
-    console.error("Fetch Error:", error);
+    logError(`failed fetch data from ${url}`, method, url);
     throw error;
   }
 };
