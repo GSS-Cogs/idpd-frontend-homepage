@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
+
+const backendDomain = process.env.NEXT_PUBLIC_BACKEND_URL.replace(
+  "https://",
+  ""
+);
+
 const nextConfig = {
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: [backendDomain],
+    },
   },
   async headers() {
     return [
