@@ -51,7 +51,6 @@ export default async function Datasets({
         <PhaseBanner
           href="/"
           tag={{ children: "prototype" }}
-          className="govuk-phase-banner--inverse"
         />
         <Breadcrumbs items={[{ text: "Home", href: "/" }]} />
         <main className="app-datasets" id="main-content" role="main">

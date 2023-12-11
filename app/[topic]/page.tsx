@@ -70,9 +70,9 @@ const Topics = async ({ params }: { params: { topic: string } }) => {
     <>
       <Header borderColour="blue-alt-border" />
       <Hero className="app-hero--alternative">
-        <HeroPhaseBanner className="govuk-!-padding-top-4">
+        <HeroPhaseBanner>
           <HeroPhaseBannerTag className="app-hero__phase-banner__tag--alternative">
-            Alpha
+            Prototype
           </HeroPhaseBannerTag>
           <HeroPhaseBannerDescription>
             This is a new service - your{" "}
