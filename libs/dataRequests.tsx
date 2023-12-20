@@ -89,32 +89,25 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
   // which is the corresponding name of the given coverage code
   // e.g. K02000001 -> United Kingdom
   const data = await fetchData("/datasets", "GET");
-  let codes = new Set<string>();
 
-  data.datasets.forEach((item: { spatial_coverage: string }) => {
-    codes.add(item.spatial_coverage);
-  });
+  const geoportalCodes = await handleResponse(
+    await fetch(
+      "https://opendata.arcgis.com/datasets/33a3c8eadd084ac38d20ff3dcfa110ce_0/FeatureServer/0/query?outFields=*&where=1%3D1"
+    )
+  );
 
-  const uniqueCodes = Array.from(codes);
-
-  const codesUpdated: { [key: string]: { code: string; coverage: any } } = {};
-  await Promise.all(
-    uniqueCodes.map(async (item: string) => {
-      const response = await handleResponse(
-        await fetch(`https://findthatpostcode.uk/areas/${item}.json`)
-      );
-
-      const coverage = response.data.attributes.name;
-      return (codesUpdated[item] = coverage);
-    })
+  const codesMap = new Map<string, string>(
+    geoportalCodes.features.map(
+      (feature: { attributes: { CTRY15CD: string; CTRY15NM: string } }) => {
+        return [feature.attributes.CTRY15CD, feature.attributes.CTRY15NM];
+      }
+    )
   );
 
   data.datasets.forEach(
-    (item: {
-      spatial_coverage_name: { code: string; coverage: any };
-      spatial_coverage: string;
-    }) => {
-      item.spatial_coverage_name = codesUpdated[item.spatial_coverage];
+    (item: { spatial_coverage_name: string; spatial_coverage: string }) => {
+      item.spatial_coverage_name =
+        codesMap.get(item.spatial_coverage) || "UNKNOWN";
     }
   );
 
