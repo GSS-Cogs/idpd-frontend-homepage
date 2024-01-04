@@ -89,47 +89,51 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
   // which is the corresponding name of the given coverage code
   // e.g. K02000001 -> United Kingdom
   const data = await fetchData("/datasets", "GET");
+  const geoportalUrl =
+    "https://opendata.arcgis.com/datasets/33a3c8eadd084ac38d20ff3dcfa110ce_0/FeatureServer/0/query?outFields=*&where=1%3D1";
 
-  const geoportalCodes = await handleResponse(
-    await fetch(
-      "https://opendata.arcgis.com/datasets/33a3c8eadd084ac38d20ff3dcfa110ce_0/FeatureServer/0/query?outFields=*&where=1%3D1"
-    )
-  );
+  try {
+    logInfo(`fetching data from ${geoportalUrl}`, "GET", geoportalUrl);
+    const geoportalCodes = await handleResponse(await fetch(geoportalUrl));
 
-  const codesMap = new Map<string, string>(
-    geoportalCodes.features.map(
-      (feature: { attributes: { CTRY15CD: string; CTRY15NM: string } }) => {
-        return [feature.attributes.CTRY15CD, feature.attributes.CTRY15NM];
+    const codesMap = new Map<string, string>(
+      geoportalCodes.features.map(
+        (feature: { attributes: { CTRY15CD: string; CTRY15NM: string } }) => {
+          return [feature.attributes.CTRY15CD, feature.attributes.CTRY15NM];
+        }
+      )
+    );
+
+    data.datasets.forEach(
+      (item: { spatial_coverage_name: string; spatial_coverage: string }) => {
+        item.spatial_coverage_name =
+          codesMap.get(item.spatial_coverage) || "UNKNOWN";
       }
-    )
-  );
+    );
 
-  data.datasets.forEach(
-    (item: { spatial_coverage_name: string; spatial_coverage: string }) => {
-      item.spatial_coverage_name =
-        codesMap.get(item.spatial_coverage) || "UNKNOWN";
+    const response = await getPublishers();
+    let publishersDict: any = {};
+
+    for (const pub of response.publishers) {
+      if (pub.hasOwnProperty("@id")) {
+        publishersDict[pub["@id"]] = pub;
+      }
     }
-  );
 
-  const response = await getPublishers();
-  let publishersDict: any = {};
+    data.datasets.forEach(
+      (item: {
+        publisher_full: { code: string; coverage: any };
+        publisher: string;
+      }) => {
+        item.publisher_full = publishersDict[item.publisher];
+      }
+    );
 
-  for (const pub of response.publishers) {
-    if (pub.hasOwnProperty("@id")) {
-      publishersDict[pub["@id"]] = pub;
-    }
+    return data;
+  } catch (error) {
+    logError(`failed fetch data from ${geoportalUrl}`, "GET", geoportalUrl);
+    throw error;
   }
-
-  data.datasets.forEach(
-    (item: {
-      publisher_full: { code: string; coverage: any };
-      publisher: string;
-    }) => {
-      item.publisher_full = publishersDict[item.publisher];
-    }
-  );
-
-  return data;
 };
 
 const getDataset = async (id: string) => {
