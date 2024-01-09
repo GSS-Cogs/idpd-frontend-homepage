@@ -79,7 +79,7 @@ async function getStatusCode(): Promise<number> {
     const headersList = headers();
     const domain = headersList.get("x-forwarded-host") || "";
     const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
-    const fullUrl = `${proto}://${domain}`;
+    const fullUrl = `asdf${proto}://${domain}`;
     const options = {
       method: "GET",
       headers: getHeaders(),
@@ -112,10 +112,8 @@ async function checkDataExplorer(): Promise<HealthCheck> {
     check.status = "CRITICAL";
     check.status_code = 500;
     const headersList = headers();
-    const domain = headersList.get("referer") || "";
-    const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
-    const fullUrl = `${proto}://${domain}`;
-    check.message = fullUrl; //"data explorer is unavailable or non-functioning";
+    const header_url = headersList.get("x-url") || "";
+    check.message = header_url; //"data explorer is unavailable or non-functioning";
     check.last_failure = new Date();
   }
 
