@@ -111,7 +111,11 @@ async function checkDataExplorer(): Promise<HealthCheck> {
   } else if (statusCode >= 400 && statusCode !== 429) {
     check.status = "CRITICAL";
     check.status_code = 500;
-    check.message = "data explorer is unavailable or non-functioning";
+    const headersList = headers();
+    const domain = headersList.get("x-forwarded-host") || "";
+    const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
+    const fullUrl = `${proto}://${domain}`;
+    check.message = fullUrl; //"data explorer is unavailable or non-functioning";
     check.last_failure = new Date();
   }
 
@@ -121,6 +125,7 @@ async function checkDataExplorer(): Promise<HealthCheck> {
 const getHeaders = () => {
   const headers: Record<string, string> = {
     Accept: "text/html",
+    "Content-Type": "text/html",
   };
 
   const basicAuth = `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString(
