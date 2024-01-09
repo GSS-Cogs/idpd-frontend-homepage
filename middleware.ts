@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
+import absoluteUrl from "next-absolute-url";
+import { IncomingMessage } from "http";
 
 export function middleware(request: Request) {
-  // Store current request url in a custom header, which you can read later
+  const { origin } = absoluteUrl(request as unknown as IncomingMessage); // Rename variable to avoid redeclaration
+
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-url", request.url);
+  requestHeaders.set("x-url", origin);
 
   return NextResponse.next({
     request: {
-      // Apply new request headers
       headers: requestHeaders,
     },
   });

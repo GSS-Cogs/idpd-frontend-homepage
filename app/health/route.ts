@@ -78,8 +78,7 @@ async function getStatusCode(): Promise<number> {
   try {
     const headersList = headers();
     const headerUrl = headersList.get("x-url") || "";
-    const fullUrl =
-      new URL(headerUrl).protocol + "//" + new URL(headerUrl).host;
+    const fullUrl = headerUrl;
 
     const options = {
       method: "GET",
@@ -114,10 +113,11 @@ async function checkDataExplorer(): Promise<HealthCheck> {
     check.status_code = 500;
     const headersList = headers();
     const header_url = headersList.get("x-url") || "";
+
     const fullUrl =
       new URL(header_url).protocol + "//" + new URL(header_url).host;
 
-    check.message = fullUrl; //"data explorer is unavailable or non-functioning";
+    check.message = header_url; //"data explorer is unavailable or non-functioning";
     check.last_failure = new Date();
   }
 
