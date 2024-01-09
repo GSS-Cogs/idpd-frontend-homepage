@@ -112,7 +112,7 @@ async function checkDataExplorer(): Promise<HealthCheck> {
     check.status = "CRITICAL";
     check.status_code = 500;
     const headersList = headers();
-    const domain = headersList.get("x-forwarded-host") || "";
+    const domain = headersList.get("host") || "";
     const proto = (headersList.get("x-forwarded-proto") || "").split(",")[0];
     const fullUrl = `${proto}://${domain}`;
     check.message = fullUrl; //"data explorer is unavailable or non-functioning";
