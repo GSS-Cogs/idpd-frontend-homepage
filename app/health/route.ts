@@ -1,8 +1,6 @@
 // pages/api/health.ts
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-// import absoluteUrl from "next-absolute-url";
-import { IncomingMessage } from "http";
 
 const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
 const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
@@ -81,12 +79,11 @@ async function getStatusCode(): Promise<number> {
     const headersList = headers();
     const headerUrl = headersList.get("x-url") || "";
     const fullUrl = headerUrl;
-    const { origin } = absoluteUrl(headersList);
     const options = {
       method: "GET",
       headers: getHeaders(),
     };
-    const response = await fetch(origin, options);
+    const response = await fetch(fullUrl, options);
     return response.status;
   } catch (error) {
     return 500;
@@ -113,12 +110,7 @@ async function checkDataExplorer(): Promise<HealthCheck> {
   } else if (statusCode >= 400 && statusCode !== 429) {
     check.status = "CRITICAL";
     check.status_code = 500;
-    const headersList = headers();
-    const header_url = headersList.get("x-url") || "";
-
-    const { origin } = absoluteUrl(headersList);
-
-    check.message = origin; //"data explorer is unavailable or non-functioning";
+    check.message = "data explorer is unavailable or non-functioning";
     check.last_failure = new Date();
   }
 
@@ -138,30 +130,3 @@ const getHeaders = () => {
 
   return headers;
 };
-
-function absoluteUrl(req?: any, localhostAddress = "localhost:3000") {
-  let host = req?.get("host") || localhostAddress;
-  let protocol = /^localhost(:\d+)?$/.test(host) ? "http:" : "https:";
-
-  if (
-    req &&
-    req.get("x-forwarded-host") &&
-    typeof req.get("x-forwarded-host") === "string"
-  ) {
-    host = req.get("x-forwarded-host");
-  }
-
-  if (
-    req &&
-    req.get("x-forwarded-proto") &&
-    typeof req.get("x-forwarded-proto") === "string"
-  ) {
-    protocol = `${req.get("x-forwarded-proto")}:`;
-  }
-
-  return {
-    protocol,
-    host,
-    origin: protocol + "//" + host,
-  };
-}
