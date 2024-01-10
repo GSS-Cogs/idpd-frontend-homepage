@@ -123,10 +123,10 @@ const getHeaders = () => {
     "Content-Type": "text/html",
   };
 
-  const basicAuth = `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString(
-    "base64"
-  )}`;
-  headers.Authorization = basicAuth;
+  // const basicAuth = `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString(
+  //   "base64"
+  // )}`;
+  // headers.Authorization = basicAuth;
 
   return headers;
 };
