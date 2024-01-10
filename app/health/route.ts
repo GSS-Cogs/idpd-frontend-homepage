@@ -2,9 +2,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 
-const USERNAME = process.env.NEXT_PRIVATE_USERNAME;
-const PASSWORD = process.env.NEXT_PRIVATE_PASSWORD;
-
 interface HealthCheck {
   name: string;
   status: string;
