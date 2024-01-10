@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import absoluteUrl from "next-absolute-url";
 import { IncomingMessage } from "http";
 
-export function middleware(request: Request) {
-  const { origin } = absoluteUrl(request as unknown as IncomingMessage); // Rename variable to avoid redeclaration
+export function middleware(request: IncomingMessage) {
+  const { origin } = absoluteUrl(request);
 
-  const requestHeaders = new Headers(request.headers);
+  const requestHeaders = new Headers(request.headers as HeadersInit);
   requestHeaders.set("x-url", origin);
 
   return NextResponse.next({
