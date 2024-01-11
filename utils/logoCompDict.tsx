@@ -19,7 +19,7 @@ const checkTitle = (title: string) => {
 const createLogoComponent =
   (src: string) =>
   ({ title, id }: LogoProps) => {
-    const shouldDisplay = true; // checkTitle(title);
+    const shouldDisplay = checkTitle(title);
     const publisher = id?.split("/").pop();
     const colour = govukColoursOrganisations[publisher || ""];
     return (
