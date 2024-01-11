@@ -40,7 +40,10 @@ const DatasetsListItem = (props: {
         <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>
       <div className="app-datasets-list__item-bottom">
-        <PublisherComponent title={props?.publisher_full.title} />
+        <PublisherComponent
+          title={props?.publisher_full.title}
+          id={props?.publisher}
+        />
         <ul
           className="app-datasets-list__item-metadata"
           style={{ textAlign: "right" }}
