@@ -1,6 +1,6 @@
-# IDPD FRONTEND HOMEPAGE
+# IDPD Frontend Homepage
 
-This project serves as our GOV.UK frontend catalogue for our IDPD API, containing all our datasets.
+This project serves as our GOV.UK frontend catalogue for our IDPD API, containing all our datasets. The live site can be accessed at [https://staging.idpd.uk/](https://staging.idpd.uk/).
 
 ## Built With
 
@@ -8,6 +8,10 @@ This project serves as our GOV.UK frontend catalogue for our IDPD API, containin
 - [Next.js](https://nextjs.org/) 14.0.3
 - [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend) ^4.7.0
 - [TypeScript](https://www.typescriptlang.org/) 5.1.6
+
+## Related Projects
+
+This microservice works together with [IDPD Frontend Datasets](https://github.com/GSS-Cogs/idpd-frontend-datasets). Together, they make up [https://staging.idpd.uk/](https://staging.idpd.uk/).
 
 ## Getting Started
 
