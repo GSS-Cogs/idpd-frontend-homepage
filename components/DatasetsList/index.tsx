@@ -19,6 +19,7 @@ const DatasetsListItem = (props: {
   subTopic: string;
   spatial_coverage_name: string;
   temporal_coverage: { start: string; end: string };
+  topics_full: { title: string }[];
 }) => {
   const PublisherComponent =
     logoCompDict[props.publisher] || logoCompDict["default"];
@@ -33,9 +34,14 @@ const DatasetsListItem = (props: {
           {props?.title}
         </a>
         <div className="app-datasets-list__item-topic">
-          Topic
-          <div className="app-datasets-list__chevron" />
-          Subtopic
+          {props?.topics_full.map((topic, index) => (
+            <>
+              <span key={topic.title}>{topic.title}</span>
+              {index + 1 < props?.topics_full.length && (
+                <div className="app-datasets-list__chevron" />
+              )}
+            </>
+          ))}
         </div>
         <p className="app-datasets-list__item-description">{props?.summary}</p>
       </div>

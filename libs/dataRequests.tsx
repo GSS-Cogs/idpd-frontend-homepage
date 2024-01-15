@@ -94,6 +94,7 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
 
   try {
     logInfo(`fetching data from ${geoportalUrl}`, "GET", geoportalUrl);
+    // add spatial coverage name to each dataset
     const geoportalCodes = await handleResponse(await fetch(geoportalUrl));
 
     const codesMap = new Map<string, string>(
@@ -111,6 +112,7 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
       }
     );
 
+    // add full publisher information to each dataset
     const response = await getPublishers();
     let publishersDict: any = {};
 
@@ -126,6 +128,29 @@ const getDatasetsWithSpatialCoverageInfo = async () => {
         publisher: string;
       }) => {
         item.publisher_full = publishersDict[item.publisher];
+      }
+    );
+
+    // add full topic information to each dataset
+    const topics = await getTopics();
+    let topicsDict: any = {};
+
+    for (const topic of topics.topics) {
+      if (topic.hasOwnProperty("@id")) {
+        topicsDict[topic["@id"]] = topic;
+      }
+    }
+
+    data.datasets.forEach(
+      (item: {
+        topics_full: { code: string; coverage: any }[];
+        topics: string[];
+      }) => {
+        item.topics_full = [];
+
+        item.topics.forEach((topic: string) => {
+          item.topics_full.push(topicsDict[topic]);
+        });
       }
     );
 
