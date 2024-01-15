@@ -45,7 +45,11 @@ const createLogoComponent =
 const defaulLogoComponent =
   () =>
   ({ title }: LogoProps) =>
-    <div className="app-datasets-list__item-bottom-publisher">{title}</div>;
+    (
+      <div className="app-datasets-list__item-bottom-publisher">
+        <h3 className="app-datasets-list__item-publisher-inner">{title}</h3>
+      </div>
+    );
 
 const logoCompDict: LogoCompDict = {
   "https://staging.idpd.uk/publishers/office-for-national-statistics":
@@ -53,6 +57,8 @@ const logoCompDict: LogoCompDict = {
       "/assets/images/ONS_Logo_Digital_Colour_English_RGB.svg"
     ),
   "https://staging.idpd.uk/publishers/department-for-energy-security-and-net-zero":
+    createLogoComponent("/assets/images/crest.png"),
+  "https://staging.idpd.uk/publishers/department-for-education":
     createLogoComponent("/assets/images/crest.png"),
   default: defaulLogoComponent(),
 };
